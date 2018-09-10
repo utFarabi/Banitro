@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Banitro</string>
+    <string name="profile">پروفایل</string>
+    <string name="recent">تازه ها</string>
+    <string name="incoming">ورودی</string>
+    <string name="toast_click_again_to_exit">برای خروج مجددا کلیک نمایید</string>
+    <string name="product_detail">جزئیات محصول</string>
+    <string name="no_message_found">پیامی یافت نشد.</string>
+</resources>

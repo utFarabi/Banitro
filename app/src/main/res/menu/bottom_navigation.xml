@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bottom_navigation_profile"
+        android:enabled="true"
+        android:icon="@drawable/baseline_person_white_36"
+        android:title="@string/profile"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/bottom_navigation_recent"
+        android:enabled="true"
+        android:icon="@drawable/baseline_mail_white_36"
+        android:title="@string/recent"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/bottom_navigation_incoming"
+        android:enabled="true"
+        android:icon="@drawable/baseline_drafts_white_36"
+        android:title="@string/incoming"
+        app:showAsAction="always" />
+</menu>
