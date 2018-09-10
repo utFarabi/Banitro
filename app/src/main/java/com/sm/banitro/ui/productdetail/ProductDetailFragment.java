@@ -72,7 +72,7 @@ public class ProductDetailFragment extends Fragment
 
     @Override
     public void onClick(View view) {
-
+        // send price
     }
 
     @Override
