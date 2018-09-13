@@ -1,13 +1,22 @@
 package com.sm.banitro.data.model;
 
-public class Product {
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String name;
+@SuppressLint("ParcelCreator")
+public class Product implements Parcelable {
+
     private int id;
-    private String category;
+    private String name;
+    private Category category;
     private int clientId;
+    private int sellerId;
     private String picture;
     private int number;
+    private boolean isReplied;
+    private Reply reply;
+    private int position;
 
     public String getName() {
         return name;
@@ -25,11 +34,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -55,5 +64,47 @@ public class Product {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public boolean isReplied() {
+        return isReplied;
+    }
+
+    public void setReplied(boolean replied) {
+        isReplied = replied;
+    }
+
+    public int getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public Reply getReply() {
+        return reply;
+    }
+
+    public void setReply(Reply reply) {
+        this.reply = reply;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

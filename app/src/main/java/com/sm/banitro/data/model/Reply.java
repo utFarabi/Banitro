@@ -2,18 +2,9 @@ package com.sm.banitro.data.model;
 
 public class Reply {
 
-    private int sellerId;
     private int id;
     private boolean approved;
-    private Product product;
-
-    public int getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
+    private int price;
 
     public int getId() {
         return id;
@@ -31,11 +22,11 @@ public class Reply {
         this.approved = approved;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getPrice() {
+        return price;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Demand;
+import com.sm.banitro.data.model.Product;
 
 import java.util.ArrayList;
 
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder> {
-    private ArrayList<Demand> demands;
+    private ArrayList<Product> products;
     private Interaction interaction;
 
     public RecentAdapter(Interaction interaction) {
@@ -28,17 +28,17 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder
 
     @Override
     public void onBindViewHolder(RecentAdapter.viewHolder holder, int position) {
-        Demand demand = demands.get(position);
-        holder.tvProductName.setText(demand.getProductName());
-        holder.tvProductCategory.setText(demand.getProductCategory());
+        Product product = products.get(position);
+        holder.tvProductName.setText(product.getName());
+        holder.tvProductCategory.setText(product.getCategory().getName());
     }
 
     @Override
     public int getItemCount() {
-        if (demands == null) {
+        if (products == null) {
             return 0;
         }
-        return demands.size();
+        return products.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
@@ -51,23 +51,19 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    interaction.setDemandToRecentProduct(getDemands().get(getAdapterPosition()));
+                    interaction.setProductToRecentFragment(products.get(getAdapterPosition()));
                 }
             });
         }
     }
 
-    public ArrayList<Demand> getDemands() {
-        return demands;
-    }
-
-    public void setDemands(ArrayList<Demand> demands) {
-        this.demands = demands;
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
         notifyDataSetChanged();
     }
 
     public interface Interaction {
 
-        void setDemandToRecentProduct(Demand demand);
+        void setProductToRecentFragment(Product product);
     }
 }

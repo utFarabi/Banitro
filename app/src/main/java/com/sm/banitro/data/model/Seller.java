@@ -6,7 +6,7 @@ public class Seller {
 
     private int id;
     private String phoneNumber;
-    private ArrayList<String> categories;
+    private ArrayList<Category> categories;
 
     public int getId() {
         return id;
@@ -24,11 +24,11 @@ public class Seller {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<String> getCategories() {
+    public ArrayList<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(ArrayList<String> categories) {
+    public void setCategories(ArrayList<Category> categories) {
         this.categories = categories;
     }
 }

@@ -1,6 +1,6 @@
 package com.sm.banitro.ui.recent;
 
-import com.sm.banitro.data.model.Demand;
+import com.sm.banitro.data.model.Product;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public interface RecentContract {
 
         void hideProgress();
 
-        void showDemands(ArrayList<Demand> demands);
+        void showProducts(ArrayList<Product> products);
 
         void showErrorMessage(String message);
     }

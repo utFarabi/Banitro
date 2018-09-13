@@ -16,17 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Demand;
+import com.sm.banitro.data.model.Product;
 
 import java.util.ArrayList;
 
 public class RecentFragment extends Fragment implements RecentContract.View, RecentAdapter.Interaction {
     private RecentContract.Presenter iaPresenter;
-    private RecyclerView rvRecent;
+    private Interaction interaction;
     private RecentAdapter recentAdapter;
+    private RecyclerView rvRecent;
     private ProgressBar pbProgress;
     private TextView tvNotFound;
-    private Interaction interaction;
 
     public static RecentFragment newInstance() {
         RecentFragment fragment = new RecentFragment();
@@ -44,7 +44,7 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iaPresenter = new RecentPresenter(this);
+        iaPresenter = new RecentPresenter(this,getContext());
         recentAdapter = new RecentAdapter(this);
     }
 
@@ -58,8 +58,8 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        pbProgress = view.findViewById(R.id.recent_fragment_pb_progress);
         rvRecent = view.findViewById(R.id.recent_fragment_rv_recent);
+        pbProgress = view.findViewById(R.id.recent_fragment_pb_progress);
         tvNotFound = view.findViewById(R.id.recent_fragment_tv_no_message_found);
         rvRecent.setLayoutManager(new LinearLayoutManager(getContext()));
         rvRecent.setItemAnimator(new DefaultItemAnimator());
@@ -78,11 +78,11 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     }
 
     @Override
-    public void showDemands(ArrayList<Demand> demands) {
-        if (demands == null || demands.size()==0) {
+    public void showProducts(ArrayList<Product> products) {
+        if (products == null || products.size()==0) {
             tvNotFound.setVisibility(View.VISIBLE);
         } else {
-            recentAdapter.setDemands(demands);
+            recentAdapter.setProducts(products);
         }
     }
 
@@ -92,12 +92,12 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     }
 
     @Override
-    public void setDemandToRecentProduct(Demand demand) {
-        interaction.goToProductDetailFragment(demand);
+    public void setProductToRecentFragment(Product product) {
+        interaction.goToProductDetailFragment(product);
     }
 
     public interface Interaction {
 
-        void goToProductDetailFragment(Demand demand);
+        void goToProductDetailFragment(Product product);
     }
 }

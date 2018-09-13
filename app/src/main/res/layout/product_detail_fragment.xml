@@ -3,49 +3,219 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:layoutDirection="rtl">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_y3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_y45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_y6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_y75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_y9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_x2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_x25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/product_detail_fragment_gl_x95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <ImageView
         android:id="@+id/product_detail_fragment_iv_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_local_offer_black_36"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y3" />
+
+    <TextView
+        android:id="@+id/product_detail_fragment_tv_help1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:text="@string/product_name"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y3"
+        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_name"/>
 
     <TextView
         android:id="@+id/product_detail_fragment_tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="right|center"
+        android:lines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_15"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help1"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/line"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45" />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/outline_menu_black_36"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_iv_picture" />
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45" />
+
+    <TextView
+        android:id="@+id/product_detail_fragment_tv_help2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:text="@string/product_category"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45"
+        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_category"/>
 
     <TextView
         android:id="@+id/product_detail_fragment_tv_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="right|center"
+        android:lines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_15"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help2"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/line"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6" />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/outline_add_to_photos_black_36"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_name" />
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6" />
+
+    <TextView
+        android:id="@+id/product_detail_fragment_tv_help3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:text="@string/product_number"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6"
+        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_number"/>
 
     <TextView
         android:id="@+id/product_detail_fragment_tv_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_category" />
+        android:ellipsize="end"
+        android:gravity="right|center"
+        android:lines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_15"
+        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help3"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"/>
 
-    <ProgressBar
-        android:id="@+id/product_detail_fragment_pb_progress"
-        style="?android:attr/progressBarStyle"
+    <View
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_height="@dimen/line"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"
+        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y75" />
+
+    <Button
+        android:id="@+id/product_detail_fragment_btn_send_price"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_18"
+        android:text="@string/send_price"
+        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y9" />
 
 </android.support.constraint.ConstraintLayout>

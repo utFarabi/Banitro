@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Demand;
+import com.sm.banitro.data.model.Product;
 import com.sm.banitro.ui.incoming.IncomingFragment;
 import com.sm.banitro.ui.productdetail.ProductDetailFragment;
 import com.sm.banitro.ui.profile.ProfileFragment;
@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity implements RecentFragment.In
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         bottomNavigation = findViewById(R.id.activity_main_bottom_navigation);
         toolbar = findViewById(R.id.activity_main_toolbar);
+
         fragmentManager = getSupportFragmentManager();
         profileFragment = (ProfileFragment) fragmentManager
                 .findFragmentByTag(ProfileFragment.class.getName());
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements RecentFragment.In
                 .findFragmentByTag(IncomingFragment.class.getName());
         productDetailFragment = (ProductDetailFragment) fragmentManager
                 .findFragmentByTag(ProductDetailFragment.class.getName());
+
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
         setValueBottomNavigation();
     }
@@ -169,9 +172,9 @@ public class MainActivity extends AppCompatActivity implements RecentFragment.In
     // Implement
 
     @Override
-    public void goToProductDetailFragment(Demand demand) {
+    public void goToProductDetailFragment(Product product) {
         if (productDetailFragment == null) {
-                productDetailFragment = ProductDetailFragment.newInstance(demand);
+                productDetailFragment = ProductDetailFragment.newInstance(product);
             fragmentManager.beginTransaction()
             .add(R.id.activity_main_frame_layout, productDetailFragment, ProductDetailFragment.class.getName())
             .addToBackStack(ProductDetailFragment.class.getName())

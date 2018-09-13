@@ -4,34 +4,33 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Demand;
 import com.sm.banitro.data.model.Product;
 import com.sm.banitro.util.Constant;
 
 public class ProductDetailFragment extends Fragment
         implements ProductDetailContract.View, View.OnClickListener {
 
-    private static final String KEY_DEMAND = "demand";
-    private Demand demand;
+    private static final String KEY_PRODUCT = "product";
+    private Product product;
     private TextView tvName, tvCategory, tvNumber;
     private ImageView ivPicture;
-    private ProgressBar pbProgress;
+    private Button btnSendPrice;
     private ProductDetailContract.Presenter iaPresenter;
 
-    public static ProductDetailFragment newInstance(Demand demand) {
+    public static ProductDetailFragment newInstance(Product product) {
         ProductDetailFragment fragment = new ProductDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DEMAND, demand);
+        bundle.putParcelable(KEY_PRODUCT, product);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -39,10 +38,10 @@ public class ProductDetailFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iaPresenter = new ProductDetailPresenter(this);
+        iaPresenter = new ProductDetailPresenter(this,getContext());
         Bundle bundle = getArguments();
         if (bundle == null) return;
-        setDemand((Demand) bundle.getParcelable(KEY_DEMAND));
+        setProduct((Product) bundle.getParcelable(KEY_PRODUCT));
     }
 
     @Nullable
@@ -60,39 +59,20 @@ public class ProductDetailFragment extends Fragment
         tvCategory = view.findViewById(R.id.product_detail_fragment_tv_category);
         tvNumber = view.findViewById(R.id.product_detail_fragment_tv_number);
         ivPicture = view.findViewById(R.id.product_detail_fragment_iv_picture);
-        pbProgress = view.findViewById(R.id.product_detail_fragment_pb_progress);
-        tvName.setText(demand.getProductName());
-        tvCategory.setText(demand.getProductCategory());
-        iaPresenter.loadData(demand.getProductId());
+        btnSendPrice = view.findViewById(R.id.product_detail_fragment_btn_send_price);
+        tvName.setText(product.getName());
+        tvCategory.setText(product.getCategory().getName());
+        tvNumber.setText(String.valueOf(product.getNumber()));
+        Glide.with(this).load(Constant.BASE_URL + product.getPicture()).into(ivPicture);
+        btnSendPrice.setOnClickListener(this);
     }
 
-    public void setDemand(Demand demand) {
-        this.demand = demand;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public void onClick(View view) {
-        // send price
-    }
-
-    @Override
-    public void showProgress() {
-        pbProgress.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        pbProgress.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showProduct(Product product) {
-        tvNumber.setText(String.valueOf(product.getNumber()));
-        Glide.with(this).load(Constant.BASE_URL + product.getPicture()).into(ivPicture);
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        Log.i("sina", "onClick");
     }
 }
