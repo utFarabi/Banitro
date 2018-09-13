@@ -7,7 +7,14 @@
     <string name="product_detail">جزئیات محصول</string>
     <string name="no_message_found">پیامی یافت نشد.</string>
     <string name="product_name">نام محصول</string>
-    <string name="product_number">تعداد</string>
+    <string name="product_number">تعداد محصول</string>
     <string name="product_category">دسته بندی</string>
     <string name="send_price">ارسال قیمت</string>
+    <string name="send">ارسال</string>
+    <string name="cancel">لغو کردن</string>
+    <string name="price_toman">قیمت به تومان</string>
+    <string name="internet_error_header">عدم اتصال به اینترنت</string>
+    <string name="internet_error_message">اتصال شما به اینترنت برقرار نیست. برای استفاده از برنامه به اینترنت متصل شوید.</string>
+    <string name="internet_wi_fi">اینترنت Wi-Fi</string>
+    <string name="internet_mobile">اینترنت موبایل</string>
 </resources>

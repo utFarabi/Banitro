@@ -1,5 +1,6 @@
 package com.sm.banitro.ui.productdetail;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
+import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.util.Constant;
 
 public class ProductDetailFragment extends Fragment
@@ -26,6 +28,7 @@ public class ProductDetailFragment extends Fragment
     private ImageView ivPicture;
     private Button btnSendPrice;
     private ProductDetailContract.Presenter iaPresenter;
+    private Interaction interaction;
 
     public static ProductDetailFragment newInstance(Product product) {
         ProductDetailFragment fragment = new ProductDetailFragment();
@@ -33,6 +36,12 @@ public class ProductDetailFragment extends Fragment
         bundle.putParcelable(KEY_PRODUCT, product);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
     }
 
     @Override
@@ -63,7 +72,7 @@ public class ProductDetailFragment extends Fragment
         tvName.setText(product.getName());
         tvCategory.setText(product.getCategory().getName());
         tvNumber.setText(String.valueOf(product.getNumber()));
-        Glide.with(this).load(Constant.BASE_URL + product.getPicture()).into(ivPicture);
+//        Glide.with(this).load(Constant.BASE_URL + product.getPicture()).into(ivPicture);
         btnSendPrice.setOnClickListener(this);
     }
 
@@ -73,6 +82,11 @@ public class ProductDetailFragment extends Fragment
 
     @Override
     public void onClick(View view) {
-        Log.i("sina", "onClick");
+        interaction.goToReplyDialogFragment(product);
+    }
+
+    public interface Interaction {
+
+        void goToReplyDialogFragment(Product product);
     }
 }

@@ -55,10 +55,9 @@
                 app:layout_constraintGuide_percent="0.95" />
 
             <ImageView
-                android:id="@+id/list_item_recent_iv_chat"
+                android:id="@+id/list_item_recent_iv_is_replied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_chat_black_36"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y6"
                 app:layout_constraintRight_toRightOf="@id/list_item_recent_gl_x05"
@@ -75,7 +74,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_18"
                 app:layout_constraintLeft_toLeftOf="@id/list_item_recent_gl_x95"
-                app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_chat"
+                app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_is_replied"
                 app:layout_constraintTop_toTopOf="@id/list_item_recent_gl_y2" />
 
             <TextView
@@ -89,7 +88,7 @@
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y6"
                 app:layout_constraintLeft_toLeftOf="@id/list_item_recent_gl_x95"
-                app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_chat" />
+                app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_is_replied" />
 
             <TextView
                 android:layout_width="wrap_content"

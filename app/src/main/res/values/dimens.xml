@@ -10,5 +10,11 @@
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_21">21sp</dimen>
     <dimen name="line">1dp</dimen>
+    <dimen name="dialog_fragment_height">250dp</dimen>
+    <dimen name="dialog_fragment_width">280dp</dimen>
+    <dimen name="radius">10dp</dimen>
+    <dimen name="frame_edit_text">2dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
 </resources>
