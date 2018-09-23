@@ -20,13 +20,31 @@ import com.sm.banitro.data.model.Product;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class RecentFragment extends Fragment implements RecentContract.View, RecentAdapter.Interaction {
-    private RecentContract.Presenter iaPresenter;
+
+    // ********************************************************************************
+    // Field
+
+    // Instance
     private Interaction interaction;
+    private RecentContract.Presenter iaPresenter;
     private RecentAdapter recentAdapter;
-    private RecyclerView rvRecent;
-    private ProgressBar pbProgress;
-    private TextView tvNotFound;
+    private Unbinder unbinder;
+
+    // View
+    @BindView(R.id.recent_fragment_rv_recent)
+    RecyclerView rvRecent;
+    @BindView(R.id.recent_fragment_pb_progress)
+    ProgressBar pbProgress;
+    @BindView(R.id.recent_fragment_tv_no_message_found)
+    TextView tvNotFound;
+
+    // ********************************************************************************
+    // New Instance
 
     public static RecentFragment newInstance() {
         RecentFragment fragment = new RecentFragment();
@@ -34,6 +52,9 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    // ********************************************************************************
+    // Basic Override
 
     @Override
     public void onAttach(Context context) {
@@ -44,7 +65,7 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iaPresenter = new RecentPresenter(this,getContext());
+        iaPresenter = new RecentPresenter(this, getContext());
         recentAdapter = new RecentAdapter(this);
     }
 
@@ -58,14 +79,20 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvRecent = view.findViewById(R.id.recent_fragment_rv_recent);
-        pbProgress = view.findViewById(R.id.recent_fragment_pb_progress);
-        tvNotFound = view.findViewById(R.id.recent_fragment_tv_no_message_found);
+
+        // Init Instance
+        unbinder = ButterKnife.bind(this, view);
+
+        // Init View
         rvRecent.setLayoutManager(new LinearLayoutManager(getContext()));
         rvRecent.setItemAnimator(new DefaultItemAnimator());
         rvRecent.setAdapter(recentAdapter);
+
         iaPresenter.loadData();
     }
+
+    // ********************************************************************************
+    // Implement
 
     @Override
     public void showProgress() {
@@ -79,7 +106,7 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
 
     @Override
     public void showProducts(ArrayList<Product> products) {
-        if (products == null || products.size()==0) {
+        if (products == null || products.size() == 0) {
             tvNotFound.setVisibility(View.VISIBLE);
         } else {
             recentAdapter.setProducts(products);
@@ -92,12 +119,44 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     }
 
     @Override
-    public void setProductToRecentFragment(Product product) {
+    public void setProductFromAdapterToRecentFragment(Product product) {
         interaction.goToProductDetailFragment(product);
     }
+
+    @Override
+    public void openDeleteDialogFragment(Product product) {
+        interaction.goToDeleteDialogFragment(product);
+    }
+
+    // ********************************************************************************
+    // Supplementary Override
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iaPresenter = null;
+        recentAdapter = null;
+    }
+
+    // ********************************************************************************
+    // Interface
 
     public interface Interaction {
 
         void goToProductDetailFragment(Product product);
+
+        void goToDeleteDialogFragment(Product product);
     }
 }

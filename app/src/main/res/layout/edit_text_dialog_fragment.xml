@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dialog_fragment_width"
+        android:layout_height="@dimen/edit_text_dialog_fragment_height">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y75"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_y9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_x1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_x3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_x5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/edit_text_dialog_fragment_gl_x9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:id="@+id/edit_text_dialog_fragment_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y1" />
+
+        <TextView
+            android:id="@+id/edit_text_dialog_fragment_tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y35"
+            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y35" />
+
+        <EditText
+            android:id="@+id/edit_text_dialog_fragment_et_input"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/edit_text_shape"
+            android:lines="1"
+            android:padding="@dimen/padding_8"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y7"
+            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y5" />
+
+        <Button
+            android:id="@+id/edit_text_dialog_fragment_btn_send"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="bottom|right"
+            android:text="@string/send"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y9"
+            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x3"
+            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y75" />
+
+        <Button
+            android:id="@+id/edit_text_dialog_fragment_btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="bottom|right"
+            android:text="@string/cancel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y9"
+            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x5"
+            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x3"
+            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y75" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

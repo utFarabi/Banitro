@@ -12,31 +12,39 @@ import com.sm.banitro.data.model.Product;
 
 import java.util.ArrayList;
 
-public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder> {
-    private ArrayList<Product> products;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder> {
+
+    // ********************************************************************************
+    // Field
+
+    // Instance
     private Interaction interaction;
+    private ArrayList<Product> products;
+
+    // ********************************************************************************
+    // Constructor
 
     public RecentAdapter(Interaction interaction) {
         this.interaction = interaction;
     }
 
+    // ********************************************************************************
+    // Basic Override
+
     @Override
-    public RecentAdapter.viewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_recent, parent, false);
-        return new RecentAdapter.viewHolder(itemView);
+        return new RecentAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RecentAdapter.viewHolder holder, int position) {
+    public void onBindViewHolder(RecentAdapter.ViewHolder holder, int position) {
         Product product = products.get(position);
-        holder.tvProductName.setText(product.getName());
-        holder.tvProductCategory.setText(product.getCategory().getName());
-        if (product.isReplied()) {
-            holder.ivIsReplied.setImageResource(R.drawable.outline_chat_white_36);
-        } else {
-            holder.ivIsReplied.setImageResource(R.drawable.outline_chat_bubble_outline_white_36);
-        }
+        holder.onBind(product);
     }
 
     @Override
@@ -47,31 +55,64 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder
         return products.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
-        TextView tvProductName, tvProductCategory;
-        ImageView ivIsReplied;
-
-        viewHolder(View itemView) {
-            super(itemView);
-            tvProductName = itemView.findViewById(R.id.list_item_recent_tv_product_name);
-            tvProductCategory = itemView.findViewById(R.id.list_item_recent_tv_product_category);
-            ivIsReplied = itemView.findViewById(R.id.list_item_recent_iv_is_replied);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    interaction.setProductToRecentFragment(products.get(getAdapterPosition()));
-                }
-            });
-        }
-    }
+    // ********************************************************************************
+    // Method
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
         notifyDataSetChanged();
     }
 
+    // ********************************************************************************
+    // Inner Class
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.list_item_recent_tv_product_name)
+        TextView tvProductName;
+        @BindView(R.id.list_item_recent_tv_product_category)
+        TextView tvProductCategory;
+        @BindView(R.id.list_item_recent_iv_is_replied)
+        ImageView ivIsReplied;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    interaction.setProductFromAdapterToRecentFragment(products.get(getAdapterPosition()));
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Product product=products.get(getAdapterPosition());
+                    if (!product.isReplied()) {
+                        interaction.openDeleteDialogFragment(product);
+                    }
+                    return false;
+                }
+            });
+        }
+
+        public void onBind(Product product) {
+            tvProductName.setText(product.getName());
+            tvProductCategory.setText(product.getCategory().getName());
+            if (product.isReplied()) {
+                ivIsReplied.setImageResource(R.drawable.outline_chat_white_36);
+            } else {
+                ivIsReplied.setImageResource(R.drawable.outline_chat_bubble_outline_white_36);
+            }
+        }
+    }
+
+    // ********************************************************************************
+    // Interface
+
     public interface Interaction {
 
-        void setProductToRecentFragment(Product product);
+        void setProductFromAdapterToRecentFragment(Product product);
+
+        void openDeleteDialogFragment(Product product);
     }
 }

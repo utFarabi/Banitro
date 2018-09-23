@@ -21,8 +21,8 @@ interface ApiInterface {
 
     @POST("{seller_id}/{product_id}")
     @FormUrlEncoded
-    Call<ReplyResponse> postReply(@Path("seller_id") int sellerId,
+    Call<ReplyResponse> postReply(@Path("seller_id") int sellerId/*no*/,
                                   @Path("product_id") int productId,
-                                  @Field("is_replied") boolean isReplied,
+                                  @Field("is_replied") boolean isReplied/*no*/,
                                   @Field("reply") Reply reply);
 }

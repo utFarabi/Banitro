@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="list_item_incoming_height">150dp</dimen>
     <dimen name="list_item_recent_height">150dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_16">16dp</dimen>
@@ -12,9 +13,16 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_21">21sp</dimen>
     <dimen name="line">1dp</dimen>
-    <dimen name="dialog_fragment_height">250dp</dimen>
+    <dimen name="delete_dialog_fragment_height">150dp</dimen>
+    <dimen name="network_dialog_fragment_height">250dp</dimen>
+    <dimen name="edit_text_dialog_fragment_height">200dp</dimen>
+    <dimen name="reply_dialog_fragment_height">230dp</dimen>
+    <dimen name="category_dialog_fragment_height">400dp</dimen>
     <dimen name="dialog_fragment_width">280dp</dimen>
     <dimen name="radius">10dp</dimen>
     <dimen name="frame_edit_text">2dp</dimen>
     <dimen name="padding_8">8dp</dimen>
+    <dimen name="tab_indicator_height">5dp</dimen>
+    <dimen name="image_size_36">36dp</dimen>
+    <dimen name="list_item_category_height">55dp</dimen>
 </resources>

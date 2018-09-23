@@ -12,10 +12,25 @@ import android.widget.QuickContactBadge;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
 
-public class ReplyDialogFragment extends DialogFragment implements View.OnClickListener {
-    private static final String KEY_PRODUCT = "product";
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+public class ReplyDialogFragment extends DialogFragment {
+
+    // ********************************************************************************
+    // Field
+
+    // Instance
+    private Unbinder unbinder;
     private Product product;
-    private Button btnSend,btnCancel;
+
+    // Data Type
+    private static final String KEY_PRODUCT = "product";
+
+    // ********************************************************************************
+    // New Instance
 
     public static ReplyDialogFragment newInstance(Product product) {
         ReplyDialogFragment fragment = new ReplyDialogFragment();
@@ -24,6 +39,9 @@ public class ReplyDialogFragment extends DialogFragment implements View.OnClickL
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    // ********************************************************************************
+    // Basic Override
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,25 +62,28 @@ public class ReplyDialogFragment extends DialogFragment implements View.OnClickL
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnSend=view.findViewById(R.id.reply_dialog_fragment_btn_send);
-        btnCancel=view.findViewById(R.id.reply_dialog_fragment_btn_cancel);
-        btnSend.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+
+        // Init Instance
+        unbinder = ButterKnife.bind(this, view);
     }
+
+    // ********************************************************************************
+    // Method
 
     public void setProduct(Product product) {
         this.product = product;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.reply_dialog_fragment_btn_send:
+    // ********************************************************************************
+    // Supplementary Override
 
-                break;
-            case R.id.reply_dialog_fragment_btn_cancel:
-                dismiss();
-                break;
-        }
+    @OnClick(R.id.reply_dialog_fragment_btn_send)
+    public void onClickSend() {
+
+    }
+
+    @OnClick(R.id.reply_dialog_fragment_btn_cancel)
+    public void onClickCancel() {
+        dismiss();
     }
 }

@@ -20,35 +20,35 @@
             android:layout_height="match_parent">
 
             <android.support.constraint.Guideline
-                android:id="@+id/list_item_recent_gl_y2"
+                android:id="@+id/list_item_incoming_gl_y2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.2" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/list_item_recent_gl_y6"
+                android:id="@+id/list_item_incoming_gl_y6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.6" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/list_item_recent_gl_y8"
+                android:id="@+id/list_item_incoming_gl_y8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.8" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/list_item_recent_gl_x05"
+                android:id="@+id/list_item_incoming_gl_x05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.05" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/list_item_recent_gl_x95"
+                android:id="@+id/list_item_incoming_gl_x95"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -59,9 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tint="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y6"
-                app:layout_constraintRight_toRightOf="@id/list_item_recent_gl_x05"
-                app:layout_constraintTop_toTopOf="@id/list_item_recent_gl_y2" />
+                app:layout_constraintBottom_toBottomOf="@id/list_item_incoming_gl_y6"
+                app:layout_constraintRight_toRightOf="@id/list_item_incoming_gl_x05"
+                app:layout_constraintTop_toTopOf="@id/list_item_incoming_gl_y2" />
 
             <TextView
                 android:id="@+id/list_item_recent_tv_product_name"
@@ -73,9 +73,9 @@
                 android:lines="1"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_18"
-                app:layout_constraintLeft_toLeftOf="@id/list_item_recent_gl_x95"
+                app:layout_constraintLeft_toLeftOf="@id/list_item_incoming_gl_x95"
                 app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_is_replied"
-                app:layout_constraintTop_toTopOf="@id/list_item_recent_gl_y2" />
+                app:layout_constraintTop_toTopOf="@id/list_item_incoming_gl_y2" />
 
             <TextView
                 android:id="@+id/list_item_recent_tv_product_category"
@@ -86,26 +86,26 @@
                 android:gravity="right|center"
                 android:lines="1"
                 android:textSize="@dimen/text_size_15"
-                app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y6"
-                app:layout_constraintLeft_toLeftOf="@id/list_item_recent_gl_x95"
+                app:layout_constraintBottom_toBottomOf="@id/list_item_incoming_gl_y6"
+                app:layout_constraintLeft_toLeftOf="@id/list_item_incoming_gl_x95"
                 app:layout_constraintRight_toLeftOf="@id/list_item_recent_iv_is_replied" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_detail"
-                app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y8"
-                app:layout_constraintRight_toRightOf="@id/list_item_recent_gl_x05"
-                app:layout_constraintTop_toTopOf="@id/list_item_recent_gl_y8" />
+                app:layout_constraintBottom_toBottomOf="@id/list_item_incoming_gl_y8"
+                app:layout_constraintRight_toRightOf="@id/list_item_incoming_gl_x05"
+                app:layout_constraintTop_toTopOf="@id/list_item_incoming_gl_y8" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_details_black_24"
                 android:tint="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@id/list_item_recent_gl_y8"
-                app:layout_constraintLeft_toLeftOf="@id/list_item_recent_gl_x95"
-                app:layout_constraintTop_toTopOf="@id/list_item_recent_gl_y8" />
+                app:layout_constraintBottom_toBottomOf="@id/list_item_incoming_gl_y8"
+                app:layout_constraintLeft_toLeftOf="@id/list_item_incoming_gl_x95"
+                app:layout_constraintTop_toTopOf="@id/list_item_incoming_gl_y8" />
 
         </android.support.constraint.ConstraintLayout>
 

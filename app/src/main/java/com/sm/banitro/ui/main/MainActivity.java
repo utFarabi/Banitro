@@ -1,8 +1,5 @@
 package com.sm.banitro.ui.main;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,38 +7,54 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
 import com.sm.banitro.ui.home.incoming.IncomingFragment;
+import com.sm.banitro.ui.home.profile.editdialog.EditCategoryDialogFragment;
+import com.sm.banitro.ui.home.profile.editdialog.EditTextDialogFragment;
 import com.sm.banitro.ui.home.profile.ProfileFragment;
+import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.productdetail.ProductDetailFragment;
 import com.sm.banitro.ui.productdetail.ReplyDialogFragment;
 import com.sm.banitro.util.Function;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
-        implements RecentFragment.Interaction, ProductDetailFragment.Interaction {
+        implements RecentFragment.Interaction, ProductDetailFragment.Interaction
+        , NetworkReceiver.Interaction,ProfileFragment.Interaction{
 
     // ********************************************************************************
+    // Field
+
     // Instance
     private FragmentManager fragmentManager;
-    private ProfileFragment profileFragment;
     private RecentFragment recentFragment;
     private IncomingFragment incomingFragment;
+    private ProfileFragment profileFragment;
     private ProductDetailFragment productDetailFragment;
-    private DialogFragment dialogFragmentNetwork;
-    private InternalNetworkChangeReceiver internalNetworkChangeReceiver;
-    // Type
-    private String fragmentName;
-    private boolean networkDialogIsShowing;
-    // View
-    private BottomNavigationView bottomNavigation;
-    private Toolbar toolbar;
+    private DialogFragment networkDialogFragment;
+    private NetworkReceiver networkReceiver;
     private Toast toast;
+
+    // Data Type
+    private boolean networkDialogIsShowing;
+    private final String NETWORK_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+
+    // View
+    @BindView(R.id.activity_main_bottom_navigation)
+    BottomNavigationView bottomNavigation;
+    @BindView(R.id.activity_main_toolbar_logo)
+    ImageView logo;
+    @BindView(R.id.activity_main_toolbar_title)
+    TextView title;
 
     // ********************************************************************************
     // Basic Override
@@ -50,12 +63,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        internalNetworkChangeReceiver = new InternalNetworkChangeReceiver();
-
-        bottomNavigation = findViewById(R.id.activity_main_bottom_navigation);
-        toolbar = findViewById(R.id.activity_main_toolbar);
-
+        // Init Instance
         fragmentManager = getSupportFragmentManager();
         profileFragment = (ProfileFragment) fragmentManager
                 .findFragmentByTag(ProfileFragment.class.getName());
@@ -65,22 +75,40 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentByTag(IncomingFragment.class.getName());
         productDetailFragment = (ProductDetailFragment) fragmentManager
                 .findFragmentByTag(ProductDetailFragment.class.getName());
-
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
 
-        setValueBottomNavigation();
+        networkReceiver = new NetworkReceiver();
+        networkReceiver.interaction = this;
 
-        registerReceiver();
+        registerNetworkReceiver();
+
+        setValueToBottomNavigation();
     }
 
     // ********************************************************************************
     // Initialization
 
-    private void setValueBottomNavigation() {
+    private void registerNetworkReceiver() {
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(NETWORK_CHANGE_ACTION);
+            registerReceiver(networkReceiver, intentFilter);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
+    private void setValueToBottomNavigation() {
+
+        // First Item Selected
         bottomNavigation.setSelectedItemId(R.id.bottom_navigation_recent);
-        toolbar.setTitle(R.string.recent);
-        goToRecentFragment();
+        title.setText(R.string.recent);
+        logo.setImageResource(R.drawable.baseline_mail_white_24);
+        if (Function.isConnecting(this)) {
+            goToRecentFragment();
+        } else {
+            goToNetworkDialogFragment();
+        }
 
         bottomNavigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -88,15 +116,18 @@ public class MainActivity extends AppCompatActivity
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.bottom_navigation_profile:
-                                toolbar.setTitle(R.string.profile);
+                                title.setText(R.string.profile);
+                                logo.setImageResource(R.drawable.baseline_person_white_24);
                                 goToProfileFragment();
                                 break;
                             case R.id.bottom_navigation_recent:
-                                toolbar.setTitle(R.string.recent);
+                                title.setText(R.string.recent);
+                                logo.setImageResource(R.drawable.baseline_mail_white_24);
                                 goToRecentFragment();
                                 break;
                             case R.id.bottom_navigation_incoming:
-                                toolbar.setTitle(R.string.incoming);
+                                title.setText(R.string.incoming);
+                                logo.setImageResource(R.drawable.baseline_drafts_white_24);
                                 goToIncomingFragment();
                                 break;
                         }
@@ -105,18 +136,57 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    private void registerReceiver() {
-        try {
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(NetworkChangeReceiver.NETWORK_CHANGE_ACTION);
-            registerReceiver(internalNetworkChangeReceiver, intentFilter);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    // ********************************************************************************
+    // Method
+
+    private void goToRecentFragment() {
+        if (recentFragment == null) {
+            recentFragment = recentFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                    .commit();
+        } else {
+            if (profileFragment == null && incomingFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(incomingFragment).show(recentFragment).commit();
+            } else if (profileFragment != null && incomingFragment == null) {
+                fragmentManager.beginTransaction()
+                        .hide(profileFragment).show(recentFragment).commit();
+            } else if (profileFragment != null && incomingFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(profileFragment).hide(incomingFragment).show(recentFragment).commit();
+            }
         }
     }
 
-    // ********************************************************************************
-    // Method
+    private void goToIncomingFragment() {
+        if (incomingFragment == null) {
+            incomingFragment = IncomingFragment.newInstance();
+            if (profileFragment == null) {
+                fragmentManager.beginTransaction()
+                        .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
+                        .hide(recentFragment)
+                        .commit();
+            } else {
+                fragmentManager.beginTransaction()
+                        .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
+                        .hide(recentFragment)
+                        .hide(profileFragment)
+                        .commit();
+            }
+        } else {
+            if (recentFragment == null && profileFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(profileFragment).show(incomingFragment).commit();
+            } else if (recentFragment != null && profileFragment == null) {
+                fragmentManager.beginTransaction()
+                        .hide(recentFragment).show(incomingFragment).commit();
+            } else if (recentFragment != null && profileFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(recentFragment).hide(profileFragment).show(incomingFragment).commit();
+            }
+        }
+    }
 
     private void goToProfileFragment() {
         if (profileFragment == null) {
@@ -147,69 +217,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void goToRecentFragment() {
-        if (recentFragment == null) {
-            if (Function.isNetworkAvailable(this)) {
-                recentFragment = recentFragment.newInstance();
-                fragmentManager.beginTransaction()
-                        .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
-                        .commit();
-            } else {
-                fragmentName = "RecentFragment";
-                goToInternetDialog();
-            }
-        } else {
-            if (profileFragment == null && incomingFragment != null) {
-                fragmentManager.beginTransaction()
-                        .hide(incomingFragment).show(recentFragment).commit();
-            } else if (profileFragment != null && incomingFragment == null) {
-                fragmentManager.beginTransaction()
-                        .hide(profileFragment).show(recentFragment).commit();
-            } else if (profileFragment != null && incomingFragment != null) {
-                fragmentManager.beginTransaction()
-                        .hide(profileFragment).hide(incomingFragment).show(recentFragment).commit();
-            }
-        }
-    }
-
-    private void goToIncomingFragment() {
-        if (incomingFragment == null) {
-            if (Function.isNetworkAvailable(this)) {
-                incomingFragment = IncomingFragment.newInstance();
-                if (profileFragment == null) {
-                    fragmentManager.beginTransaction()
-                            .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
-                            .hide(recentFragment)
-                            .commit();
-                } else {
-                    fragmentManager.beginTransaction()
-                            .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
-                            .hide(recentFragment)
-                            .hide(profileFragment)
-                            .commit();
-                }
-            } else {
-                fragmentName = "IncomingFragment";
-                goToInternetDialog();
-            }
-        } else {
-            if (recentFragment == null && profileFragment != null) {
-                fragmentManager.beginTransaction()
-                        .hide(profileFragment).show(incomingFragment).commit();
-            } else if (recentFragment != null && profileFragment == null) {
-                fragmentManager.beginTransaction()
-                        .hide(recentFragment).show(incomingFragment).commit();
-            } else if (recentFragment != null && profileFragment != null) {
-                fragmentManager.beginTransaction()
-                        .hide(recentFragment).hide(profileFragment).show(incomingFragment).commit();
-            }
-        }
-    }
-
-    public void goToInternetDialog() {
-        dialogFragmentNetwork = NetworkDialogFragment.newInstance();
-        dialogFragmentNetwork.show(fragmentManager.beginTransaction(), NetworkDialogFragment.class.getName());
-        dialogFragmentNetwork.setCancelable(false);
+    public void goToNetworkDialogFragment() {
+        networkDialogFragment = NetworkDialogFragment.newInstance();
+        networkDialogFragment.show(fragmentManager.beginTransaction(), NetworkDialogFragment.class.getName());
+        networkDialogFragment.setCancelable(false);
         networkDialogIsShowing = true;
     }
 
@@ -224,7 +235,13 @@ public class MainActivity extends AppCompatActivity
                 .hide(recentFragment)
                 .addToBackStack(ProductDetailFragment.class.getName())
                 .commit();
+    }
 
+    @Override
+    public void goToDeleteDialogFragment(Product product) {
+        DialogFragment dialogFragment = DeleteDialogFragment.newInstance(product);
+        dialogFragment.show(fragmentManager.beginTransaction(), DeleteDialogFragment.class.getName());
+        dialogFragment.setCancelable(false);
     }
 
     @Override
@@ -232,6 +249,29 @@ public class MainActivity extends AppCompatActivity
         DialogFragment dialogFragment = ReplyDialogFragment.newInstance(product);
         dialogFragment.show(fragmentManager.beginTransaction(), ReplyDialogFragment.class.getName());
         dialogFragment.setCancelable(false);
+    }
+
+    @Override
+    public void goToEditTextDialogFragment(int type) {
+        DialogFragment dialogFragment = EditTextDialogFragment.newInstance(type);
+        dialogFragment.show(fragmentManager.beginTransaction(), EditTextDialogFragment.class.getName());
+        dialogFragment.setCancelable(false);
+    }
+
+    @Override
+    public void goToEditCategoryDialogFragment(){
+        DialogFragment dialogFragment = EditCategoryDialogFragment.newInstance();
+        dialogFragment.show(fragmentManager.beginTransaction(), EditCategoryDialogFragment.class.getName());
+        dialogFragment.setCancelable(false);
+    }
+
+    @Override
+    public void isConnecting() {
+        if (networkDialogIsShowing) {
+            networkDialogFragment.dismiss();
+            networkDialogIsShowing = false;
+            goToRecentFragment();
+        }
     }
 
     // ********************************************************************************
@@ -253,30 +293,32 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (networkDialogFragment != null) {
+            networkDialogIsShowing = true;
+            if (Function.isConnecting(this)) {
+                networkDialogFragment.dismiss();
+                networkDialogIsShowing = false;
+                goToRecentFragment();
+            }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        networkDialogIsShowing = false;
+    }
+
+    @Override
     protected void onDestroy() {
         try {
-            unregisterReceiver(internalNetworkChangeReceiver);
+            unregisterReceiver(networkReceiver);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        networkReceiver = null;
         super.onDestroy();
-    }
-
-    class InternalNetworkChangeReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getBooleanExtra("status", false) && networkDialogIsShowing) {
-                dialogFragmentNetwork.dismiss();
-                networkDialogIsShowing = false;
-                switch (fragmentName) {
-                    case "RecentFragment":
-                        goToRecentFragment();
-                        break;
-                    case "IncomingFragment":
-                        goToIncomingFragment();
-                        break;
-                }
-            }
-        }
     }
 }

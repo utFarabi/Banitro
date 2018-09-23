@@ -3,18 +3,8 @@
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#EF9A9A</color>
-
-    <!--<color name="colorPrimary">#FF9800</color>-->
-    <!--<color name="colorPrimaryDark">#F57C00</color>-->
-    <!--<color name="colorAccent">#FFCC80</color>-->
-
-    <!--<color name="colorPrimary">#607D8B</color>-->
-    <!--<color name="colorPrimaryDark">#455A64</color>-->
-    <!--<color name="colorAccent">#B0BEC5</color>-->
-
-    <!--<color name="colorPrimary">#FF5722</color>-->
-    <!--<color name="colorPrimaryDark">#E64A19</color>-->
-    <!--<color name="colorAccent">#FFAB91</color>-->
-
     <color name="colorError">#B00020</color>
+    <color name="colorOk">#00B020</color>
+    <color name="colorSelected">#FFFFFF</color>
+    <color name="colorUnselected">#AAAAAA</color>
 </resources>

@@ -12,8 +12,21 @@ import android.widget.Button;
 
 import com.sm.banitro.R;
 
-public class NetworkDialogFragment extends DialogFragment implements View.OnClickListener {
-    private Button btnMobile, btnWiFi;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+public class NetworkDialogFragment extends DialogFragment {
+
+    // ********************************************************************************
+    // Field
+
+    // Instance
+    private Unbinder unbinder;
+
+    // ********************************************************************************
+    // New Instance
 
     public static NetworkDialogFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -21,6 +34,9 @@ public class NetworkDialogFragment extends DialogFragment implements View.OnClic
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    // ********************************************************************************
+    // Basic Override
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,21 +54,27 @@ public class NetworkDialogFragment extends DialogFragment implements View.OnClic
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnMobile = view.findViewById(R.id.network_dialog_fragment_btn_mobile);
-        btnWiFi = view.findViewById(R.id.network_dialog_fragment_btn_wifi);
-        btnMobile.setOnClickListener(this);
-        btnWiFi.setOnClickListener(this);
+
+        // Init Instance
+        unbinder = ButterKnife.bind(this, view);
+    }
+
+    // ********************************************************************************
+    // Supplementary Override
+
+    @OnClick(R.id.network_dialog_fragment_btn_mobile)
+    public void onClickMobile() {
+        startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+    }
+
+    @OnClick(R.id.network_dialog_fragment_btn_wifi)
+    public void onClickWifi() {
+        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.network_dialog_fragment_btn_mobile:
-                startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
-                break;
-            case R.id.network_dialog_fragment_btn_wifi:
-                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                break;
-        }
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
