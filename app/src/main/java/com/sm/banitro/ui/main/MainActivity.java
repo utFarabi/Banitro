@@ -15,21 +15,22 @@ import android.widget.Toast;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
 import com.sm.banitro.ui.home.incoming.IncomingFragment;
+import com.sm.banitro.ui.home.profile.ProfileFragment;
 import com.sm.banitro.ui.home.profile.editdialog.EditCategoryDialogFragment;
 import com.sm.banitro.ui.home.profile.editdialog.EditTextDialogFragment;
-import com.sm.banitro.ui.home.profile.ProfileFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
-import com.sm.banitro.ui.productdetail.ProductDetailFragment;
-import com.sm.banitro.ui.productdetail.ReplyDialogFragment;
+import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
+import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.Function;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements RecentFragment.Interaction, ProductDetailFragment.Interaction
-        , NetworkReceiver.Interaction,ProfileFragment.Interaction{
+        implements RecentFragment.Interaction, RecentDetailFragment.Interaction,
+        NetworkReceiver.Interaction, ProfileFragment.Interaction,
+        DeleteDialogFragment.Interaction {
 
     // ********************************************************************************
     // Field
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private RecentFragment recentFragment;
     private IncomingFragment incomingFragment;
     private ProfileFragment profileFragment;
-    private ProductDetailFragment productDetailFragment;
+    private RecentDetailFragment recentDetailFragment;
     private DialogFragment networkDialogFragment;
     private NetworkReceiver networkReceiver;
     private Toast toast;
@@ -73,8 +74,8 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentByTag(RecentFragment.class.getName());
         incomingFragment = (IncomingFragment) fragmentManager
                 .findFragmentByTag(IncomingFragment.class.getName());
-        productDetailFragment = (ProductDetailFragment) fragmentManager
-                .findFragmentByTag(ProductDetailFragment.class.getName());
+        recentDetailFragment = (RecentDetailFragment) fragmentManager
+                .findFragmentByTag(RecentDetailFragment.class.getName());
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
 
         networkReceiver = new NetworkReceiver();
@@ -228,12 +229,12 @@ public class MainActivity extends AppCompatActivity
     // Implement
 
     @Override
-    public void goToProductDetailFragment(Product product) {
-        productDetailFragment = ProductDetailFragment.newInstance(product);
+    public void goToRecentDetailFragment(Product product) {
+        recentDetailFragment = RecentDetailFragment.newInstance(product);
         fragmentManager.beginTransaction()
-                .add(R.id.base_layout, productDetailFragment, ProductDetailFragment.class.getName())
+                .add(R.id.base_layout, recentDetailFragment, RecentDetailFragment.class.getName())
                 .hide(recentFragment)
-                .addToBackStack(ProductDetailFragment.class.getName())
+                .addToBackStack(RecentDetailFragment.class.getName())
                 .commit();
     }
 
@@ -259,10 +260,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void goToEditCategoryDialogFragment(){
+    public void goToEditCategoryDialogFragment() {
         DialogFragment dialogFragment = EditCategoryDialogFragment.newInstance();
         dialogFragment.show(fragmentManager.beginTransaction(), EditCategoryDialogFragment.class.getName());
         dialogFragment.setCancelable(false);
+    }
+
+    @Override
+    public void setProductToFragmentForDelete(Product product) {
+        recentFragment.sendRequestDeleteProduct(product);
     }
 
     @Override

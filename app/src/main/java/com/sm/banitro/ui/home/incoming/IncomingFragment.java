@@ -28,9 +28,9 @@ public class IncomingFragment extends Fragment {
     private PagerAdapter pagerAdapter;
 
     // View
-    @BindView(R.id.incoming_fragment_tab_layout)
+    @BindView(R.id.fragment_incoming_tab_layout)
     TabLayout tabLayout;
-    @BindView(R.id.incoming_fragment_view_page)
+    @BindView(R.id.fragment_incoming_view_page)
     ViewPager viewPager;
 
     // ********************************************************************************
@@ -56,7 +56,7 @@ public class IncomingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.incoming_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_incoming, container, false);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.productdetail;
+package com.sm.banitro.ui.recentdetail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,13 +6,10 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.QuickContactBadge;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -56,7 +53,7 @@ public class ReplyDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.reply_dialog_fragment, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_reply, container, false);
     }
 
     @Override
@@ -77,12 +74,12 @@ public class ReplyDialogFragment extends DialogFragment {
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.reply_dialog_fragment_btn_send)
+    @OnClick(R.id.dialog_fragment_reply_btn_send)
     public void onClickSend() {
 
     }
 
-    @OnClick(R.id.reply_dialog_fragment_btn_cancel)
+    @OnClick(R.id.dialog_fragment_reply_btn_cancel)
     public void onClickCancel() {
         dismiss();
     }

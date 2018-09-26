@@ -1,5 +1,6 @@
 package com.sm.banitro.data.source.remote;
 
+import com.sm.banitro.data.model.DeleteResponse;
 import com.sm.banitro.data.model.Product;
 import com.sm.banitro.data.model.Reply;
 import com.sm.banitro.data.model.ReplyResponse;
@@ -25,4 +26,8 @@ interface ApiInterface {
                                   @Path("product_id") int productId,
                                   @Field("is_replied") boolean isReplied/*no*/,
                                   @Field("reply") Reply reply);
+
+    @POST("{product_id}")
+    @FormUrlEncoded
+    Call<DeleteResponse> postProductForDelete(@Path("product_id") int productId);
 }

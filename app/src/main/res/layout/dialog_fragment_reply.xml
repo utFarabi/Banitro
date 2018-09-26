@@ -7,119 +7,129 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/dialog_fragment_width"
-        android:layout_height="@dimen/edit_text_dialog_fragment_height">
+        android:layout_height="@dimen/reply_dialog_fragment_height">
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y1"
+            android:id="@+id/dialog_fragment_reply_gl_y1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.1" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y35"
+            android:id="@+id/dialog_fragment_reply_gl_y25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y5"
+            android:id="@+id/dialog_fragment_reply_gl_y45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_reply_gl_y5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y7"
+            android:id="@+id/dialog_fragment_reply_gl_y7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.7" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y75"
+            android:id="@+id/dialog_fragment_reply_gl_y75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.75" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_y9"
+            android:id="@+id/dialog_fragment_reply_gl_y9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_x1"
+            android:id="@+id/dialog_fragment_reply_gl_x1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.1" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_x3"
+            android:id="@+id/dialog_fragment_reply_gl_x3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.3" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_x5"
+            android:id="@+id/dialog_fragment_reply_gl_x5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/edit_text_dialog_fragment_gl_x9"
+            android:id="@+id/dialog_fragment_reply_gl_x9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
 
         <TextView
-            android:id="@+id/edit_text_dialog_fragment_tv_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lines="1"
+            android:text="@string/submit_price"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_18"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y1" />
-
-        <TextView
-            android:id="@+id/edit_text_dialog_fragment_tv_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lines="1"
-            android:textSize="@dimen/text_size_15"
-            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y35"
-            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y35" />
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_reply_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y1" />
 
         <EditText
-            android:id="@+id/edit_text_dialog_fragment_et_input"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/edit_text_shape"
+            android:hint="توضیح مختصر"
+            android:inputType="text"
             android:lines="1"
+            android:maxLength="20"
             android:padding="@dimen/padding_8"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_15"
-            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y7"
-            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y5" />
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_reply_gl_y45"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_reply_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_reply_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y25" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/price_toman"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="12"
+            android:padding="@dimen/padding_8"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_reply_gl_y7"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_reply_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_reply_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y5" />
 
         <Button
-            android:id="@+id/edit_text_dialog_fragment_btn_send"
+            android:id="@+id/dialog_fragment_reply_btn_send"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@null"
@@ -128,13 +138,13 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_15"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y9"
-            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x3"
-            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y75" />
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_reply_gl_y9"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_reply_gl_x3"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_reply_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y75" />
 
         <Button
-            android:id="@+id/edit_text_dialog_fragment_btn_cancel"
+            android:id="@+id/dialog_fragment_reply_btn_cancel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@null"
@@ -143,10 +153,10 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_15"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/edit_text_dialog_fragment_gl_y9"
-            app:layout_constraintLeft_toLeftOf="@id/edit_text_dialog_fragment_gl_x5"
-            app:layout_constraintRight_toRightOf="@id/edit_text_dialog_fragment_gl_x3"
-            app:layout_constraintTop_toTopOf="@id/edit_text_dialog_fragment_gl_y75" />
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_reply_gl_y9"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_reply_gl_x5"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_reply_gl_x3"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y75" />
 
     </android.support.constraint.ConstraintLayout>
 

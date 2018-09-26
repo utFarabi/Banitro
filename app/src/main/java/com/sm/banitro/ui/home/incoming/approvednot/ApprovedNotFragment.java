@@ -36,11 +36,11 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
     private Unbinder unbinder;
 
     // View
-    @BindView(R.id.approved_not_fragment_rv_approved_not)
+    @BindView(R.id.fragment_approved_not_rv_approved_not)
     RecyclerView rvApprovedNot;
-    @BindView(R.id.approved_not_fragment_pb_progress)
+    @BindView(R.id.fragment_approved_not_pb_progress)
     ProgressBar pbProgress;
-    @BindView(R.id.approved_not_fragment_tv_no_message_found)
+    @BindView(R.id.fragment_approved_not_tv_no_message_found)
     TextView tvNotFound;
 
     // ********************************************************************************
@@ -67,7 +67,7 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.approved_not_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_approved_not, container, false);
     }
 
     @Override

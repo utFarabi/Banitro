@@ -27,11 +27,11 @@ public class EditTextDialogFragment extends DialogFragment {
     private int type;
 
     // View
-    @BindView(R.id.edit_text_dialog_fragment_tv_title)
+    @BindView(R.id.dialog_fragment_edit_text_tv_title)
     TextView tvTitle;
-    @BindView(R.id.edit_text_dialog_fragment_tv_description)
+    @BindView(R.id.dialog_fragment_edit_text_tv_description)
     TextView tvDescription;
-    @BindView(R.id.edit_text_dialog_fragment_et_input)
+    @BindView(R.id.dialog_fragment_edit_text_et_input)
     EditText etInput;
 
     // Data Type
@@ -64,7 +64,7 @@ public class EditTextDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.edit_text_dialog_fragment, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_edit_text, container, false);
     }
 
     @Override
@@ -107,12 +107,12 @@ public class EditTextDialogFragment extends DialogFragment {
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.edit_text_dialog_fragment_btn_send)
+    @OnClick(R.id.dialog_fragment_edit_text_btn_send)
     public void onClickSend() {
 
     }
 
-    @OnClick(R.id.edit_text_dialog_fragment_btn_cancel)
+    @OnClick(R.id.dialog_fragment_edit_text_btn_cancel)
     public void onClickCancel() {
         dismiss();
     }

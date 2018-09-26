@@ -8,11 +8,9 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.sm.banitro.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -48,7 +46,7 @@ public class NetworkDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.network_dialog_fragment, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_network, container, false);
     }
 
     @Override
@@ -62,12 +60,12 @@ public class NetworkDialogFragment extends DialogFragment {
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.network_dialog_fragment_btn_mobile)
+    @OnClick(R.id.dialog_fragment_network_btn_mobile)
     public void onClickMobile() {
         startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
     }
 
-    @OnClick(R.id.network_dialog_fragment_btn_wifi)
+    @OnClick(R.id.dialog_fragment_network_btn_wifi)
     public void onClickWifi() {
         startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
     }

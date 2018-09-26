@@ -66,24 +66,24 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Interaction interaction;
     private ProfileContract.Presenter iaPresenter;
     private Unbinder unbinder;
-    private Uri cameraUri, cropPictureUri;
+    private Uri cameraUri;
 
     // Data Type
     private final int IMAGE_REQUEST_CODE = 100;
     private int MAX_CROP_HEIGHT, MAX_CROP_WIDTH;
 
     // View
-    @BindView(R.id.profile_fragment_iv_seller_image)
+    @BindView(R.id.fragment_profile_iv_seller_image)
     ImageView ivSellerImage;
-    @BindView(R.id.profile_fragment_tv_name)
+    @BindView(R.id.fragment_profile_tv_name)
     TextView tvName;
-    @BindView(R.id.profile_fragment_tv_phone_number)
+    @BindView(R.id.fragment_profile_tv_phone_number)
     TextView tvPhoneNumber;
-    @BindView(R.id.profile_fragment_tv_address)
+    @BindView(R.id.fragment_profile_tv_address)
     TextView tvAddress;
-    @BindView(R.id.profile_fragment_tv_category)
+    @BindView(R.id.fragment_profile_tv_category)
     TextView tvCategory;
-    @BindView(R.id.profile_fragment_pb_progress)
+    @BindView(R.id.fragment_profile_pb_progress)
     ProgressBar pbProgress;
 
     // ********************************************************************************
@@ -115,7 +115,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.profile_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
@@ -185,7 +185,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     private void handleGalleryResult(Intent data) {
         File sourceFile = null;
-        File destinationFile = null;
         try {
             String realPathFromURI = getRealPathFromURI(getContext(), data.getData());
             if (Version.isVersionCodesKitkatSupported()) {
@@ -201,23 +200,17 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
             return;
         }
         try {
-            destinationFile = createImageTempFile();
-            cropPictureUri = Uri.fromFile(destinationFile);
             if (sourceFile.exists()) {
                 if (Version.isVersionCodesMSupported()) {
                     showCropperDialog(FileProvider.getUriForFile(getContext(),
-                            getContext().getPackageName() + ".provider", sourceFile),
-                            cropPictureUri);
+                            getContext().getPackageName() + ".provider", sourceFile));
                 } else {
-                    showCropperDialog(Uri.fromFile(sourceFile), cropPictureUri);
+                    showCropperDialog(Uri.fromFile(sourceFile));
                 }
             } else {
-                showCropperDialog(data.getData(), cropPictureUri);
+                showCropperDialog(data.getData());
             }
         } catch (Exception e) {
-            if (destinationFile != null) {
-                destinationFile.delete();
-            }
             Toast.makeText(getContext(), "Error on Write Image", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -250,7 +243,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         return Uri.parse(path);
     }
 
-    private void showCropperDialog(Uri sourceImage, Uri destinationImage) {
+    private void showCropperDialog(Uri sourceImage) {
         CropImage
                 .activity(sourceImage)
                 .setAllowFlipping(false)
@@ -260,15 +253,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 .setOutputCompressFormat(Bitmap.CompressFormat.JPEG)
                 .setMaxCropResultSize(MAX_CROP_WIDTH, MAX_CROP_HEIGHT)
                 .start(getContext(), this);
-    }
-
-    private void handleCameraResult(Uri cameraPictureUrl) {
-        try {
-            cropPictureUri = Uri.fromFile(createImageFile());
-            showCropperDialog(cameraPictureUrl, cropPictureUri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private File createImageFile() throws IOException {
@@ -453,7 +437,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.profile_fragment_iv_seller_image)
+    @OnClick(R.id.fragment_profile_iv_seller_image)
     public void onClickSellerImage() {
         if (Version.isVersionCodesMSupported()) {
             if (isAllPermissionGranted()) {
@@ -466,22 +450,22 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         }
     }
 
-    @OnClick(R.id.profile_fragment_cl_name)
+    @OnClick(R.id.fragment_profile_cl_name)
     public void onClickName() {
         interaction.goToEditTextDialogFragment(R.string.full_name);
     }
 
-    @OnClick(R.id.profile_fragment_cl_phoneNumber)
+    @OnClick(R.id.fragment_profile_cl_phoneNumber)
     public void onClickPhoneNumber() {
         interaction.goToEditTextDialogFragment(R.string.phone);
     }
 
-    @OnClick(R.id.profile_fragment_cl_address)
+    @OnClick(R.id.fragment_profile_cl_address)
     public void onClickAddress() {
         interaction.goToEditTextDialogFragment(R.string.address);
     }
 
-    @OnClick(R.id.profile_fragment_cl_category)
+    @OnClick(R.id.fragment_profile_cl_category)
     public void onClickCategory() {
         interaction.goToEditCategoryDialogFragment();
     }
@@ -503,7 +487,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                     handleGalleryResult(data);
                 }
             } else {
-                handleCameraResult(cameraUri);
+                showCropperDialog(cameraUri);
             }
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {

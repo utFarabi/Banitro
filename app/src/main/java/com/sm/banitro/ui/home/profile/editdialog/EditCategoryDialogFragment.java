@@ -33,7 +33,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     private boolean[] checks;
 
     // View
-    @BindView(R.id.category_dialog_fragment_rv_category)
+    @BindView(R.id.dialog_fragment_category_rv_category)
     RecyclerView rvCategory;
 
     // ********************************************************************************
@@ -62,7 +62,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.category_dialog_fragment, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_category, container, false);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.category_dialog_fragment_btn_send)
+    @OnClick(R.id.dialog_fragment_category_btn_send)
     public void onClickSend() {
         for (int i = 0; i < categories.size(); i++) {
             if (checks[i]) {
@@ -148,7 +148,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
         }
     }
 
-    @OnClick(R.id.category_dialog_fragment_btn_cancel)
+    @OnClick(R.id.dialog_fragment_category_btn_cancel)
     public void onClickCancel() {
         dismiss();
     }

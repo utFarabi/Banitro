@@ -2,6 +2,7 @@ package com.sm.banitro.data.source.remote;
 
 import android.content.Context;
 
+import com.sm.banitro.data.model.DeleteResponse;
 import com.sm.banitro.data.model.Product;
 import com.sm.banitro.data.source.local.AppPreferences;
 
@@ -17,7 +18,7 @@ public class Repository {
 
     public Repository(Context context) {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        pref=new AppPreferences(context);
+        pref = new AppPreferences(context);
     }
 
     public void loadProducts(int position, final ApiResult<ArrayList<Product>> callback) {
@@ -35,6 +36,26 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
+    public void deleteProduct(Product product, final ApiResult<DeleteResponse> callback) {
+        final Call<DeleteResponse> call = apiInterface.postProductForDelete(product.getId());
+        call.enqueue(new Callback<DeleteResponse>() {
+
+            @Override
+            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                if (response.isSuccessful()) {
+                        callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteResponse> call, Throwable t) {
                 callback.onFail(t.getMessage());
             }
         });

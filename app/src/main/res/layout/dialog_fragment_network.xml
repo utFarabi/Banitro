@@ -10,49 +10,49 @@
         android:layout_height="@dimen/network_dialog_fragment_height">
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_y3"
+            android:id="@+id/dialog_fragment_network_gl_y3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_y45"
+            android:id="@+id/dialog_fragment_network_gl_y45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.45" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_y75"
+            android:id="@+id/dialog_fragment_network_gl_y75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.75" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_y8"
+            android:id="@+id/dialog_fragment_network_gl_y8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.8" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_x1"
+            android:id="@+id/dialog_fragment_network_gl_x1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.1" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_x5"
+            android:id="@+id/dialog_fragment_network_gl_x5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/network_dialog_fragment_gl_x9"
+            android:id="@+id/dialog_fragment_network_gl_x9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -63,9 +63,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_wifi_off_white_48"
             android:tint="@color/colorError"
-            app:layout_constraintBottom_toBottomOf="@id/network_dialog_fragment_gl_y3"
-            app:layout_constraintLeft_toLeftOf="@id/network_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/network_dialog_fragment_gl_x1"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_network_gl_y3"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_network_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_network_gl_x1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -75,10 +75,10 @@
             android:text="@string/internet_error_header"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_18"
-            app:layout_constraintBottom_toBottomOf="@id/network_dialog_fragment_gl_y45"
-            app:layout_constraintLeft_toLeftOf="@id/network_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/network_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/network_dialog_fragment_gl_y3" />
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_network_gl_y45"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_network_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_network_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_network_gl_y3" />
 
         <TextView
             android:layout_width="0dp"
@@ -86,10 +86,10 @@
             android:gravity="center"
             android:text="@string/internet_error_message"
             android:textSize="@dimen/text_size_15"
-            app:layout_constraintBottom_toBottomOf="@id/network_dialog_fragment_gl_y75"
-            app:layout_constraintLeft_toLeftOf="@id/network_dialog_fragment_gl_x9"
-            app:layout_constraintRight_toRightOf="@id/network_dialog_fragment_gl_x1"
-            app:layout_constraintTop_toTopOf="@id/network_dialog_fragment_gl_y45" />
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_network_gl_y75"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_network_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_network_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_network_gl_y45" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
@@ -97,10 +97,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/network_dialog_fragment_gl_y8">
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_network_gl_y8">
 
             <Button
-                android:id="@+id/network_dialog_fragment_btn_mobile"
+                android:id="@+id/dialog_fragment_network_btn_mobile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/colorError"
@@ -108,11 +108,11 @@
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/network_dialog_fragment_btn_wifi"
+                app:layout_constraintRight_toLeftOf="@id/dialog_fragment_network_btn_wifi"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/network_dialog_fragment_btn_wifi"
+                android:id="@+id/dialog_fragment_network_btn_wifi"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/colorError"
@@ -120,7 +120,7 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/network_dialog_fragment_btn_mobile"
+                app:layout_constraintLeft_toRightOf="@id/dialog_fragment_network_btn_mobile"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,7 +135,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/network_dialog_fragment_gl_y8" />
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_network_gl_y8" />
 
     </android.support.constraint.ConstraintLayout>
 

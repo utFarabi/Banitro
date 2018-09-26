@@ -1,12 +1,12 @@
 package com.sm.banitro.ui.home.recent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
@@ -24,13 +24,14 @@ public class DeleteDialogFragment extends DialogFragment {
 
     // Instance
     private Unbinder unbinder;
+    private Interaction interaction;
     private Product product;
 
     // Data Type
     private static final String KEY_PRODUCT = "product";
 
     // View
-    @BindView(R.id.delete_dialog_fragment_tv_product_name)
+    @BindView(R.id.dialog_fragment_delete_tv_product_name)
     TextView tvProductName;
 
     // ********************************************************************************
@@ -48,6 +49,12 @@ public class DeleteDialogFragment extends DialogFragment {
     // Basic Override
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
@@ -60,7 +67,7 @@ public class DeleteDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.delete_dialog_fragment, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_delete, container, false);
     }
 
     @Override
@@ -84,19 +91,34 @@ public class DeleteDialogFragment extends DialogFragment {
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.delete_dialog_fragment_btn_delete)
+    @OnClick(R.id.dialog_fragment_delete_btn_delete)
     public void onClickDelete() {
-
+        interaction.setProductToFragmentForDelete(product);
+        dismiss();
     }
 
-    @OnClick(R.id.delete_dialog_fragment_btn_cancel)
+    @OnClick(R.id.dialog_fragment_delete_btn_cancel)
     public void onClickCancel() {
         dismiss();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    // ********************************************************************************
+    // Interface
+
+    public interface Interaction {
+
+        void setProductToFragmentForDelete(Product product);
     }
 }

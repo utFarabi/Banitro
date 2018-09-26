@@ -15,10 +15,14 @@ public interface RecentContract {
         void showProducts(ArrayList<Product> products);
 
         void showErrorMessage(String message);
+
+        void productDeleted(Product product);
     }
 
     interface Presenter {
 
         void loadData();
+
+        void deleteProduct(Product product);
     }
 }

@@ -7,7 +7,7 @@
     android:layoutDirection="rtl">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/product_detail_fragment_toolbar"
+        android:id="@+id/fragment_recent_detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -16,94 +16,94 @@
         app:titleTextColor="@android:color/white" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_y3"
+        android:id="@+id/fragment_recent_detail_gl_y4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_y45"
+        android:id="@+id/fragment_recent_detail_gl_y52"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_y6"
+        android:id="@+id/fragment_recent_detail_gl_y64"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.64" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_y75"
+        android:id="@+id/fragment_recent_detail_gl_y76"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.76" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_y9"
+        android:id="@+id/fragment_recent_detail_gl_y9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_x2"
+        android:id="@+id/fragment_recent_detail_gl_x2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_x25"
+        android:id="@+id/fragment_recent_detail_gl_x25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.25" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/product_detail_fragment_gl_x95"
+        android:id="@+id/fragment_recent_detail_gl_x95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
     <ImageView
-        android:id="@+id/product_detail_fragment_iv_picture"
+        android:id="@+id/fragment_recent_detail_iv_picture"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/banitro_logo"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y3"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_toolbar" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y4"
+        app:layout_constraintTop_toBottomOf="@id/fragment_recent_detail_toolbar" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/outline_local_offer_black_36"
         android:tint="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y52"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y3" />
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y4" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_help1"
+        android:id="@+id/fragment_recent_detail_tv_help1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right|center"
         android:text="@string/product_name"
         android:textSize="@dimen/text_size_12"
-        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_name"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y3" />
+        app:layout_constraintBottom_toTopOf="@id/fragment_recent_detail_tv_name"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y4" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_name"
+        android:id="@+id/fragment_recent_detail_tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -111,44 +111,44 @@
         android:lines="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_15"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help1" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y52"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/fragment_recent_detail_tv_help1" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="@dimen/line"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y45"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y52"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y52" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/outline_menu_black_36"
         android:tint="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y64"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45" />
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y52" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_help2"
+        android:id="@+id/fragment_recent_detail_tv_help2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right|center"
         android:text="@string/category"
         android:textSize="@dimen/text_size_12"
-        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_category"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y45" />
+        app:layout_constraintBottom_toTopOf="@id/fragment_recent_detail_tv_category"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y52" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_category"
+        android:id="@+id/fragment_recent_detail_tv_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -156,44 +156,44 @@
         android:lines="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_15"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help2" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y64"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/fragment_recent_detail_tv_help2" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="@dimen/line"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y6"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y64"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y64" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/outline_add_to_photos_black_36"
         android:tint="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x2"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y76"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6" />
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y64" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_help3"
+        android:id="@+id/fragment_recent_detail_tv_help3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right|center"
         android:text="@string/product_number"
         android:textSize="@dimen/text_size_12"
-        app:layout_constraintBottom_toTopOf="@id/product_detail_fragment_tv_number"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y6" />
+        app:layout_constraintBottom_toTopOf="@id/fragment_recent_detail_tv_number"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y64" />
 
     <TextView
-        android:id="@+id/product_detail_fragment_tv_number"
+        android:id="@+id/fragment_recent_detail_tv_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -201,22 +201,22 @@
         android:lines="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_15"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toBottomOf="@id/product_detail_fragment_tv_help3" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y76"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toBottomOf="@id/fragment_recent_detail_tv_help3" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="@dimen/line"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@id/product_detail_fragment_gl_y75"
-        app:layout_constraintLeft_toLeftOf="@id/product_detail_fragment_gl_x95"
-        app:layout_constraintRight_toRightOf="@id/product_detail_fragment_gl_x25"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y75" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_recent_detail_gl_y76"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_recent_detail_gl_x95"
+        app:layout_constraintRight_toRightOf="@id/fragment_recent_detail_gl_x25"
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y76" />
 
     <Button
-        android:id="@+id/product_detail_fragment_btn_submit_price"
+        android:id="@+id/fragment_recent_detail_btn_submit_price"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorAccent"
@@ -227,6 +227,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/product_detail_fragment_gl_y9" />
+        app:layout_constraintTop_toTopOf="@id/fragment_recent_detail_gl_y9" />
 
 </android.support.constraint.ConstraintLayout>

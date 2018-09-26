@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
+import com.sm.banitro.ui.main.MainActivity;
+import com.sm.banitro.ui.main.PaginationScrollListener;
+import com.sm.banitro.util.Function;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecentFragment extends Fragment implements RecentContract.View, RecentAdapter.Interaction {
+public class RecentFragment extends Fragment
+        implements RecentContract.View, RecentAdapter.Interaction {
 
     // ********************************************************************************
     // Field
@@ -33,14 +37,18 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     private Interaction interaction;
     private RecentContract.Presenter iaPresenter;
     private RecentAdapter recentAdapter;
+    private LinearLayoutManager layoutManager;
     private Unbinder unbinder;
 
+    // Data Type
+    private boolean isLoading;
+
     // View
-    @BindView(R.id.recent_fragment_rv_recent)
+    @BindView(R.id.fragment_recent_rv_recent)
     RecyclerView rvRecent;
-    @BindView(R.id.recent_fragment_pb_progress)
+    @BindView(R.id.fragment_recent_pb_progress)
     ProgressBar pbProgress;
-    @BindView(R.id.recent_fragment_tv_no_message_found)
+    @BindView(R.id.fragment_recent_tv_no_message_found)
     TextView tvNotFound;
 
     // ********************************************************************************
@@ -67,13 +75,14 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
         super.onCreate(savedInstanceState);
         iaPresenter = new RecentPresenter(this, getContext());
         recentAdapter = new RecentAdapter(this);
+        layoutManager = new LinearLayoutManager(getContext());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.recent_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_recent, container, false);
     }
 
     @Override
@@ -84,11 +93,26 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
-        rvRecent.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvRecent.setItemAnimator(new DefaultItemAnimator());
+        rvRecent.setLayoutManager(layoutManager);
         rvRecent.setAdapter(recentAdapter);
 
         iaPresenter.loadData();
+
+        rvRecent.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+
+            @Override
+            protected void loadMoreItems() {
+                if (Function.isConnecting(getContext())){
+                    isLoading = true;
+                    iaPresenter.loadData();
+                }
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
     // ********************************************************************************
@@ -111,6 +135,8 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
         } else {
             recentAdapter.setProducts(products);
         }
+
+        isLoading = false;
     }
 
     @Override
@@ -119,13 +145,25 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
     }
 
     @Override
+    public void productDeleted(Product product) {
+        recentAdapter.deleteProduct(product);
+    }
+
+    @Override
     public void setProductFromAdapterToRecentFragment(Product product) {
-        interaction.goToProductDetailFragment(product);
+        interaction.goToRecentDetailFragment(product);
     }
 
     @Override
     public void openDeleteDialogFragment(Product product) {
         interaction.goToDeleteDialogFragment(product);
+    }
+
+    // ********************************************************************************
+    // Method
+
+    public void sendRequestDeleteProduct(Product product) {
+        iaPresenter.deleteProduct(product);
     }
 
     // ********************************************************************************
@@ -155,7 +193,7 @@ public class RecentFragment extends Fragment implements RecentContract.View, Rec
 
     public interface Interaction {
 
-        void goToProductDetailFragment(Product product);
+        void goToRecentDetailFragment(Product product);
 
         void goToDeleteDialogFragment(Product product);
     }

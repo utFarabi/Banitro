@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.productdetail;
+package com.sm.banitro.ui.recentdetail;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,14 +21,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class ProductDetailFragment extends Fragment implements ProductDetailContract.View {
+public class RecentDetailFragment extends Fragment implements RecentDetailContract.View {
 
     // ********************************************************************************
     // Field
 
     // Instance
     private Interaction interaction;
-    private ProductDetailContract.Presenter iaPresenter;
+    private RecentDetailContract.Presenter iaPresenter;
     private Product product;
     private Unbinder unbinder;
 
@@ -36,22 +36,22 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     private static final String KEY_PRODUCT = "product";
 
     // View
-    @BindView(R.id.product_detail_fragment_tv_name)
+    @BindView(R.id.fragment_recent_detail_tv_name)
     TextView tvName;
-    @BindView(R.id.product_detail_fragment_tv_category)
+    @BindView(R.id.fragment_recent_detail_tv_category)
     TextView tvCategory;
-    @BindView(R.id.product_detail_fragment_tv_number)
+    @BindView(R.id.fragment_recent_detail_tv_number)
     TextView tvNumber;
-    @BindView(R.id.product_detail_fragment_iv_picture)
+    @BindView(R.id.fragment_recent_detail_iv_picture)
     ImageView ivPicture;
-    @BindView(R.id.product_detail_fragment_btn_submit_price)
+    @BindView(R.id.fragment_recent_detail_btn_submit_price)
     Button btnSendPrice;
 
     // ********************************************************************************
     // New Instance
 
-    public static ProductDetailFragment newInstance(Product product) {
-        ProductDetailFragment fragment = new ProductDetailFragment();
+    public static RecentDetailFragment newInstance(Product product) {
+        RecentDetailFragment fragment = new RecentDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_PRODUCT, product);
         fragment.setArguments(bundle);
@@ -70,7 +70,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iaPresenter = new ProductDetailPresenter(this, getContext());
+        iaPresenter = new RecentDetailPresenter(this, getContext());
         Bundle bundle = getArguments();
         if (bundle == null) return;
         setProduct((Product) bundle.getParcelable(KEY_PRODUCT));
@@ -81,7 +81,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.product_detail_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_recent_detail, container, false);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.product_detail_fragment_btn_submit_price)
+    @OnClick(R.id.fragment_recent_detail_btn_submit_price)
     public void onClickSubmitPrice() {
         interaction.goToReplyDialogFragment(product);
     }

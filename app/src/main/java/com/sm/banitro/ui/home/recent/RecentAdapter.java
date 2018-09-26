@@ -1,5 +1,6 @@
 package com.sm.banitro.ui.home.recent;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.Product;
+import com.sm.banitro.ui.main.ProductDiffUtil;
 
 import java.util.ArrayList;
 
@@ -23,12 +25,14 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
     // Instance
     private Interaction interaction;
     private ArrayList<Product> products;
+    private DiffUtil.DiffResult diffResult;
 
     // ********************************************************************************
     // Constructor
 
     public RecentAdapter(Interaction interaction) {
         this.interaction = interaction;
+        products = new ArrayList<>();
     }
 
     // ********************************************************************************
@@ -59,8 +63,18 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
     // Method
 
     public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-        notifyDataSetChanged();
+        ArrayList<Product> total = new ArrayList<>();
+        total.addAll(this.products);
+        total.addAll(products);
+        diffResult = DiffUtil
+                .calculateDiff(new ProductDiffUtil(this.products, total), true);
+        this.products.addAll(products);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void deleteProduct(Product product) {
+        notifyItemRemoved(products.indexOf(product));
+        products.remove(product);
     }
 
     // ********************************************************************************
@@ -86,7 +100,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Product product=products.get(getAdapterPosition());
+                    Product product = products.get(getAdapterPosition());
                     if (!product.isReplied()) {
                         interaction.openDeleteDialogFragment(product);
                     }
