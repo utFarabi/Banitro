@@ -1,15 +1,18 @@
 package com.sm.banitro.ui.recentdetail;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -20,11 +23,18 @@ public class ReplyDialogFragment extends DialogFragment {
     // Field
 
     // Instance
-    private Unbinder unbinder;
+    private Interaction interaction;
     private Product product;
+    private Unbinder unbinder;
 
     // Data Type
     private static final String KEY_PRODUCT = "product";
+
+    // View
+    @BindView(R.id.dialog_fragment_reply_et_description)
+    EditText etDescription;
+    @BindView(R.id.dialog_fragment_reply_et_price)
+    EditText etPrice;
 
     // ********************************************************************************
     // New Instance
@@ -39,6 +49,12 @@ public class ReplyDialogFragment extends DialogFragment {
 
     // ********************************************************************************
     // Basic Override
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,11 +92,36 @@ public class ReplyDialogFragment extends DialogFragment {
 
     @OnClick(R.id.dialog_fragment_reply_btn_send)
     public void onClickSend() {
-
+        String description = etDescription.getText().toString();
+        String price = etPrice.getText().toString();
+        if (!price.isEmpty()) {
+            interaction.setPriceToRecentDetailFragment(price, description);
+        }
+        dismiss();
     }
 
     @OnClick(R.id.dialog_fragment_reply_btn_cancel)
     public void onClickCancel() {
         dismiss();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    // ********************************************************************************
+    // Interface
+
+    public interface Interaction {
+
+        void setPriceToRecentDetailFragment(String price, String description);
     }
 }

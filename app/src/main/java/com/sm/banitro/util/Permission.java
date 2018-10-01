@@ -12,7 +12,7 @@ public class Permission {
     }
 
     // ********************************************************************************
-    // Data Type
+    // Seller Type
 
     // Image
     public static final int IMAGE_PERMISSION_REQUEST_CODE = 102;

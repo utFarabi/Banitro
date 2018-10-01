@@ -33,8 +33,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Category;
-import com.sm.banitro.data.model.Seller;
+import com.sm.banitro.data.model.seller.Seller;
 import com.sm.banitro.util.Permission;
 import com.sm.banitro.util.Version;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -46,7 +45,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -68,13 +66,13 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Unbinder unbinder;
     private Uri cameraUri;
 
-    // Data Type
+    // Seller Type
     private final int IMAGE_REQUEST_CODE = 100;
     private int MAX_CROP_HEIGHT, MAX_CROP_WIDTH;
 
     // View
-    @BindView(R.id.fragment_profile_iv_seller_image)
-    ImageView ivSellerImage;
+    @BindView(R.id.fragment_profile_iv_image)
+    ImageView ivImage;
     @BindView(R.id.fragment_profile_tv_name)
     TextView tvName;
     @BindView(R.id.fragment_profile_tv_phone_number)
@@ -108,7 +106,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iaPresenter = new ProfilePresenter(this);
+        iaPresenter = new ProfilePresenter(this, getContext());
     }
 
     @Nullable
@@ -413,15 +411,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void showSeller(Seller seller) {
-        tvName.setText(seller.getName());
-        tvPhoneNumber.setText(seller.getPhoneNumber());
+        tvName.setText(seller.getNickname());
+        tvPhoneNumber.setText(seller.getPhonenumber());
         tvAddress.setText(seller.getAddress());
-        ArrayList<Category> categories = seller.getCategories();
-        String categoriesName = "";
-        for (int i = 0; i < categories.size(); i++) {
-            categoriesName += categories.get(i).getName() + ",";
-        }
-        tvCategory.setText(categoriesName);
+        tvCategory.setText(seller.getCategory());
+        Glide.with(this).load(seller.getImage()).into(ivImage);
     }
 
     @Override
@@ -429,15 +423,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showSellerImage(File file) {
-        Glide.with(this).load(file.getPath()).into(ivSellerImage);
-    }
-
     // ********************************************************************************
     // Supplementary Override
 
-    @OnClick(R.id.fragment_profile_iv_seller_image)
+    @OnClick(R.id.fragment_profile_iv_image)
     public void onClickSellerImage() {
         if (Version.isVersionCodesMSupported()) {
             if (isAllPermissionGranted()) {
@@ -493,7 +482,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                iaPresenter.uploadSellerImage(new File(result.getUri().getPath()));
+//                iaPresenter.uploadSellerImage(new File(result.getUri().getPath()));
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,7 +78,7 @@ public class DeleteDialogFragment extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
-        tvProductName.setText(product.getName());
+        tvProductName.setText(product.getProName());
     }
 
     // ********************************************************************************

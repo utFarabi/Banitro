@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.util.Constant;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class IncomingAdapter extends RecyclerView.Adapter<IncomingAdapter.ViewHo
     private ArrayList<Product> products;
 
     // Data Type
-    private int productPosition;
+    private String productCondition;
 
     // ********************************************************************************
     // Constructor
@@ -86,20 +86,20 @@ public class IncomingAdapter extends RecyclerView.Adapter<IncomingAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    interaction.goToDetail(products.get(getAdapterPosition()));
+                    interaction.setProductFromAdapterToFragments(products.get(getAdapterPosition()));
                 }
             });
         }
 
         public void onBind(Product product) {
-            productPosition = product.getPosition();
-            tvProductName.setText(product.getName());
-            tvProductCategory.setText(product.getCategory().getName());
-            if (productPosition == Constant.POSITION_APPROVED) {
+            productCondition = product.getPosition();
+            tvProductName.setText(product.getProName());
+            tvProductCategory.setText(product.getProCat());
+            if (productCondition.equals(Constant.CONDITION_APPROVED)) {
                 ivApproved.setImageResource(R.drawable.baseline_check_white_48);
                 ivApproved.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.colorOk),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
-            } else if (productPosition == Constant.POSITION_APPROVED_NOT) {
+            } else if (productCondition.equals(Constant.CONDITION_APPROVED_NOT)) {
                 ivApproved.setImageResource(R.drawable.baseline_clear_white_48);
                 ivApproved.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.colorError),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -112,6 +112,6 @@ public class IncomingAdapter extends RecyclerView.Adapter<IncomingAdapter.ViewHo
 
     public interface Interaction {
 
-        void goToDetail(Product product);
+        void setProductFromAdapterToFragments(Product product);
     }
 }

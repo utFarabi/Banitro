@@ -9,7 +9,7 @@ public abstract class PaginationScrollListener extends RecyclerView.OnScrollList
     // Field
 
     // Instance
-    LinearLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
 
     // ********************************************************************************
     // New Instance

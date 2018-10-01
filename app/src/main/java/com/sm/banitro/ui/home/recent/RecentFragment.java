@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
-import com.sm.banitro.ui.main.MainActivity;
+import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.main.PaginationScrollListener;
 import com.sm.banitro.util.Function;
 
@@ -102,7 +100,7 @@ public class RecentFragment extends Fragment
 
             @Override
             protected void loadMoreItems() {
-                if (Function.isConnecting(getContext())){
+                if (Function.isConnecting(getContext())) {
                     isLoading = true;
                     iaPresenter.loadData();
                 }
@@ -186,6 +184,7 @@ public class RecentFragment extends Fragment
         super.onDestroy();
         iaPresenter = null;
         recentAdapter = null;
+        layoutManager = null;
     }
 
     // ********************************************************************************

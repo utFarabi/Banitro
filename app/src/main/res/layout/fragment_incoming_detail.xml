@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:layoutDirection="rtl">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/fragment_incoming_detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/product_detail"
+        app:titleTextColor="@android:color/white" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="200dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y280"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="280dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y360"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="360dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y440"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="440dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y520"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="520dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="600dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_x2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_x25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_x95"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <ImageView
+                android:id="@+id/fragment_incoming_detail_iv_picture"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banitro_logo"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y200"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_local_offer_black_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y280"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y200" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/product_name"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_name"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y200" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y280"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y280"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y280" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_menu_black_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y360"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y280" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/category"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_category"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y280" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y360"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help2" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y360"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y360" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_add_to_photos_black_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y440"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y360" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/product_number"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_number"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y360" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y440"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help3" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y440"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y440" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_attach_money_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y520"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y440" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/price_toman"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_price"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y440" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y520"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help4" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y520"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y520" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_done_all_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y600"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y520" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/condition_offer"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_condition"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y520" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_condition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y600"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help5" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y600"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y600" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

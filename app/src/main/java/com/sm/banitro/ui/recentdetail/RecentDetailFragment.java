@@ -10,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.util.Function;
 
 import butterknife.BindView;
@@ -21,7 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class RecentDetailFragment extends Fragment implements RecentDetailContract.View {
+public class RecentDetailFragment extends Fragment
+        implements RecentDetailContract.View, ReplyDialogFragment.Interaction {
 
     // ********************************************************************************
     // Field
@@ -32,20 +36,22 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
     private Product product;
     private Unbinder unbinder;
 
-    // Data Type
+    // Seller Type
     private static final String KEY_PRODUCT = "product";
 
     // View
+    @BindView(R.id.fragment_recent_detail_iv_picture)
+    ImageView ivPicture;
     @BindView(R.id.fragment_recent_detail_tv_name)
     TextView tvName;
     @BindView(R.id.fragment_recent_detail_tv_category)
     TextView tvCategory;
     @BindView(R.id.fragment_recent_detail_tv_number)
     TextView tvNumber;
-    @BindView(R.id.fragment_recent_detail_iv_picture)
-    ImageView ivPicture;
     @BindView(R.id.fragment_recent_detail_btn_submit_price)
     Button btnSendPrice;
+    @BindView(R.id.fragment_recent_detail_pb_progress)
+    ProgressBar pbProgress;
 
     // ********************************************************************************
     // New Instance
@@ -92,15 +98,15 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
-        tvName.setText(product.getName());
-        tvCategory.setText(product.getCategory().getName());
-        tvNumber.setText(String.valueOf(product.getNumber()));
+        tvName.setText(product.getProName());
+        tvCategory.setText(product.getProCat());
+        tvNumber.setText(String.valueOf(product.getProNumber()));
         if (product.isReplied()) {
             btnSendPrice.setText(
-                    Function.convertIntToStrMoney(product.getReply().getPrice(), false)
+                    Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
                             + "   :" + getString(R.string.suggested_price));
         }
-//        Glide.with(this).load(Constant.BASE_URL + product.getPicture()).into(ivPicture);
+        Glide.with(this).load(product.getProPicture()).into(ivPicture);
     }
 
     // ********************************************************************************
@@ -108,6 +114,37 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    // ********************************************************************************
+    // Implement
+
+    @Override
+    public void showProgress() {
+        pbProgress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        pbProgress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void replySent(String price, String description) {
+        product.setReplyPrice(price);
+        product.setReplyDc(description);
+        btnSendPrice.setText(Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
+                + "   :" + getString(R.string.suggested_price));
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setPriceToRecentDetailFragment(String price, String description) {
+        iaPresenter.sendReply(product, price, description);
     }
 
     // ********************************************************************************

@@ -1,6 +1,6 @@
 package com.sm.banitro.ui.home.recent;
 
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 
 import java.util.ArrayList;
 

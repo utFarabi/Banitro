@@ -1,13 +1,12 @@
 package com.sm.banitro.ui.home.incoming.approvednot;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.home.incoming.IncomingAdapter;
+import com.sm.banitro.ui.main.PaginationScrollListener;
+import com.sm.banitro.util.Function;
 
 import java.util.ArrayList;
 
@@ -25,15 +26,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class ApprovedNotFragment extends Fragment implements ApprovedNotContract.View,IncomingAdapter.Interaction {
+public class ApprovedNotFragment extends Fragment implements ApprovedNotContract.View, IncomingAdapter.Interaction {
 
     // ********************************************************************************
     // Field
 
     // Instance
+    private Interaction interaction;
     private ApprovedNotContract.Presenter iaPresenter;
     private IncomingAdapter incomingAdapter;
+    private LinearLayoutManager layoutManager;
     private Unbinder unbinder;
+
+    // Data Type
+    private boolean isLoading;
 
     // View
     @BindView(R.id.fragment_approved_not_rv_approved_not)
@@ -57,10 +63,17 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
     // Basic Override
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         iaPresenter = new ApprovedNotPresenter(this, getContext());
         incomingAdapter = new IncomingAdapter(this);
+        layoutManager = new LinearLayoutManager(getContext());
     }
 
     @Nullable
@@ -78,11 +91,26 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
-        rvApprovedNot.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvApprovedNot.setItemAnimator(new DefaultItemAnimator());
+        rvApprovedNot.setLayoutManager(layoutManager);
         rvApprovedNot.setAdapter(incomingAdapter);
 
         iaPresenter.loadData();
+
+        rvApprovedNot.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+
+            @Override
+            protected void loadMoreItems() {
+                if (Function.isConnecting(getContext())) {
+                    isLoading = true;
+                    iaPresenter.loadData();
+                }
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
     // ********************************************************************************
@@ -112,8 +140,19 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void setProductFromAdapterToFragments(Product product) {
+        interaction.goToIncomingDetailFragment(product);
+    }
+
     // ********************************************************************************
     // Supplementary Override
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
+    }
 
     @Override
     public void onDestroyView() {
@@ -126,10 +165,14 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
         super.onDestroy();
         iaPresenter = null;
         incomingAdapter = null;
+        layoutManager = null;
     }
 
-    @Override
-    public void goToDetail(Product product) {
-        Log.i("sina","approvedNot");
+    // ********************************************************************************
+    // Interface
+
+    public interface Interaction {
+
+        void goToIncomingDetailFragment(Product product);
     }
 }

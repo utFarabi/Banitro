@@ -9,12 +9,12 @@ public class Constant {
     // ********************************************************************************
     // Base Url
 
-    public static final String BASE_URL = "https://banitro.com/wp-json";
+    public static final String BASE_URL = "https://banitro.com/wp-json/";
 
     // ********************************************************************************
-    // Product Position
+    // Product Condition
 
-    public static final int POSITION_RECENT = 0;
-    public static final int POSITION_APPROVED_NOT = 2;
-    public static final int POSITION_APPROVED = 1;
+    public static final String CONDITION_RECENT = "0";
+    public static final String CONDITION_APPROVED_NOT = "2";
+    public static final String CONDITION_APPROVED = "1";
 }

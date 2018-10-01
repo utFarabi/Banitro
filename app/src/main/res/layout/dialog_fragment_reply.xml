@@ -97,10 +97,11 @@
             app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y1" />
 
         <EditText
+            android:id="@+id/dialog_fragment_reply_et_description"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/edit_text_shape"
-            android:hint="توضیح مختصر"
+            android:hint="@string/short_description"
             android:inputType="text"
             android:lines="1"
             android:maxLength="20"
@@ -113,6 +114,7 @@
             app:layout_constraintTop_toTopOf="@id/dialog_fragment_reply_gl_y25" />
 
         <EditText
+            android:id="@+id/dialog_fragment_reply_et_price"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/edit_text_shape"

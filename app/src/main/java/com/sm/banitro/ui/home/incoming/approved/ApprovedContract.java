@@ -1,6 +1,6 @@
 package com.sm.banitro.ui.home.incoming.approved;
 
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 
 import java.util.ArrayList;
 

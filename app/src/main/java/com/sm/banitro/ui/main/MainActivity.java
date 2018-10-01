@@ -13,13 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.home.incoming.IncomingFragment;
+import com.sm.banitro.ui.home.incoming.approved.ApprovedFragment;
+import com.sm.banitro.ui.home.incoming.approvednot.ApprovedNotFragment;
 import com.sm.banitro.ui.home.profile.ProfileFragment;
 import com.sm.banitro.ui.home.profile.editdialog.EditCategoryDialogFragment;
 import com.sm.banitro.ui.home.profile.editdialog.EditTextDialogFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
+import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.Function;
@@ -30,6 +33,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements RecentFragment.Interaction, RecentDetailFragment.Interaction,
         NetworkReceiver.Interaction, ProfileFragment.Interaction,
+        ApprovedFragment.Interaction, ApprovedNotFragment.Interaction,
         DeleteDialogFragment.Interaction {
 
     // ********************************************************************************
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private IncomingFragment incomingFragment;
     private ProfileFragment profileFragment;
     private RecentDetailFragment recentDetailFragment;
+    private IncomingDetailFragment incomingDetailFragment;
     private DialogFragment networkDialogFragment;
     private NetworkReceiver networkReceiver;
     private Toast toast;
@@ -76,6 +81,9 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentByTag(IncomingFragment.class.getName());
         recentDetailFragment = (RecentDetailFragment) fragmentManager
                 .findFragmentByTag(RecentDetailFragment.class.getName());
+        incomingDetailFragment = (IncomingDetailFragment) fragmentManager
+                .findFragmentByTag(IncomingDetailFragment.class.getName());
+
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
 
         networkReceiver = new NetworkReceiver();
@@ -235,6 +243,16 @@ public class MainActivity extends AppCompatActivity
                 .add(R.id.base_layout, recentDetailFragment, RecentDetailFragment.class.getName())
                 .hide(recentFragment)
                 .addToBackStack(RecentDetailFragment.class.getName())
+                .commit();
+    }
+
+    @Override
+    public void goToIncomingDetailFragment(Product product) {
+        incomingDetailFragment = IncomingDetailFragment.newInstance(product);
+        fragmentManager.beginTransaction()
+                .add(R.id.base_layout, incomingDetailFragment, IncomingDetailFragment.class.getName())
+                .hide(incomingFragment)
+                .addToBackStack(IncomingDetailFragment.class.getName())
                 .commit();
     }
 

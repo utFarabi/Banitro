@@ -48,7 +48,7 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <ImageView
-        android:id="@+id/fragment_profile_iv_seller_image"
+        android:id="@+id/fragment_profile_iv_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"

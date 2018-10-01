@@ -3,7 +3,7 @@ package com.sm.banitro.ui.main;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
-import com.sm.banitro.data.model.Product;
+import com.sm.banitro.data.model.product.Product;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class ProductDiffUtil extends DiffUtil.Callback {
     private ArrayList<Product> newProducts;
 
     // ********************************************************************************
-    // New Instance
+    // Constructor
 
     public ProductDiffUtil(ArrayList<Product> oldProducts, ArrayList<Product> newProducts) {
         this.oldProducts = oldProducts;

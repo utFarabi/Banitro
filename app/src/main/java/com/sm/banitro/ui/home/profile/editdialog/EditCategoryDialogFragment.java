@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Category;
 
 import java.util.ArrayList;
 
@@ -28,8 +27,8 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // Instance
     private Unbinder unbinder;
     private EditCategoryAdapter editCategoryAdapter;
-    private ArrayList<Category> categories;
-    private ArrayList<Category> myCategories;
+    private ArrayList<String> categories;
+    private ArrayList<String> myCategories;
     private boolean[] checks;
 
     // View
@@ -84,46 +83,16 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // Initialization
 
     public void setValueToCategories() {
-        Category category = new Category();
-        category.setName("دسته بندی 0");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 1");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 2");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 3");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 4");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 5");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 6");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 7");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 8");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("دسته بندی 9");
-        categories.add(category);
-
+        categories.add("دسته بندی 0");
+        categories.add("دسته بندی 1");
+        categories.add("دسته بندی 2");
+        categories.add("دسته بندی 3");
+        categories.add("دسته بندی 4");
+        categories.add("دسته بندی 5");
+        categories.add("دسته بندی 6");
+        categories.add("دسته بندی 7");
+        categories.add("دسته بندی 8");
+        categories.add("دسته بندی 9");
         editCategoryAdapter.setCategories(categories);
         checks = new boolean[categories.size()];
     }

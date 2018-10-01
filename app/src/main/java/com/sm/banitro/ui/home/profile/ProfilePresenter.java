@@ -1,49 +1,47 @@
 package com.sm.banitro.ui.home.profile;
 
-import com.sm.banitro.data.model.Category;
-import com.sm.banitro.data.model.Seller;
+import android.content.Context;
 
-import java.io.File;
-import java.util.ArrayList;
+import com.sm.banitro.data.model.seller.Seller;
+import com.sm.banitro.data.source.remote.ApiResult;
+import com.sm.banitro.data.source.remote.Repository;
 
 public class ProfilePresenter implements ProfileContract.Presenter {
-    private ProfileContract.View iaView;
 
-    public ProfilePresenter(ProfileContract.View iaView) {
+    // ********************************************************************************
+    // Field
+
+    // Instance
+    private ProfileContract.View iaView;
+    private Repository repository;
+
+    // ********************************************************************************
+    // Constructor
+
+    public ProfilePresenter(ProfileContract.View iaView, Context context) {
         this.iaView = iaView;
+        repository = new Repository(context);
     }
+
+    // ********************************************************************************
+    // Implement
 
     @Override
     public void loadData() {
-        test();
-    }
+        iaView.showProgress();
+        repository.loadSeller(new ApiResult<Seller>() {
 
-    @Override
-    public void uploadSellerImage(File file) {
-        iaView.showSellerImage(file);
-    }
+            @Override
+            public void onSuccess(Seller result) {
+                iaView.hideProgress();
+                iaView.showSeller(result);
+            }
 
-    private void test() {
-        Seller seller = new Seller();
-        seller.setName("سینا الماسی");
-        seller.setPhoneNumber("09397696665");
-        seller.setAddress("تهران-مشیریه-خیابان بیست متری اعظم-کوچه فرخی امندی-پلاک 4-واحد 6");
-
-        ArrayList<Category> categories = new ArrayList<>();
-        Category category = new Category();
-        category.setName("جلوبندی");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("عقب");
-        categories.add(category);
-
-        category = new Category();
-        category.setName("اتاق");
-        categories.add(category);
-
-        seller.setCategories(categories);
-
-        iaView.showSeller(seller);
+            @Override
+            public void onFail(String errorMessage) {
+                iaView.hideProgress();
+                iaView.showErrorMessage(errorMessage);
+            }
+        });
     }
 }

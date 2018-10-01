@@ -9,7 +9,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.Category;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class EditCategoryAdapter extends RecyclerView.Adapter<EditCategoryAdapte
 
     // Instance
     private Interaction interaction;
-    private ArrayList<Category> categories;
+    private ArrayList<String> categories;
 
     // ********************************************************************************
     // Constructor
@@ -44,7 +43,7 @@ public class EditCategoryAdapter extends RecyclerView.Adapter<EditCategoryAdapte
 
     @Override
     public void onBindViewHolder(EditCategoryAdapter.ViewHolder holder, int position) {
-        Category category = categories.get(position);
+        String category = categories.get(position);
         holder.onBind(category);
     }
 
@@ -59,7 +58,7 @@ public class EditCategoryAdapter extends RecyclerView.Adapter<EditCategoryAdapte
     // ********************************************************************************
     // Method
 
-    public void setCategories(ArrayList<Category> categories) {
+    public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
@@ -78,12 +77,12 @@ public class EditCategoryAdapter extends RecyclerView.Adapter<EditCategoryAdapte
             ButterKnife.bind(this, itemView);
         }
 
-        public void onBind(Category category) {
-            tvName.setText(category.getName());
+        public void onBind(String category) {
+            tvName.setText(category);
             cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    interaction.onCheckedChanged(getAdapterPosition(),isChecked);
+                    interaction.onCheckedChanged(getAdapterPosition(), isChecked);
                 }
             });
         }
@@ -94,6 +93,6 @@ public class EditCategoryAdapter extends RecyclerView.Adapter<EditCategoryAdapte
 
     public interface Interaction {
 
-        void onCheckedChanged(int position,boolean isChecked);
+        void onCheckedChanged(int condition, boolean isChecked);
     }
 }

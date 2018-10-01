@@ -76,7 +76,7 @@ public class IncomingFragment extends Fragment {
     // ********************************************************************************
     // Initialization
 
-    private void setValueToTabLayout(){
+    private void setValueToTabLayout() {
         tabLayout.getTabAt(0)
                 .setText(R.string.approved)
                 .setIcon(R.drawable.baseline_check_circle_outline_white_24);

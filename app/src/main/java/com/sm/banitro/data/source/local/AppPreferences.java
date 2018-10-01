@@ -4,21 +4,34 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class AppPreferences {
+
+    // ********************************************************************************
+    // Field
+
+    // Instance
     public Context context;
     private SharedPreferences pref;
+
+    // Data Type
     final String PREF_NAME = AppPreferences.class.getName();
     final String KEY_SELLER_ID = "sellerId";
+
+    // ********************************************************************************
+    // Constructor
 
     public AppPreferences(Context context) {
         this.context = context;
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    public int getSellerId() {
-        return pref.getInt(KEY_SELLER_ID, 0);
+    // ********************************************************************************
+    // Method
+
+    public String getSellerId() {
+        return pref.getString(KEY_SELLER_ID, "");
     }
 
-    public void setSellerId(int sellerId) {
-        pref.edit().putInt(KEY_SELLER_ID, sellerId).apply();
+    public void setSellerId(String sellerId) {
+        pref.edit().putString(KEY_SELLER_ID, sellerId).apply();
     }
 }

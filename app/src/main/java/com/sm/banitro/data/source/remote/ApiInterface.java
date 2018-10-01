@@ -1,9 +1,8 @@
 package com.sm.banitro.data.source.remote;
 
-import com.sm.banitro.data.model.DeleteResponse;
-import com.sm.banitro.data.model.Product;
-import com.sm.banitro.data.model.Reply;
-import com.sm.banitro.data.model.ReplyResponse;
+import com.sm.banitro.data.model.basic.BaseResponse;
+import com.sm.banitro.data.model.product.Product;
+import com.sm.banitro.data.model.seller.Seller;
 
 import java.util.ArrayList;
 
@@ -16,18 +15,60 @@ import retrofit2.http.Path;
 
 interface ApiInterface {
 
-    @GET("{seller_id}/{position}")
-    Call<ArrayList<Product>> getProducts(@Path("seller_id") int sellerId,
-                                         @Path("position") int position);
+    // ********************************************************************************
+    // Product
 
-    @POST("{seller_id}/{product_id}")
-    @FormUrlEncoded
-    Call<ReplyResponse> postReply(@Path("seller_id") int sellerId/*no*/,
-                                  @Path("product_id") int productId,
-                                  @Field("is_replied") boolean isReplied/*no*/,
-                                  @Field("reply") Reply reply);
+    @GET("seller/{seller_id}/{position}")
+    Call<ArrayList<Product>> getProducts(@Path("seller_id") String sellerId,
+                                         @Path("position") String condition);
 
-    @POST("{product_id}")
+    @GET("delete/{reply_id}/{seller_id}")
+    Call<BaseResponse> getProductForDelete(@Path("reply_id") String productId,
+                                           @Path("seller_id") String sellerId);
+
+    // ********************************************************************************
+    // Reply
+
+    @POST("reply/suggest")
     @FormUrlEncoded
-    Call<DeleteResponse> postProductForDelete(@Path("product_id") int productId);
+    Call<BaseResponse> postReplySuggest(@Field("reply_price") String replyPrice,
+                                        @Field("reply_dc") String replyDc,
+                                        @Field("reply_id") String productId);
+
+    @POST("reply/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postReplyEdit(@Field("reply_price") String replyPrice,
+                                     @Field("reply_dc") String replyDc,
+                                     @Field("reply_id") String productId);
+
+    // ********************************************************************************
+    // Seller
+
+    @GET("seller/id/{seller_id}")
+    Call<Seller> getSeller(@Path("seller_id") String sellerId);
+
+    @POST("user/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postProfileImage(@Field("id") String sellerId,
+                                        @Field("user_pic") String image);
+
+    @POST("user/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postProfileName(@Field("id") String sellerId,
+                                       @Field("fullname") String name);
+
+    @POST("user/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postProfilePhoneNumber(@Field("id") String sellerId,
+                                              @Field("user_phone") String phoneNumber);
+
+    @POST("user/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postProfileAddress(@Field("id") String sellerId,
+                                          @Field("user_address") String address);
+
+    @POST("user/edit")
+    @FormUrlEncoded
+    Call<BaseResponse> postProfileCategory(@Field("id") String sellerId,
+                                           @Field("user_category") String category);
 }

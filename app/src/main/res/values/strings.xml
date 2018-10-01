@@ -33,4 +33,6 @@
     <string name="full_name_hint">نام کاربری</string>
     <string name="phone_hint">*********09</string>
     <string name="choose_your_profile_image">تصویر پروفایل مورد نظر خود را انتخاب نمایید.</string>
+    <string name="condition_offer">وضعیت پیشنهاد</string>
+    <string name="short_description">توضیح مختصر</string>
 </resources>
