@@ -24,8 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class RecentDetailFragment extends Fragment
-        implements RecentDetailContract.View, ReplyDialogFragment.Interaction {
+public class RecentDetailFragment extends Fragment implements RecentDetailContract.View {
 
     // ********************************************************************************
     // Field
@@ -99,14 +98,16 @@ public class RecentDetailFragment extends Fragment
 
         // Init View
         tvName.setText(product.getProName());
-        tvCategory.setText(product.getProCat());
+        tvCategory.setText(Function.getCategoryName(product.getProCat()));
         tvNumber.setText(String.valueOf(product.getProNumber()));
         if (product.isReplied()) {
             btnSendPrice.setText(
                     Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
                             + "   :" + getString(R.string.suggested_price));
         }
-        Glide.with(this).load(product.getProPicture()).into(ivPicture);
+        if (product.getProPicture() != null && !product.getProPicture().isEmpty()) {
+            Glide.with(this).load(product.getProPicture()).into(ivPicture);
+        }
     }
 
     // ********************************************************************************
@@ -114,6 +115,10 @@ public class RecentDetailFragment extends Fragment
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public void sendReply(String price, String description) {
+        iaPresenter.sendReply(product, price, description);
     }
 
     // ********************************************************************************
@@ -140,11 +145,6 @@ public class RecentDetailFragment extends Fragment
     @Override
     public void showErrorMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setPriceToRecentDetailFragment(String price, String description) {
-        iaPresenter.sendReply(product, price, description);
     }
 
     // ********************************************************************************

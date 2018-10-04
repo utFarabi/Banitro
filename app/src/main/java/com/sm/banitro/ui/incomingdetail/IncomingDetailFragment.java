@@ -84,7 +84,7 @@ public class IncomingDetailFragment extends Fragment {
 
         // Init View
         tvName.setText(product.getProName());
-        tvCategory.setText(product.getProCat());
+        tvCategory.setText(Function.getCategoryName(product.getProCat()));
         tvNumber.setText(String.valueOf(product.getProNumber()));
         tvPrice.setText(Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
         if (product.getPosition().equals(Constant.CONDITION_APPROVED)) {

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.main.ProductDiffUtil;
+import com.sm.banitro.util.Function;
 
 import java.util.ArrayList;
 
@@ -111,7 +112,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
 
         public void onBind(Product product) {
             tvProductName.setText(product.getProName());
-            tvProductCategory.setText(product.getProCat());
+            tvProductCategory.setText(Function.getCategoryName(product.getProCat()));
             if (product.isReplied()) {
                 ivIsReplied.setImageResource(R.drawable.outline_chat_white_36);
             } else {

@@ -2,6 +2,7 @@ package com.sm.banitro.ui.home.profile;
 
 import android.content.Context;
 
+import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.model.seller.Seller;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
@@ -35,6 +36,27 @@ public class ProfilePresenter implements ProfileContract.Presenter {
             public void onSuccess(Seller result) {
                 iaView.hideProgress();
                 iaView.showSeller(result);
+            }
+
+            @Override
+            public void onFail(String errorMessage) {
+                iaView.hideProgress();
+                iaView.showErrorMessage(errorMessage);
+            }
+        });
+    }
+
+    @Override
+    public void sendInfo(final String text, final int type) {
+        iaView.showProgress();
+        repository.sendInfo(text,type,new ApiResult<BaseResponse>() {
+
+            @Override
+            public void onSuccess(BaseResponse result) {
+                iaView.hideProgress();
+                if (result.isResult()) {
+                    iaView.infoSent(text, type);
+                }
             }
 
             @Override

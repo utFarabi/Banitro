@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.Function;
 
 import java.util.ArrayList;
 
@@ -94,7 +95,7 @@ public class IncomingAdapter extends RecyclerView.Adapter<IncomingAdapter.ViewHo
         public void onBind(Product product) {
             productCondition = product.getPosition();
             tvProductName.setText(product.getProName());
-            tvProductCategory.setText(product.getProCat());
+            tvProductCategory.setText(Function.getCategoryName(product.getProCat()));
             if (productCondition.equals(Constant.CONDITION_APPROVED)) {
                 ivApproved.setImageResource(R.drawable.baseline_check_white_48);
                 ivApproved.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.colorOk),

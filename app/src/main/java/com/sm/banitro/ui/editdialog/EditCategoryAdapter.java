@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.home.profile.editdialog;
+package com.sm.banitro.ui.editdialog;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

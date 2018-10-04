@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.seller.Seller;
+import com.sm.banitro.util.Constant;
 import com.sm.banitro.util.Permission;
 import com.sm.banitro.util.Version;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -45,6 +46,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -66,7 +68,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private Unbinder unbinder;
     private Uri cameraUri;
 
-    // Seller Type
+    // Data Type
     private final int IMAGE_REQUEST_CODE = 100;
     private int MAX_CROP_HEIGHT, MAX_CROP_WIDTH;
 
@@ -387,13 +389,16 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 getString(R.string.app_name));
 
-        // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 return null;
             }
         }
         return mediaStorageDir;
+    }
+
+    public void sendInfo(String text, int type) {
+        iaPresenter.sendInfo(text, type);
     }
 
     // ********************************************************************************
@@ -411,16 +416,36 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void showSeller(Seller seller) {
-        tvName.setText(seller.getNickname());
-        tvPhoneNumber.setText(seller.getPhonenumber());
+        tvName.setText(seller.getFirstName() + " " + seller.getLastName());
+        tvPhoneNumber.setText(seller.getNickname());
         tvAddress.setText(seller.getAddress());
         tvCategory.setText(seller.getCategory());
-        Glide.with(this).load(seller.getImage()).into(ivImage);
+        if (seller.getImage() != null && !seller.getImage().isEmpty()) {
+            Glide.with(this).load(seller.getImage()).into(ivImage);
+        }
     }
 
     @Override
     public void showErrorMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void infoSent(String text, int type) {
+        switch (type){
+            case R.string.full_name:
+                tvName.setText(text);
+                break;
+            case R.string.phone:
+                tvPhoneNumber.setText(text);
+                break;
+            case R.string.address:
+                tvAddress.setText(text);
+                break;
+            case R.string.categories:
+                tvCategory.setText(text);
+                break;
+        }
     }
 
     // ********************************************************************************
@@ -441,22 +466,22 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @OnClick(R.id.fragment_profile_cl_name)
     public void onClickName() {
-        interaction.goToEditTextDialogFragment(R.string.full_name);
+        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.full_name);
     }
 
     @OnClick(R.id.fragment_profile_cl_phoneNumber)
     public void onClickPhoneNumber() {
-        interaction.goToEditTextDialogFragment(R.string.phone);
+        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.phone);
     }
 
     @OnClick(R.id.fragment_profile_cl_address)
     public void onClickAddress() {
-        interaction.goToEditTextDialogFragment(R.string.address);
+        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.address);
     }
 
     @OnClick(R.id.fragment_profile_cl_category)
     public void onClickCategory() {
-        interaction.goToEditCategoryDialogFragment();
+        interaction.goToEditCategoryDialogFragment(Constant.EDIT_DIALOG);
     }
 
     @Override
@@ -512,8 +537,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     public interface Interaction {
 
-        void goToEditTextDialogFragment(int type);
+        void goToEditTextDialogFragment(int callStatus,int type);
 
-        void goToEditCategoryDialogFragment();
+        void goToEditCategoryDialogFragment(int callStatus);
     }
 }

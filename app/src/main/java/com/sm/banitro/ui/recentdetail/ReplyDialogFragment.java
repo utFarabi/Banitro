@@ -94,10 +94,12 @@ public class ReplyDialogFragment extends DialogFragment {
     public void onClickSend() {
         String description = etDescription.getText().toString();
         String price = etPrice.getText().toString();
-        if (!price.isEmpty()) {
+        if (price.isEmpty()) {
+            etPrice.requestFocus();
+        } else {
             interaction.setPriceToRecentDetailFragment(price, description);
+            dismiss();
         }
-        dismiss();
     }
 
     @OnClick(R.id.dialog_fragment_reply_btn_cancel)

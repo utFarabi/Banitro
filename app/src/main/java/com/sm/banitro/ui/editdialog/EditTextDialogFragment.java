@@ -1,16 +1,20 @@
-package com.sm.banitro.ui.home.profile.editdialog;
+package com.sm.banitro.ui.editdialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
+import com.sm.banitro.util.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,8 +27,8 @@ public class EditTextDialogFragment extends DialogFragment {
     // Field
 
     // Instance
+    private Interaction interaction;
     private Unbinder unbinder;
-    private int type;
 
     // View
     @BindView(R.id.dialog_fragment_edit_text_tv_title)
@@ -33,16 +37,21 @@ public class EditTextDialogFragment extends DialogFragment {
     TextView tvDescription;
     @BindView(R.id.dialog_fragment_edit_text_et_input)
     EditText etInput;
+    @BindView(R.id.dialog_fragment_edit_text_btn_send)
+    Button btnSend;
 
     // Data Type
     private static final String KEY_TYPE = "type";
+    private static final String KEY_CALL_STATUS = "callStatus";
+    private int type, callStatus;
 
     // ********************************************************************************
     // New Instance
 
-    public static EditTextDialogFragment newInstance(int type) {
+    public static EditTextDialogFragment newInstance(int callStatus, int type) {
         EditTextDialogFragment fragment = new EditTextDialogFragment();
         Bundle bundle = new Bundle();
+        bundle.putInt(KEY_CALL_STATUS, callStatus);
         bundle.putInt(KEY_TYPE, type);
         fragment.setArguments(bundle);
         return fragment;
@@ -52,11 +61,18 @@ public class EditTextDialogFragment extends DialogFragment {
     // Basic Override
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle == null) return;
         setType(bundle.getInt(KEY_TYPE));
+        setCallStatus(bundle.getInt(KEY_CALL_STATUS));
     }
 
     @Nullable
@@ -95,6 +111,9 @@ public class EditTextDialogFragment extends DialogFragment {
                 etInput.setHint(R.string.address_hint);
                 break;
         }
+        if (callStatus == Constant.REGISTER_DIALOG) {
+            btnSend.setText(R.string.approve);
+        }
     }
 
     // ********************************************************************************
@@ -104,16 +123,58 @@ public class EditTextDialogFragment extends DialogFragment {
         this.type = type;
     }
 
+    public void setCallStatus(int callStatus) {
+        this.callStatus = callStatus;
+    }
+
     // ********************************************************************************
     // Supplementary Override
 
     @OnClick(R.id.dialog_fragment_edit_text_btn_send)
     public void onClickSend() {
-
+        String text = etInput.getText().toString();
+        if (type == R.string.phone) {
+            if (text.length() != 11 || !text.substring(0, 2).equals("09")) {
+                etInput.setText("");
+                text = "";
+            }
+        }
+        if (text.isEmpty()) {
+            etInput.requestFocus();
+        } else {
+            if (callStatus == Constant.EDIT_DIALOG) {
+                interaction.setTextToProfileFragment(text, type);
+            } else if (callStatus == Constant.REGISTER_DIALOG) {
+                interaction.setTextToLoginFragment(text, type);
+            }
+            dismiss();
+        }
     }
 
     @OnClick(R.id.dialog_fragment_edit_text_btn_cancel)
     public void onClickCancel() {
         dismiss();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    // ********************************************************************************
+    // Interface
+
+    public interface Interaction {
+
+        void setTextToProfileFragment(String text, int type);
+
+        void setTextToLoginFragment(String text, int type);
     }
 }

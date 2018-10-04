@@ -1,5 +1,6 @@
-package com.sm.banitro.ui.home.profile.editdialog;
+package com.sm.banitro.ui.editdialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -9,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.sm.banitro.R;
+import com.sm.banitro.util.Constant;
 
 import java.util.ArrayList;
 
@@ -25,22 +28,30 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // Field
 
     // Instance
+    private Interaction interaction;
     private Unbinder unbinder;
     private EditCategoryAdapter editCategoryAdapter;
     private ArrayList<String> categories;
-    private ArrayList<String> myCategories;
     private boolean[] checks;
 
     // View
     @BindView(R.id.dialog_fragment_category_rv_category)
     RecyclerView rvCategory;
+    @BindView(R.id.dialog_fragment_category_btn_send)
+    Button btnSend;
+
+    // Data Type
+    private static final String KEY_CALL_STATUS = "callStatus";
+    private int callStatus;
+    private String categoriesCode;
 
     // ********************************************************************************
     // New Instance
 
-    public static EditCategoryDialogFragment newInstance() {
+    public static EditCategoryDialogFragment newInstance(int callStatus) {
         EditCategoryDialogFragment fragment = new EditCategoryDialogFragment();
         Bundle bundle = new Bundle();
+        bundle.putInt(KEY_CALL_STATUS, callStatus);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -49,11 +60,21 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // Basic Override
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        interaction = (Interaction) context;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle == null) return;
+        setCallStatus(bundle.getInt(KEY_CALL_STATUS));
+
         editCategoryAdapter = new EditCategoryAdapter(this);
         categories = new ArrayList<>();
-        myCategories = new ArrayList<>();
     }
 
     @Nullable
@@ -75,6 +96,12 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategory.setItemAnimator(new DefaultItemAnimator());
         rvCategory.setAdapter(editCategoryAdapter);
+        if (callStatus == Constant.REGISTER_DIALOG) {
+            btnSend.setText(R.string.approve);
+        }
+
+        // Init Data Type
+        categoriesCode = "";
 
         setValueToCategories();
     }
@@ -83,18 +110,25 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     // Initialization
 
     public void setValueToCategories() {
-        categories.add("دسته بندی 0");
-        categories.add("دسته بندی 1");
-        categories.add("دسته بندی 2");
-        categories.add("دسته بندی 3");
-        categories.add("دسته بندی 4");
-        categories.add("دسته بندی 5");
-        categories.add("دسته بندی 6");
-        categories.add("دسته بندی 7");
-        categories.add("دسته بندی 8");
-        categories.add("دسته بندی 9");
+        categories.add(getString(R.string.category_10));
+        categories.add(getString(R.string.category_12));
+        categories.add(getString(R.string.category_14));
+        categories.add(getString(R.string.category_16));
+        categories.add(getString(R.string.category_18));
+        categories.add(getString(R.string.category_20));
+        categories.add(getString(R.string.category_22));
+        categories.add(getString(R.string.category_24));
+        categories.add(getString(R.string.category_26));
+        categories.add(getString(R.string.category_28));
         editCategoryAdapter.setCategories(categories);
         checks = new boolean[categories.size()];
+    }
+
+    // ********************************************************************************
+    // Method
+
+    public void setCallStatus(int callStatus) {
+        this.callStatus = callStatus;
     }
 
     // ********************************************************************************
@@ -112,8 +146,16 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
     public void onClickSend() {
         for (int i = 0; i < categories.size(); i++) {
             if (checks[i]) {
-                myCategories.add(categories.get(i));
+                categoriesCode += String.valueOf((i + 5) * 2);
             }
+        }
+        if (!categoriesCode.isEmpty()) {
+            if (callStatus == Constant.EDIT_DIALOG) {
+                interaction.setTextToProfileFragment(categoriesCode, R.string.categories);
+            } else if (callStatus == Constant.REGISTER_DIALOG) {
+                interaction.setTextToLoginFragment(categoriesCode, R.string.categories);
+            }
+            dismiss();
         }
     }
 
@@ -127,7 +169,28 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
         super.onDestroy();
         editCategoryAdapter = null;
         categories = null;
-        myCategories = null;
         checks = null;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        interaction = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    // ********************************************************************************
+    // Interface
+
+    public interface Interaction {
+
+        void setTextToProfileFragment(String text, int type);
+
+        void setTextToLoginFragment(String text, int type);
     }
 }

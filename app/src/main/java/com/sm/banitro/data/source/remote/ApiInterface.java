@@ -71,4 +71,17 @@ interface ApiInterface {
     @FormUrlEncoded
     Call<BaseResponse> postProfileCategory(@Field("id") String sellerId,
                                            @Field("user_category") String category);
+
+    @POST("user/register")
+    @FormUrlEncoded
+    Call<BaseResponse> postRegisterInfo(@Field("user_") String name,
+                                        @Field("user_phone") String phoneNamber,
+                                        @Field("user_address") String address,
+                                        @Field("user_category") String categories,
+                                        @Field("user_pic") String image);
+
+    @POST("user/login")
+    @FormUrlEncoded
+    Call<BaseResponse> postLoginInfo(@Field("username") String username,
+                                     @Field("password") String password);
 }

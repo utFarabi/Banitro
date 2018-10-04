@@ -1,27 +1,24 @@
-package com.sm.banitro.ui.home.incoming.approvednot;
+package com.sm.banitro.ui.register;
 
 import android.content.Context;
 
-import com.sm.banitro.data.model.product.Product;
+import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
-import com.sm.banitro.util.Constant;
 
-import java.util.ArrayList;
-
-public class ApprovedNotPresenter implements ApprovedNotContract.Presenter {
+public class RegisterPresenter implements RegisterContract.Presenter {
 
     // ********************************************************************************
     // Field
 
     // Instance
-    private ApprovedNotContract.View iaView;
+    private RegisterContract.View iaView;
     private Repository repository;
 
     // ********************************************************************************
     // Constructor
 
-    public ApprovedNotPresenter(ApprovedNotContract.View iaView, Context context) {
+    public RegisterPresenter(RegisterContract.View iaView, Context context) {
         this.iaView = iaView;
         repository = new Repository(context);
     }
@@ -30,15 +27,17 @@ public class ApprovedNotPresenter implements ApprovedNotContract.Presenter {
     // Implement
 
     @Override
-    public void loadData() {
+    public void sendRegisterInfo(String name, String phoneNamber, String address, String categories) {
         iaView.showProgress();
-        repository.loadProducts(Constant.CONDITION_APPROVED_NOT,
-                new ApiResult<ArrayList<Product>>() {
+        repository.sendRegisterInfo(name, phoneNamber, address, categories,
+                new ApiResult<BaseResponse>() {
 
                     @Override
-                    public void onSuccess(ArrayList<Product> result) {
+                    public void onSuccess(BaseResponse result) {
                         iaView.hideProgress();
-                        iaView.showProducts(result);
+                        if (result.isResult()) {
+                            iaView.registerFinished();
+                        }
                     }
 
                     @Override

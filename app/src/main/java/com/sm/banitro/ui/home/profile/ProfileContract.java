@@ -13,10 +13,14 @@ public interface ProfileContract {
         void showSeller(Seller seller);
 
         void showErrorMessage(String message);
+
+        void infoSent(String text, int type);
     }
 
     interface Presenter {
 
         void loadData();
+
+        void sendInfo(String text, int type);
     }
 }

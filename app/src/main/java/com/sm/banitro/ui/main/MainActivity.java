@@ -14,32 +14,39 @@ import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
+import com.sm.banitro.data.source.local.AppPreferences;
+import com.sm.banitro.ui.firstpage.FirstPageFragment;
 import com.sm.banitro.ui.home.incoming.IncomingFragment;
 import com.sm.banitro.ui.home.incoming.approved.ApprovedFragment;
 import com.sm.banitro.ui.home.incoming.approvednot.ApprovedNotFragment;
 import com.sm.banitro.ui.home.profile.ProfileFragment;
-import com.sm.banitro.ui.home.profile.editdialog.EditCategoryDialogFragment;
-import com.sm.banitro.ui.home.profile.editdialog.EditTextDialogFragment;
+import com.sm.banitro.ui.editdialog.EditCategoryDialogFragment;
+import com.sm.banitro.ui.editdialog.EditTextDialogFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
+import com.sm.banitro.ui.register.RegisterFragment;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.Function;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity
         implements RecentFragment.Interaction, RecentDetailFragment.Interaction,
         NetworkReceiver.Interaction, ProfileFragment.Interaction,
         ApprovedFragment.Interaction, ApprovedNotFragment.Interaction,
-        DeleteDialogFragment.Interaction {
+        DeleteDialogFragment.Interaction, ReplyDialogFragment.Interaction,
+        EditTextDialogFragment.Interaction, EditCategoryDialogFragment.Interaction,
+        RegisterFragment.Interaction, FirstPageFragment.Interaction {
 
     // ********************************************************************************
     // Field
 
     // Instance
+    private AppPreferences pref;
     private FragmentManager fragmentManager;
     private RecentFragment recentFragment;
     private IncomingFragment incomingFragment;
@@ -47,8 +54,11 @@ public class MainActivity extends AppCompatActivity
     private RecentDetailFragment recentDetailFragment;
     private IncomingDetailFragment incomingDetailFragment;
     private DialogFragment networkDialogFragment;
+    private FirstPageFragment firstPageFragment;
+    private RegisterFragment registerFragment;
     private NetworkReceiver networkReceiver;
     private Toast toast;
+    private Unbinder unbinder;
 
     // Data Type
     private boolean networkDialogIsShowing;
@@ -69,10 +79,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         // Init Instance
+        unbinder = ButterKnife.bind(this);
         fragmentManager = getSupportFragmentManager();
+        pref = new AppPreferences(this);
+
         profileFragment = (ProfileFragment) fragmentManager
                 .findFragmentByTag(ProfileFragment.class.getName());
         recentFragment = (RecentFragment) fragmentManager
@@ -83,6 +95,10 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentByTag(RecentDetailFragment.class.getName());
         incomingDetailFragment = (IncomingDetailFragment) fragmentManager
                 .findFragmentByTag(IncomingDetailFragment.class.getName());
+        firstPageFragment = (FirstPageFragment) fragmentManager
+                .findFragmentByTag(FirstPageFragment.class.getName());
+        registerFragment = (RegisterFragment) fragmentManager
+                .findFragmentByTag(RegisterFragment.class.getName());
 
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
 
@@ -91,7 +107,14 @@ public class MainActivity extends AppCompatActivity
 
         registerNetworkReceiver();
 
-        setValueToBottomNavigation();
+        if (pref.isFirstLogin()) {
+            firstPageFragment = FirstPageFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .add(R.id.base_layout, firstPageFragment, FirstPageFragment.class.getName())
+                    .commit();
+        } else {
+            setValueToBottomNavigation();
+        }
     }
 
     // ********************************************************************************
@@ -237,6 +260,19 @@ public class MainActivity extends AppCompatActivity
     // Implement
 
     @Override
+    public void goToApp() {
+        setValueToBottomNavigation();
+    }
+
+    @Override
+    public void goToRegisterFragment() {
+        registerFragment = RegisterFragment.newInstance();
+        fragmentManager.beginTransaction()
+                .add(R.id.base_layout, registerFragment, RegisterFragment.class.getName())
+                .commit();
+    }
+
+    @Override
     public void goToRecentDetailFragment(Product product) {
         recentDetailFragment = RecentDetailFragment.newInstance(product);
         fragmentManager.beginTransaction()
@@ -271,15 +307,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void goToEditTextDialogFragment(int type) {
-        DialogFragment dialogFragment = EditTextDialogFragment.newInstance(type);
+    public void goToEditTextDialogFragment(int callStatus, int type) {
+        DialogFragment dialogFragment = EditTextDialogFragment.newInstance(callStatus, type);
         dialogFragment.show(fragmentManager.beginTransaction(), EditTextDialogFragment.class.getName());
         dialogFragment.setCancelable(false);
     }
 
     @Override
-    public void goToEditCategoryDialogFragment() {
-        DialogFragment dialogFragment = EditCategoryDialogFragment.newInstance();
+    public void goToEditCategoryDialogFragment(int callStatus) {
+        DialogFragment dialogFragment = EditCategoryDialogFragment.newInstance(callStatus);
         dialogFragment.show(fragmentManager.beginTransaction(), EditCategoryDialogFragment.class.getName());
         dialogFragment.setCancelable(false);
     }
@@ -287,6 +323,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void setProductToFragmentForDelete(Product product) {
         recentFragment.sendRequestDeleteProduct(product);
+    }
+
+    @Override
+    public void setPriceToRecentDetailFragment(String price, String description) {
+        recentDetailFragment.sendReply(price, description);
+    }
+
+    @Override
+    public void setTextToProfileFragment(String text, int type) {
+        profileFragment.sendInfo(text, type);
+    }
+
+    @Override
+    public void setTextToLoginFragment(String text, int type) {
+        registerFragment.setInfoToTextView(text, type);
     }
 
     @Override
@@ -342,7 +393,15 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        fragmentManager = null;
+        recentFragment = null;
+        incomingFragment = null;
+        profileFragment = null;
+        recentDetailFragment = null;
+        incomingDetailFragment = null;
+        networkDialogFragment = null;
         networkReceiver = null;
+        unbinder.unbind();
         super.onDestroy();
     }
 }

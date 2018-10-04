@@ -14,6 +14,7 @@ public class AppPreferences {
 
     // Data Type
     final String PREF_NAME = AppPreferences.class.getName();
+    final String KEY_FIRST_LOGIN = "firstLogin";
     final String KEY_SELLER_ID = "sellerId";
 
     // ********************************************************************************
@@ -27,8 +28,16 @@ public class AppPreferences {
     // ********************************************************************************
     // Method
 
+    public boolean isFirstLogin() {
+        return pref.getBoolean(KEY_FIRST_LOGIN, true);
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        pref.edit().putBoolean(KEY_FIRST_LOGIN, firstLogin).apply();
+    }
+
     public String getSellerId() {
-        return pref.getString(KEY_SELLER_ID, "");
+        return pref.getString(KEY_SELLER_ID, "407");
     }
 
     public void setSellerId(String sellerId) {

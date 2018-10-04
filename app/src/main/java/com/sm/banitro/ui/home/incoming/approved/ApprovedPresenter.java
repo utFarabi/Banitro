@@ -31,6 +31,7 @@ public class ApprovedPresenter implements ApprovedContract.Presenter {
 
     @Override
     public void loadData() {
+        iaView.showProgress();
         repository.loadProducts(Constant.CONDITION_APPROVED,
                 new ApiResult<ArrayList<Product>>() {
 

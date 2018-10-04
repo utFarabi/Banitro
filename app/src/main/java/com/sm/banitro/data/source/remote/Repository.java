@@ -2,6 +2,7 @@ package com.sm.banitro.data.source.remote;
 
 import android.content.Context;
 
+import com.sm.banitro.R;
 import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.data.model.seller.Seller;
@@ -93,7 +94,7 @@ public class Repository {
         });
     }
 
-    public void sendReply(Product product,String price,String description,
+    public void sendReply(Product product, String price, String description,
                           final ApiResult<BaseResponse> callback) {
 
         final Call<BaseResponse> call;
@@ -104,6 +105,88 @@ public class Repository {
             call = apiInterface.postReplySuggest(price, description, product.getId());
         }
 
+        call.enqueue(new Callback<BaseResponse>() {
+
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
+    public void sendInfo(String text, int type, final ApiResult<BaseResponse> callback) {
+
+        final Call<BaseResponse> call;
+
+        switch (type) {
+            case R.string.full_name:
+                call = apiInterface.postProfileName(pref.getSellerId(), text);
+                break;
+            case R.string.phone:
+                call = apiInterface.postProfilePhoneNumber(pref.getSellerId(), text);
+                break;
+            case R.string.address:
+                call = apiInterface.postProfileAddress(pref.getSellerId(), text);
+                break;
+            case R.string.categories:
+                call = apiInterface.postProfileCategory(pref.getSellerId(), text);
+                break;
+            default:
+                call = null;
+        }
+
+        call.enqueue(new Callback<BaseResponse>() {
+
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
+    public void sendRegisterInfo(String name, String phoneNamber, String address, String categories,
+                                 final ApiResult<BaseResponse> callback) {
+
+        Call<BaseResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories,"");
+        call.enqueue(new Callback<BaseResponse>() {
+
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
+    public void sendLoginInfo(String username, String password, final ApiResult<BaseResponse> callback) {
+
+        Call<BaseResponse> call = apiInterface.postLoginInfo(username,password);
         call.enqueue(new Callback<BaseResponse>() {
 
             @Override

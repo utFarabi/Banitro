@@ -6,107 +6,124 @@
     android:background="@android:color/white"
     android:layoutDirection="rtl">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/fragment_register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/register"
+        app:titleTextColor="@android:color/white" />
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_toolbar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y200"
+                android:id="@+id/fragment_register_gl_y200"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="200dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y280"
+                android:id="@+id/fragment_register_gl_y280"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="280dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y360"
+                android:id="@+id/fragment_register_gl_y360"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="360dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y470"
+                android:id="@+id/fragment_register_gl_y470"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="470dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y610"
+                android:id="@+id/fragment_register_gl_y610"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="610dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_y670"
+                android:id="@+id/fragment_register_gl_y670"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="670dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_x25"
+                android:id="@+id/fragment_register_gl_y730"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="730dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_register_gl_x25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.25" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_profile_gl_x95"
+                android:id="@+id/fragment_register_gl_x95"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95" />
 
             <ImageView
-                android:id="@+id/fragment_profile_iv_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/banitro_logo"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y200"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y200"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/fragment_profile_cl_name"
+                android:id="@+id/fragment_register_cl_name"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y280"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y280"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y200">
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y200">
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl1_x2"
+                    android:id="@+id/fragment_register_gl1_x2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.2" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl1_x25"
+                    android:id="@+id/fragment_register_gl1_x25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.25" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl1_x95"
+                    android:id="@+id/fragment_register_gl1_x95"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -118,24 +135,24 @@
                     android:src="@drawable/outline_local_offer_black_36"
                     android:tint="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl1_x2"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl1_x2"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_help1"
+                    android:id="@+id/fragment_register_tv_help1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:text="@string/full_name"
                     android:textSize="@dimen/text_size_12"
-                    app:layout_constraintBottom_toTopOf="@id/fragment_profile_tv_name"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl1_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl1_x25"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_register_tv_name"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl1_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl1_x25"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_name"
+                    android:id="@+id/fragment_register_tv_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -144,9 +161,9 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_15"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl1_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl1_x25"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_profile_tv_help1" />
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl1_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl1_x25"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_register_tv_help1" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -154,36 +171,36 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/line"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y280"
-                app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl_x95"
-                app:layout_constraintRight_toRightOf="@id/fragment_profile_gl_x25"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y280" />
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y280"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y280" />
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/fragment_profile_cl_phoneNumber"
+                android:id="@+id/fragment_register_cl_phoneNumber"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y360"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y360"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y280">
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y280">
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl2_x2"
+                    android:id="@+id/fragment_register_gl2_x2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.2" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl2_x25"
+                    android:id="@+id/fragment_register_gl2_x25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.25" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl2_x95"
+                    android:id="@+id/fragment_register_gl2_x95"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -195,24 +212,24 @@
                     android:src="@drawable/outline_phone_android_white_36"
                     android:tint="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl2_x2"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl2_x2"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_help2"
+                    android:id="@+id/fragment_register_tv_help2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:text="@string/phone"
                     android:textSize="@dimen/text_size_12"
-                    app:layout_constraintBottom_toTopOf="@id/fragment_profile_tv_phone_number"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl2_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl2_x25"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_register_tv_phone_number"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl2_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl2_x25"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_phone_number"
+                    android:id="@+id/fragment_register_tv_phone_number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -221,9 +238,9 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_15"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl2_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl2_x25"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_profile_tv_help2" />
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl2_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl2_x25"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_register_tv_help2" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -231,36 +248,36 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/line"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y360"
-                app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl_x95"
-                app:layout_constraintRight_toRightOf="@id/fragment_profile_gl_x25"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y360" />
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y360"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y360" />
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/fragment_profile_cl_address"
+                android:id="@+id/fragment_register_cl_address"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y470"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y470"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y360">
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y360">
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl3_x2"
+                    android:id="@+id/fragment_register_gl3_x2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.2" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl3_x25"
+                    android:id="@+id/fragment_register_gl3_x25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.25" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl3_x95"
+                    android:id="@+id/fragment_register_gl3_x95"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -272,24 +289,24 @@
                     android:src="@drawable/outline_location_on_white_36"
                     android:tint="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl3_x2"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl3_x2"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_help3"
+                    android:id="@+id/fragment_register_tv_help3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:text="@string/address"
                     android:textSize="@dimen/text_size_12"
-                    app:layout_constraintBottom_toTopOf="@id/fragment_profile_tv_address"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl3_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl3_x25"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_register_tv_address"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl3_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl3_x25"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_address"
+                    android:id="@+id/fragment_register_tv_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -299,9 +316,9 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_15"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl3_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl3_x25"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_profile_tv_help3" />
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl3_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl3_x25"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_register_tv_help3" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -309,36 +326,36 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/line"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y470"
-                app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl_x95"
-                app:layout_constraintRight_toRightOf="@id/fragment_profile_gl_x25"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y470" />
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y470"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y470" />
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/fragment_profile_cl_category"
+                android:id="@+id/fragment_register_cl_categories"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y610"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y610"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y470">
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y470">
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl4_x2"
+                    android:id="@+id/fragment_register_gl4_x2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.2" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl4_x25"
+                    android:id="@+id/fragment_register_gl4_x25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.25" />
 
                 <android.support.constraint.Guideline
-                    android:id="@+id/fragment_profile_gl4_x95"
+                    android:id="@+id/fragment_register_gl4_x95"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -350,24 +367,24 @@
                     android:src="@drawable/outline_menu_black_36"
                     android:tint="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl4_x2"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl4_x2"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_help4"
+                    android:id="@+id/fragment_register_tv_help4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:text="@string/categories"
                     android:textSize="@dimen/text_size_12"
-                    app:layout_constraintBottom_toTopOf="@id/fragment_profile_tv_category"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl4_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl4_x25"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_register_tv_categories"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl4_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl4_x25"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_tv_category"
+                    android:id="@+id/fragment_register_tv_categories"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -377,9 +394,9 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_15"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl4_x95"
-                    app:layout_constraintRight_toRightOf="@id/fragment_profile_gl4_x25"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_profile_tv_help4" />
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl4_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl4_x25"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_register_tv_help4" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -387,17 +404,30 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/line"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_profile_gl_y610"
-                app:layout_constraintLeft_toLeftOf="@id/fragment_profile_gl_x95"
-                app:layout_constraintRight_toRightOf="@id/fragment_profile_gl_x25"
-                app:layout_constraintTop_toTopOf="@id/fragment_profile_gl_y610" />
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y610"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y610" />
+
+            <Button
+                android:id="@+id/fragment_register_btn_send"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorAccent"
+                android:text="@string/submit"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y730"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y670" />
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
     <ProgressBar
-        android:id="@+id/fragment_profile_pb_progress"
+        android:id="@+id/fragment_register_pb_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
