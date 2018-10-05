@@ -29,9 +29,11 @@
     <string name="full_name_description">نام و نام خانوادگی را وارد کنید.</string>
     <string name="phone_description">شماره تلفن "نام کاربری" شما می باشد.</string>
     <string name="address_description">آدرس شرکت یا محل کار را وارد کنید.</string>
+    <string name="password_description">رمز عبور دلخواه خود را وارد کنید.</string>
     <string name="address_hint">آدرس محل کار</string>
     <string name="full_name_hint">نام کامل</string>
     <string name="phone_hint">*********09</string>
+    <string name="password_hint">حداکثر 8 رقم</string>
     <string name="choose_your_profile_image">تصویر پروفایل مورد نظر خود را انتخاب نمایید.</string>
     <string name="condition_offer">وضعیت پیشنهاد</string>
     <string name="short_description">توضیح مختصر</string>
@@ -49,4 +51,7 @@
     <string name="submit">ارسال</string>
     <string name="approve">تایید</string>
     <string name="register">ثبت نام</string>
+    <string name="password">گذرواژه</string>
+    <string name="login_in">ورود به برنامه</string>
+    <string name="username_login">نام کاربری (تلفن همراه)</string>
 </resources>

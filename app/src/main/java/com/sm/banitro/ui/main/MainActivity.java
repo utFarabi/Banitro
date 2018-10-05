@@ -15,17 +15,18 @@ import android.widget.Toast;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.data.source.local.AppPreferences;
+import com.sm.banitro.ui.editdialog.EditCategoryDialogFragment;
+import com.sm.banitro.ui.editdialog.EditTextDialogFragment;
 import com.sm.banitro.ui.firstpage.FirstPageFragment;
+import com.sm.banitro.ui.firstpage.LoginDialogFragment;
+import com.sm.banitro.ui.firstpage.register.RegisterFragment;
 import com.sm.banitro.ui.home.incoming.IncomingFragment;
 import com.sm.banitro.ui.home.incoming.approved.ApprovedFragment;
 import com.sm.banitro.ui.home.incoming.approvednot.ApprovedNotFragment;
 import com.sm.banitro.ui.home.profile.ProfileFragment;
-import com.sm.banitro.ui.editdialog.EditCategoryDialogFragment;
-import com.sm.banitro.ui.editdialog.EditTextDialogFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
-import com.sm.banitro.ui.register.RegisterFragment;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.Function;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity
         ApprovedFragment.Interaction, ApprovedNotFragment.Interaction,
         DeleteDialogFragment.Interaction, ReplyDialogFragment.Interaction,
         EditTextDialogFragment.Interaction, EditCategoryDialogFragment.Interaction,
-        RegisterFragment.Interaction, FirstPageFragment.Interaction {
+        RegisterFragment.Interaction, FirstPageFragment.Interaction,
+        LoginDialogFragment.Interaction {
 
     // ********************************************************************************
     // Field
@@ -273,6 +275,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void goToLoginFragment() {
+        DialogFragment dialogFragment = LoginDialogFragment.newInstance();
+        dialogFragment.show(fragmentManager.beginTransaction(), LoginDialogFragment.class.getName());
+        dialogFragment.setCancelable(false);
+    }
+
+    @Override
     public void goToRecentDetailFragment(Product product) {
         recentDetailFragment = RecentDetailFragment.newInstance(product);
         fragmentManager.beginTransaction()
@@ -336,8 +345,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void setTextToLoginFragment(String text, int type) {
+    public void setTextToRegisterFragment(String text, int type) {
         registerFragment.setInfoToTextView(text, type);
+    }
+
+    @Override
+    public void setLoginInfoToFirstPageFragment(String username, String password){
+        firstPageFragment.setLoginInfo(username,password);
     }
 
     @Override

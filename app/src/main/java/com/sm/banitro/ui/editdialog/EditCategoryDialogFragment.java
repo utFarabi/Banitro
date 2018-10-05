@@ -153,7 +153,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
             if (callStatus == Constant.EDIT_DIALOG) {
                 interaction.setTextToProfileFragment(categoriesCode, R.string.categories);
             } else if (callStatus == Constant.REGISTER_DIALOG) {
-                interaction.setTextToLoginFragment(categoriesCode, R.string.categories);
+                interaction.setTextToRegisterFragment(categoriesCode, R.string.categories);
             }
             dismiss();
         }
@@ -191,6 +191,6 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
 
         void setTextToProfileFragment(String text, int type);
 
-        void setTextToLoginFragment(String text, int type);
+        void setTextToRegisterFragment(String text, int type);
     }
 }

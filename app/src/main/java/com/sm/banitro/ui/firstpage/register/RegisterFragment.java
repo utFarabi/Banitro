@@ -1,10 +1,11 @@
-package com.sm.banitro.ui.register;
+package com.sm.banitro.ui.firstpage.register;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,8 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     TextView tvAddress;
     @BindView(R.id.fragment_register_tv_categories)
     TextView tvCategories;
+    @BindView(R.id.fragment_register_tv_password)
+    TextView tvPassword;
     @BindView(R.id.fragment_register_pb_progress)
     ProgressBar pbProgress;
 
@@ -102,45 +105,48 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
             case R.string.categories:
                 tvCategories.setText(getCategoriesName(text));
                 break;
+            case R.string.password:
+                tvPassword.setText(text);
+                break;
         }
     }
 
     private String getCategoriesName(String text) {
-        String result="";
-        while (!text.isEmpty()){
-            switch (text.substring(0,2)){
+        String result = "";
+        while (!text.isEmpty()) {
+            switch (text.substring(0, 2)) {
                 case Constant.CATEGORY_10:
-                    result+=getString(R.string.category_10)+" . ";
+                    result += getString(R.string.category_10) + " . ";
                     break;
                 case Constant.CATEGORY_12:
-                    result+=getString(R.string.category_12)+" . ";
+                    result += getString(R.string.category_12) + " . ";
                     break;
-                    case Constant.CATEGORY_14:
-                    result+=getString(R.string.category_14)+" . ";
+                case Constant.CATEGORY_14:
+                    result += getString(R.string.category_14) + " . ";
                     break;
-                    case Constant.CATEGORY_16:
-                    result+=getString(R.string.category_16)+" . ";
+                case Constant.CATEGORY_16:
+                    result += getString(R.string.category_16) + " . ";
                     break;
-                    case Constant.CATEGORY_18:
-                    result+=getString(R.string.category_18)+" . ";
+                case Constant.CATEGORY_18:
+                    result += getString(R.string.category_18) + " . ";
                     break;
-                    case Constant.CATEGORY_20:
-                    result+=getString(R.string.category_20)+" . ";
+                case Constant.CATEGORY_20:
+                    result += getString(R.string.category_20) + " . ";
                     break;
-                    case Constant.CATEGORY_22:
-                    result+=getString(R.string.category_22)+" . ";
+                case Constant.CATEGORY_22:
+                    result += getString(R.string.category_22) + " . ";
                     break;
-                    case Constant.CATEGORY_24:
-                    result+=getString(R.string.category_24)+" . ";
+                case Constant.CATEGORY_24:
+                    result += getString(R.string.category_24) + " . ";
                     break;
-                    case Constant.CATEGORY_26:
-                    result+=getString(R.string.category_26)+" . ";
+                case Constant.CATEGORY_26:
+                    result += getString(R.string.category_26) + " . ";
                     break;
-                    case Constant.CATEGORY_28:
-                    result+=getString(R.string.category_28)+" . ";
+                case Constant.CATEGORY_28:
+                    result += getString(R.string.category_28) + " . ";
                     break;
             }
-            text=text.substring(2);
+            text = text.substring(2);
         }
         return result;
     }
@@ -159,9 +165,13 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     }
 
     @Override
-    public void registerFinished() {
-        pref.setFirstLogin(false);
-        interaction.goToApp();
+    public void registerFinished(String sellerId) {
+        if (sellerId != null && !sellerId.isEmpty()) {
+            pref.setFirstLogin(false);
+            pref.setSellerId(sellerId);
+            Log.i("sina", "sellerId: " + pref.getSellerId());
+            interaction.goToApp();
+        }
     }
 
     @Override
@@ -192,15 +202,22 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         interaction.goToEditCategoryDialogFragment(Constant.REGISTER_DIALOG);
     }
 
+    @OnClick(R.id.fragment_register_cl_password)
+    public void onClickPassword() {
+        interaction.goToEditTextDialogFragment(Constant.REGISTER_DIALOG, R.string.password);
+    }
+
     @OnClick(R.id.fragment_register_btn_send)
     public void onClickSend() {
         String name = tvName.getText().toString();
         String phoneNumber = tvPhoneNumber.getText().toString();
         String address = tvAddress.getText().toString();
         String categories = tvCategories.getText().toString();
+        String password = tvPassword.getText().toString();
         if (!name.isEmpty() && !phoneNumber.isEmpty() &&
-                !address.isEmpty() && !categories.isEmpty()) {
-            iaPresenter.sendRegisterInfo(name, phoneNumber, address, categories);
+                !address.isEmpty() && !categories.isEmpty() &&
+                !password.isEmpty()) {
+            iaPresenter.sendRegisterInfo(name, phoneNumber, address, categories, password);
         }
     }
 

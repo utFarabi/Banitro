@@ -8,7 +8,7 @@ public interface FirstPageContract {
 
         void hideProgress();
 
-        void loginFinished();
+        void loginFinished(String sellerId);
 
         void showErrorMessage(String message);
     }

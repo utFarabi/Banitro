@@ -62,18 +62,25 @@
                 app:layout_constraintGuide_begin="610dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_register_gl_y670"
+                android:id="@+id/fragment_register_gl_y690"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="670dp" />
+                app:layout_constraintGuide_begin="690dp" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/fragment_register_gl_y730"
+                android:id="@+id/fragment_register_gl_y750"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="730dp" />
+                app:layout_constraintGuide_begin="750dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_register_gl_y810"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="810dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/fragment_register_gl_x25"
@@ -409,6 +416,84 @@
                 app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
                 app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y610" />
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/fragment_register_cl_password"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y690"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y610">
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/fragment_register_gl5_x2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.2" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/fragment_register_gl5_x25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.25" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/fragment_register_gl5_x95"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.95" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/outline_lock_white_36"
+                    android:tint="@color/colorPrimaryDark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl5_x2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_register_tv_help5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="@string/password"
+                    android:textSize="@dimen/text_size_12"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_register_tv_password"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl5_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl5_x25"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_register_tv_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="numberPassword"
+                    android:gravity="right|center"
+                    android:lines="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl5_x95"
+                    app:layout_constraintRight_toRightOf="@id/fragment_register_gl5_x25"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_register_tv_help5" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y690"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_register_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_register_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y690" />
+
             <Button
                 android:id="@+id/fragment_register_btn_send"
                 android:layout_width="0dp"
@@ -417,10 +502,10 @@
                 android:text="@string/submit"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_18"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y730"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_register_gl_y810"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y670" />
+                app:layout_constraintTop_toTopOf="@id/fragment_register_gl_y750" />
 
         </android.support.constraint.ConstraintLayout>
 

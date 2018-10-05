@@ -30,14 +30,12 @@ public class FirstPagePresenter implements FirstPageContract.Presenter {
     public void sendLoginInfo(String username, String password) {
         iaView.showProgress();
         repository.sendLoginInfo(username, password,
-                new ApiResult<BaseResponse>() {
+                new ApiResult<String>() {
 
                     @Override
-                    public void onSuccess(BaseResponse result) {
+                    public void onSuccess(String result) {
                         iaView.hideProgress();
-                        if (result.isResult()) {
-                            iaView.loginFinished();
-                        }
+                        iaView.loginFinished(result);
                     }
 
                     @Override

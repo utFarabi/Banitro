@@ -18,6 +18,7 @@
     <dimen name="edit_text_dialog_fragment_height">200dp</dimen>
     <dimen name="reply_dialog_fragment_height">230dp</dimen>
     <dimen name="category_dialog_fragment_height">400dp</dimen>
+    <dimen name="login_dialog_fragment_height">300dp</dimen>
     <dimen name="dialog_fragment_width">280dp</dimen>
     <dimen name="radius">10dp</dimen>
     <dimen name="frame_edit_text">2dp</dimen>

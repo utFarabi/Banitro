@@ -110,6 +110,12 @@ public class EditTextDialogFragment extends DialogFragment {
                 etInput.setInputType(InputType.TYPE_CLASS_TEXT);
                 etInput.setHint(R.string.address_hint);
                 break;
+            case R.string.password:
+                tvTitle.setText(R.string.password);
+                tvDescription.setText(R.string.password_description);
+                etInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                etInput.setHint(R.string.password_hint);
+                break;
         }
         if (callStatus == Constant.REGISTER_DIALOG) {
             btnSend.setText(R.string.approve);
@@ -138,6 +144,11 @@ public class EditTextDialogFragment extends DialogFragment {
                 etInput.setText("");
                 text = "";
             }
+        }else if (type == R.string.password) {
+            if (text.length() > 8) {
+                etInput.setText("");
+                text = "";
+            }
         }
         if (text.isEmpty()) {
             etInput.requestFocus();
@@ -145,7 +156,7 @@ public class EditTextDialogFragment extends DialogFragment {
             if (callStatus == Constant.EDIT_DIALOG) {
                 interaction.setTextToProfileFragment(text, type);
             } else if (callStatus == Constant.REGISTER_DIALOG) {
-                interaction.setTextToLoginFragment(text, type);
+                interaction.setTextToRegisterFragment(text, type);
             }
             dismiss();
         }
@@ -175,6 +186,6 @@ public class EditTextDialogFragment extends DialogFragment {
 
         void setTextToProfileFragment(String text, int type);
 
-        void setTextToLoginFragment(String text, int type);
+        void setTextToRegisterFragment(String text, int type);
     }
 }

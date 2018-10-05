@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dialog_fragment_width"
+        android:layout_height="@dimen/login_dialog_fragment_height">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y65"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_y95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_x1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_x3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_x5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_x9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/login_in"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y15"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y05" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="@dimen/text_size_15"
+            android:text="@string/username_login"
+            android:gravity="center|right"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y35"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y2" />
+
+        <EditText
+            android:id="@+id/dialog_fragment_login_et_username"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/phone_hint"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="11"
+            android:padding="@dimen/padding_8"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y5"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y35" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="@dimen/text_size_15"
+            android:text="@string/password"
+            android:gravity="center|right"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y65"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y5" />
+
+        <EditText
+            android:id="@+id/dialog_fragment_login_et_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/password_hint"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="8"
+            android:padding="@dimen/padding_8"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y8"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y65" />
+
+        <Button
+            android:id="@+id/dialog_fragment_login_btn_send"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="bottom|right"
+            android:text="@string/send"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y95"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x3"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y85" />
+
+        <Button
+            android:id="@+id/dialog_fragment_login_btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="bottom|right"
+            android:text="@string/cancel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y95"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x5"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x3"
+            app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y85" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

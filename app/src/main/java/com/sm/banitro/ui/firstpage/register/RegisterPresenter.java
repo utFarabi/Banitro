@@ -1,8 +1,7 @@
-package com.sm.banitro.ui.register;
+package com.sm.banitro.ui.firstpage.register;
 
 import android.content.Context;
 
-import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
 
@@ -27,17 +26,15 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     // Implement
 
     @Override
-    public void sendRegisterInfo(String name, String phoneNamber, String address, String categories) {
+    public void sendRegisterInfo(String name, String phoneNamber, String address, String categories,String password) {
         iaView.showProgress();
-        repository.sendRegisterInfo(name, phoneNamber, address, categories,
-                new ApiResult<BaseResponse>() {
+        repository.sendRegisterInfo(name, phoneNamber, address, categories,password,
+                new ApiResult<String>() {
 
                     @Override
-                    public void onSuccess(BaseResponse result) {
+                    public void onSuccess(String result) {
                         iaView.hideProgress();
-                        if (result.isResult()) {
-                            iaView.registerFinished();
-                        }
+                        iaView.registerFinished(result);
                     }
 
                     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,13 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
     }
 
     // ********************************************************************************
+    // Method
+
+    public void setLoginInfo(String username, String password) {
+        iaPresenter.sendLoginInfo(username,password);
+    }
+
+    // ********************************************************************************
     // Implement
 
     @Override
@@ -89,9 +97,13 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
     }
 
     @Override
-    public void loginFinished() {
-        pref.setFirstLogin(false);
-        interaction.goToApp();
+    public void loginFinished(String sellerId) {
+        if (sellerId != null && !sellerId.isEmpty()) {
+            pref.setFirstLogin(false);
+            pref.setSellerId(sellerId);
+            Log.i("sina", "sellerId: " + pref.getSellerId());
+            interaction.goToApp();
+        }
     }
 
     @Override
@@ -109,7 +121,7 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
 
     @OnClick(R.id.fragment_first_page_btn_login)
     public void onClickLogin() {
-
+        interaction.goToLoginFragment();
     }
 
     @Override
@@ -139,5 +151,7 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
         void goToApp();
 
         void goToRegisterFragment();
+
+        void goToLoginFragment();
     }
 }
