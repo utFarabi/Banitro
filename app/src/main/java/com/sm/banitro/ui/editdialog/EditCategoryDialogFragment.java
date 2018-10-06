@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sm.banitro.R;
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import java.util.ArrayList;
 
@@ -96,7 +96,7 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategory.setItemAnimator(new DefaultItemAnimator());
         rvCategory.setAdapter(editCategoryAdapter);
-        if (callStatus == Constant.REGISTER_DIALOG) {
+        if (callStatus == ConstantUtil.REGISTER_DIALOG) {
             btnSend.setText(R.string.approve);
         }
 
@@ -150,9 +150,9 @@ public class EditCategoryDialogFragment extends DialogFragment implements EditCa
             }
         }
         if (!categoriesCode.isEmpty()) {
-            if (callStatus == Constant.EDIT_DIALOG) {
+            if (callStatus == ConstantUtil.EDIT_DIALOG) {
                 interaction.setTextToProfileFragment(categoriesCode, R.string.categories);
-            } else if (callStatus == Constant.REGISTER_DIALOG) {
+            } else if (callStatus == ConstantUtil.REGISTER_DIALOG) {
                 interaction.setTextToRegisterFragment(categoriesCode, R.string.categories);
             }
             dismiss();

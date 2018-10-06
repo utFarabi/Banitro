@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sm.banitro.R;
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,7 +116,7 @@ public class EditTextDialogFragment extends DialogFragment {
                 etInput.setHint(R.string.password_hint);
                 break;
         }
-        if (callStatus == Constant.REGISTER_DIALOG) {
+        if (callStatus == ConstantUtil.REGISTER_DIALOG) {
             btnSend.setText(R.string.approve);
         }
     }
@@ -153,9 +152,9 @@ public class EditTextDialogFragment extends DialogFragment {
         if (text.isEmpty()) {
             etInput.requestFocus();
         } else {
-            if (callStatus == Constant.EDIT_DIALOG) {
+            if (callStatus == ConstantUtil.EDIT_DIALOG) {
                 interaction.setTextToProfileFragment(text, type);
-            } else if (callStatus == Constant.REGISTER_DIALOG) {
+            } else if (callStatus == ConstantUtil.REGISTER_DIALOG) {
                 interaction.setTextToRegisterFragment(text, type);
             }
             dismiss();

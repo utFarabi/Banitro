@@ -1,7 +1,7 @@
 package com.sm.banitro.data.source.remote;
 
 
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -18,7 +18,7 @@ public class ApiClient {
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             retrofit = new Retrofit.Builder()
                     .client(client)
-                    .baseUrl(Constant.BASE_URL)
+                    .baseUrl(ConstantUtil.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

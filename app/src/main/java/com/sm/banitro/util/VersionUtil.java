@@ -2,9 +2,9 @@ package com.sm.banitro.util;
 
 import android.os.Build;
 
-public class Version {
+public class VersionUtil {
 
-    private Version() {
+    private VersionUtil() {
         // No Instance
     }
 

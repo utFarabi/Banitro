@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.source.local.AppPreferences;
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +46,9 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     TextView tvPassword;
     @BindView(R.id.fragment_register_pb_progress)
     ProgressBar pbProgress;
+
+    // Data Type
+    private String categoriesCode;
 
     // ********************************************************************************
     // New Instance
@@ -103,6 +106,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
                 tvAddress.setText(text);
                 break;
             case R.string.categories:
+                categoriesCode = text;
                 tvCategories.setText(getCategoriesName(text));
                 break;
             case R.string.password:
@@ -111,38 +115,38 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         }
     }
 
-    private String getCategoriesName(String text) {
+    public String getCategoriesName(String text) {
         String result = "";
         while (!text.isEmpty()) {
             switch (text.substring(0, 2)) {
-                case Constant.CATEGORY_10:
+                case ConstantUtil.CATEGORY_10:
                     result += getString(R.string.category_10) + " . ";
                     break;
-                case Constant.CATEGORY_12:
+                case ConstantUtil.CATEGORY_12:
                     result += getString(R.string.category_12) + " . ";
                     break;
-                case Constant.CATEGORY_14:
+                case ConstantUtil.CATEGORY_14:
                     result += getString(R.string.category_14) + " . ";
                     break;
-                case Constant.CATEGORY_16:
+                case ConstantUtil.CATEGORY_16:
                     result += getString(R.string.category_16) + " . ";
                     break;
-                case Constant.CATEGORY_18:
+                case ConstantUtil.CATEGORY_18:
                     result += getString(R.string.category_18) + " . ";
                     break;
-                case Constant.CATEGORY_20:
+                case ConstantUtil.CATEGORY_20:
                     result += getString(R.string.category_20) + " . ";
                     break;
-                case Constant.CATEGORY_22:
+                case ConstantUtil.CATEGORY_22:
                     result += getString(R.string.category_22) + " . ";
                     break;
-                case Constant.CATEGORY_24:
+                case ConstantUtil.CATEGORY_24:
                     result += getString(R.string.category_24) + " . ";
                     break;
-                case Constant.CATEGORY_26:
+                case ConstantUtil.CATEGORY_26:
                     result += getString(R.string.category_26) + " . ";
                     break;
-                case Constant.CATEGORY_28:
+                case ConstantUtil.CATEGORY_28:
                     result += getString(R.string.category_28) + " . ";
                     break;
             }
@@ -184,27 +188,27 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @OnClick(R.id.fragment_register_cl_name)
     public void onClickName() {
-        interaction.goToEditTextDialogFragment(Constant.REGISTER_DIALOG, R.string.full_name);
+        interaction.goToEditTextDialogFragment(ConstantUtil.REGISTER_DIALOG, R.string.full_name);
     }
 
     @OnClick(R.id.fragment_register_cl_phoneNumber)
     public void onClickPhoneNumber() {
-        interaction.goToEditTextDialogFragment(Constant.REGISTER_DIALOG, R.string.phone);
+        interaction.goToEditTextDialogFragment(ConstantUtil.REGISTER_DIALOG, R.string.phone);
     }
 
     @OnClick(R.id.fragment_register_cl_address)
     public void onClickAddress() {
-        interaction.goToEditTextDialogFragment(Constant.REGISTER_DIALOG, R.string.address);
+        interaction.goToEditTextDialogFragment(ConstantUtil.REGISTER_DIALOG, R.string.address);
     }
 
     @OnClick(R.id.fragment_register_cl_categories)
     public void onClickCategory() {
-        interaction.goToEditCategoryDialogFragment(Constant.REGISTER_DIALOG);
+        interaction.goToEditCategoryDialogFragment(ConstantUtil.REGISTER_DIALOG);
     }
 
     @OnClick(R.id.fragment_register_cl_password)
     public void onClickPassword() {
-        interaction.goToEditTextDialogFragment(Constant.REGISTER_DIALOG, R.string.password);
+        interaction.goToEditTextDialogFragment(ConstantUtil.REGISTER_DIALOG, R.string.password);
     }
 
     @OnClick(R.id.fragment_register_btn_send)
@@ -212,7 +216,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         String name = tvName.getText().toString();
         String phoneNumber = tvPhoneNumber.getText().toString();
         String address = tvAddress.getText().toString();
-        String categories = tvCategories.getText().toString();
+        String categories = categoriesCode;
         String password = tvPassword.getText().toString();
         if (!name.isEmpty() && !phoneNumber.isEmpty() &&
                 !address.isEmpty() && !categories.isEmpty() &&

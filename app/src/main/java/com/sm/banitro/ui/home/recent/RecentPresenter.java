@@ -6,7 +6,7 @@ import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class RecentPresenter implements RecentContract.Presenter {
     @Override
     public void loadData() {
         iaView.showProgress();
-        repository.loadProducts(Constant.CONDITION_RECENT,
+        repository.loadProducts(ConstantUtil.CONDITION_RECENT,
                 new ApiResult<ArrayList<Product>>() {
 
                     @Override

@@ -1,8 +1,8 @@
 package com.sm.banitro.util;
 
-public class Constant {
+public class ConstantUtil {
 
-    private Constant() {
+    private ConstantUtil() {
         // No Instance
     }
 

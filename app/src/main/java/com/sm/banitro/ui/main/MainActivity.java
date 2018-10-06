@@ -29,7 +29,7 @@ import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.FunctionUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         bottomNavigation.setSelectedItemId(R.id.bottom_navigation_recent);
         title.setText(R.string.recent);
         logo.setImageResource(R.drawable.baseline_mail_white_24);
-        if (Function.isConnecting(this)) {
+        if (FunctionUtil.isConnecting(this)) {
             goToRecentFragment();
         } else {
             goToNetworkDialogFragment();
@@ -386,7 +386,7 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
         if (networkDialogFragment != null) {
             networkDialogIsShowing = true;
-            if (Function.isConnecting(this)) {
+            if (FunctionUtil.isConnecting(this)) {
                 networkDialogFragment.dismiss();
                 networkDialogIsShowing = false;
                 goToRecentFragment();

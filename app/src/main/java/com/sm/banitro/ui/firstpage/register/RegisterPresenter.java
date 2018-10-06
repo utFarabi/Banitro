@@ -1,6 +1,7 @@
 package com.sm.banitro.ui.firstpage.register;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;

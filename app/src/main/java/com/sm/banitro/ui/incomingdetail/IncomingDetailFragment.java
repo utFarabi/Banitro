@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
-import com.sm.banitro.util.Constant;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.ConstantUtil;
+import com.sm.banitro.util.FunctionUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,12 +84,12 @@ public class IncomingDetailFragment extends Fragment {
 
         // Init View
         tvName.setText(product.getProName());
-        tvCategory.setText(Function.getCategoryName(product.getProCat()));
+        tvCategory.setText(FunctionUtil.getCategoryName(product.getProCat()));
         tvNumber.setText(String.valueOf(product.getProNumber()));
-        tvPrice.setText(Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
-        if (product.getPosition().equals(Constant.CONDITION_APPROVED)) {
+        tvPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
+        if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED)) {
             tvCondition.setText(R.string.approved);
-        } else if (product.getPosition().equals(Constant.CONDITION_APPROVED_NOT)) {
+        } else if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED_NOT)) {
             tvCondition.setText(R.string.approved_not);
         }
     }

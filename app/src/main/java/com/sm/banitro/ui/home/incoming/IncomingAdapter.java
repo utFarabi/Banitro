@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
-import com.sm.banitro.util.Constant;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.ConstantUtil;
+import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;
 
@@ -95,12 +95,12 @@ public class IncomingAdapter extends RecyclerView.Adapter<IncomingAdapter.ViewHo
         public void onBind(Product product) {
             productCondition = product.getPosition();
             tvProductName.setText(product.getProName());
-            tvProductCategory.setText(Function.getCategoryName(product.getProCat()));
-            if (productCondition.equals(Constant.CONDITION_APPROVED)) {
+            tvProductCategory.setText(FunctionUtil.getCategoryName(product.getProCat()));
+            if (productCondition.equals(ConstantUtil.CONDITION_APPROVED)) {
                 ivApproved.setImageResource(R.drawable.baseline_check_white_48);
                 ivApproved.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.colorOk),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
-            } else if (productCondition.equals(Constant.CONDITION_APPROVED_NOT)) {
+            } else if (productCondition.equals(ConstantUtil.CONDITION_APPROVED_NOT)) {
                 ivApproved.setImageResource(R.drawable.baseline_clear_white_48);
                 ivApproved.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.colorError),
                         android.graphics.PorterDuff.Mode.MULTIPLY);

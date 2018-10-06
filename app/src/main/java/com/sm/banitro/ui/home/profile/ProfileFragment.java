@@ -34,9 +34,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.seller.Seller;
-import com.sm.banitro.util.Constant;
-import com.sm.banitro.util.Permission;
-import com.sm.banitro.util.Version;
+import com.sm.banitro.util.ConstantUtil;
+import com.sm.banitro.util.PermissionUtil;
+import com.sm.banitro.util.VersionUtil;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -46,7 +46,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -145,8 +144,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     // Method
 
     private boolean isAllPermissionGranted() {
-        return Permission.iscameraPermissionGranted(getContext())
-                && Permission.isStoragePermissionGranted(getContext());
+        return PermissionUtil.iscameraPermissionGranted(getContext())
+                && PermissionUtil.isStoragePermissionGranted(getContext());
     }
 
     private void loadImageFromGalleryOrCamera() {
@@ -156,7 +155,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT, true);
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (Version.isVersionCodesKitkatSupported()) {
+        if (VersionUtil.isVersionCodesKitkatSupported()) {
             cameraIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         }
         cameraUri = createImageUri(getContext());
@@ -177,7 +176,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     }
 
     private boolean isRequestPermissionResultGranted(int requestCode, int[] grantResults) {
-        return requestCode == Permission.IMAGE_PERMISSION_REQUEST_CODE
+        return requestCode == PermissionUtil.IMAGE_PERMISSION_REQUEST_CODE
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults[1] == PackageManager.PERMISSION_GRANTED;
@@ -187,7 +186,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         File sourceFile = null;
         try {
             String realPathFromURI = getRealPathFromURI(getContext(), data.getData());
-            if (Version.isVersionCodesKitkatSupported()) {
+            if (VersionUtil.isVersionCodesKitkatSupported()) {
                 if (realPathFromURI == null) {
                     sourceFile = new File(getImageUrlWithAuthority(getContext(), data.getData()));
                 } else {
@@ -201,7 +200,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         }
         try {
             if (sourceFile.exists()) {
-                if (Version.isVersionCodesMSupported()) {
+                if (VersionUtil.isVersionCodesMSupported()) {
                     showCropperDialog(FileProvider.getUriForFile(getContext(),
                             getContext().getPackageName() + ".provider", sourceFile));
                 } else {
@@ -273,7 +272,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private String getRealPathFromURI(Context context, final Uri uri) {
 
-        if (Version.isVersionCodesKitkatSupported() && DocumentsContract.isDocumentUri(context, uri)) {
+        if (VersionUtil.isVersionCodesKitkatSupported() && DocumentsContract.isDocumentUri(context, uri)) {
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
@@ -401,6 +400,46 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         iaPresenter.sendInfo(text, type);
     }
 
+    public String getCategoriesName(String text) {
+        String result = "";
+        while (!text.isEmpty()) {
+            switch (text.substring(0, 2)) {
+                case ConstantUtil.CATEGORY_10:
+                    result += getString(R.string.category_10) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_12:
+                    result += getString(R.string.category_12) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_14:
+                    result += getString(R.string.category_14) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_16:
+                    result += getString(R.string.category_16) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_18:
+                    result += getString(R.string.category_18) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_20:
+                    result += getString(R.string.category_20) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_22:
+                    result += getString(R.string.category_22) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_24:
+                    result += getString(R.string.category_24) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_26:
+                    result += getString(R.string.category_26) + " . ";
+                    break;
+                case ConstantUtil.CATEGORY_28:
+                    result += getString(R.string.category_28) + " . ";
+                    break;
+            }
+            text = text.substring(2);
+        }
+        return result;
+    }
+
     // ********************************************************************************
     // Implement
 
@@ -443,7 +482,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 tvAddress.setText(text);
                 break;
             case R.string.categories:
-                tvCategory.setText(text);
+                tvCategory.setText(getCategoriesName(text));
                 break;
         }
     }
@@ -453,11 +492,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @OnClick(R.id.fragment_profile_iv_image)
     public void onClickSellerImage() {
-        if (Version.isVersionCodesMSupported()) {
+        if (VersionUtil.isVersionCodesMSupported()) {
             if (isAllPermissionGranted()) {
                 loadImageFromGalleryOrCamera();
             } else {
-                requestPermissions(Permission.IMAGE_PERMISSIONS, Permission.IMAGE_PERMISSION_REQUEST_CODE);
+                requestPermissions(PermissionUtil.IMAGE_PERMISSIONS, PermissionUtil.IMAGE_PERMISSION_REQUEST_CODE);
             }
         } else {
             loadImageFromGalleryOrCamera();
@@ -466,22 +505,22 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @OnClick(R.id.fragment_profile_cl_name)
     public void onClickName() {
-        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.full_name);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.full_name);
     }
 
     @OnClick(R.id.fragment_profile_cl_phoneNumber)
     public void onClickPhoneNumber() {
-        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.phone);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.phone);
     }
 
     @OnClick(R.id.fragment_profile_cl_address)
     public void onClickAddress() {
-        interaction.goToEditTextDialogFragment(Constant.EDIT_DIALOG,R.string.address);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.address);
     }
 
     @OnClick(R.id.fragment_profile_cl_category)
     public void onClickCategory() {
-        interaction.goToEditCategoryDialogFragment(Constant.EDIT_DIALOG);
+        interaction.goToEditCategoryDialogFragment(ConstantUtil.EDIT_DIALOG);
     }
 
     @Override

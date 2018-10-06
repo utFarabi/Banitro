@@ -167,12 +167,13 @@ public class Repository {
     public void sendRegisterInfo(String name, String phoneNamber, String address, String categories, String password,
                                  final ApiResult<String> callback) {
 
-        Call<IdResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, /*categories*/"1012", password);
+        Call<IdResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories, password);
         call.enqueue(new Callback<IdResponse>() {
 
             @Override
             public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-                Log.i("sina","onResponse");
+                Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
+                        " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body().getId());
                 } else {

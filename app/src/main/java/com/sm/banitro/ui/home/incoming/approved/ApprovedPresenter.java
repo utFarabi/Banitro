@@ -5,7 +5,7 @@ import android.content.Context;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
-import com.sm.banitro.util.Constant;
+import com.sm.banitro.util.ConstantUtil;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class ApprovedPresenter implements ApprovedContract.Presenter {
     @Override
     public void loadData() {
         iaView.showProgress();
-        repository.loadProducts(Constant.CONDITION_APPROVED,
+        repository.loadProducts(ConstantUtil.CONDITION_APPROVED,
                 new ApiResult<ArrayList<Product>>() {
 
                     @Override

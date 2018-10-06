@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.main.PaginationScrollListener;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;
 
@@ -100,7 +100,7 @@ public class RecentFragment extends Fragment
 
             @Override
             protected void loadMoreItems() {
-                if (Function.isConnecting(getContext())) {
+                if (FunctionUtil.isConnecting(getContext())) {
                     isLoading = true;
                     iaPresenter.loadData();
                 }

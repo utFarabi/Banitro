@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.FunctionUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,11 +98,11 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
 
         // Init View
         tvName.setText(product.getProName());
-        tvCategory.setText(Function.getCategoryName(product.getProCat()));
+        tvCategory.setText(FunctionUtil.getCategoryName(product.getProCat()));
         tvNumber.setText(String.valueOf(product.getProNumber()));
         if (product.isReplied()) {
             btnSendPrice.setText(
-                    Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
+                    FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
                             + "   :" + getString(R.string.suggested_price));
         }
         if (product.getProPicture() != null && !product.getProPicture().isEmpty()) {
@@ -138,7 +138,7 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
     public void replySent(String price, String description) {
         product.setReplyPrice(price);
         product.setReplyDc(description);
-        btnSendPrice.setText(Function.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
+        btnSendPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
                 + "   :" + getString(R.string.suggested_price));
     }
 

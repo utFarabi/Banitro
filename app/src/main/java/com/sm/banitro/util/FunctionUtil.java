@@ -5,9 +5,9 @@ import android.net.ConnectivityManager;
 
 import com.sm.banitro.R;
 
-public class Function {
+public class FunctionUtil {
 
-    private Function() {
+    private FunctionUtil() {
         // No Instance
     }
 
@@ -44,25 +44,25 @@ public class Function {
 
     public static int getCategoryName(String id) {
         switch (id) {
-            case Constant.CATEGORY_10:
+            case ConstantUtil.CATEGORY_10:
                 return R.string.category_10;
-            case Constant.CATEGORY_12:
+            case ConstantUtil.CATEGORY_12:
                 return R.string.category_12;
-            case Constant.CATEGORY_14:
+            case ConstantUtil.CATEGORY_14:
                 return R.string.category_14;
-            case Constant.CATEGORY_16:
+            case ConstantUtil.CATEGORY_16:
                 return R.string.category_16;
-            case Constant.CATEGORY_18:
+            case ConstantUtil.CATEGORY_18:
                 return R.string.category_18;
-            case Constant.CATEGORY_20:
+            case ConstantUtil.CATEGORY_20:
                 return R.string.category_20;
-            case Constant.CATEGORY_22:
+            case ConstantUtil.CATEGORY_22:
                 return R.string.category_22;
-            case Constant.CATEGORY_24:
+            case ConstantUtil.CATEGORY_24:
                 return R.string.category_24;
-            case Constant.CATEGORY_26:
+            case ConstantUtil.CATEGORY_26:
                 return R.string.category_26;
-            case Constant.CATEGORY_28:
+            case ConstantUtil.CATEGORY_28:
                 return R.string.category_28;
             default:
                 return 0;

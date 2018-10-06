@@ -18,7 +18,7 @@ import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.home.incoming.IncomingAdapter;
 import com.sm.banitro.ui.main.PaginationScrollListener;
-import com.sm.banitro.util.Function;
+import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;
 
@@ -100,7 +100,7 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
 
             @Override
             protected void loadMoreItems() {
-                if (Function.isConnecting(getContext())) {
+                if (FunctionUtil.isConnecting(getContext())) {
                     isLoading = true;
                     iaPresenter.loadData();
                 }
