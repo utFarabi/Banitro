@@ -1,8 +1,8 @@
 package com.sm.banitro.data.source.remote;
 
-import com.sm.banitro.data.model.IdResponse;
 import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.model.product.Product;
+import com.sm.banitro.data.model.register.RegisterResponse;
 import com.sm.banitro.data.model.seller.Seller;
 
 import java.util.ArrayList;
@@ -75,14 +75,14 @@ interface ApiInterface {
 
     @POST("user/register")
     @FormUrlEncoded
-    Call<IdResponse> postRegisterInfo(@Field("full_name") String name,
-                                      @Field("user_phone") String phoneNamber,
-                                      @Field("user_address") String address,
-                                      @Field("user_category") String categories,
-                                      @Field("user_pass") String password);
+    Call<RegisterResponse> postRegisterInfo(@Field("full_name") String name,
+                                            @Field("user_phone") String phoneNamber,
+                                            @Field("user_address") String address,
+                                            @Field("user_category") String categories,
+                                            @Field("user_pass") String password);
 
     @POST("user/login")
     @FormUrlEncoded
-    Call<IdResponse> postLoginInfo(@Field("username") String username,
-                               @Field("password") String password);
+    Call<RegisterResponse> postLoginInfo(@Field("username") String username,
+                                         @Field("password") String password);
 }

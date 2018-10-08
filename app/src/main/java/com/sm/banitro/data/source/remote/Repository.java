@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sm.banitro.R;
-import com.sm.banitro.data.model.IdResponse;
 import com.sm.banitro.data.model.basic.BaseResponse;
 import com.sm.banitro.data.model.product.Product;
+import com.sm.banitro.data.model.register.RegisterResponse;
 import com.sm.banitro.data.model.seller.Seller;
 import com.sm.banitro.data.source.local.AppPreferences;
 
@@ -167,23 +167,25 @@ public class Repository {
     public void sendRegisterInfo(String name, String phoneNamber, String address, String categories, String password,
                                  final ApiResult<String> callback) {
 
-        Call<IdResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories, password);
-        call.enqueue(new Callback<IdResponse>() {
+        Call<RegisterResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories, password);
+        call.enqueue(new Callback<RegisterResponse>() {
 
             @Override
-            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
                         " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
-                    callback.onSuccess(response.body().getId());
+                    if (response.body().isResult()) {
+                        callback.onSuccess(response.body().getMessage());
+                    }
                 } else {
                     callback.onFail(response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<IdResponse> call, Throwable t) {
-                Log.i("sina","onFailure");
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                Log.i("sina", "onFailure");
                 callback.onFail(t.getMessage());
             }
         });
@@ -191,20 +193,22 @@ public class Repository {
 
     public void sendLoginInfo(String username, String password, final ApiResult<String> callback) {
 
-        Call<IdResponse> call = apiInterface.postLoginInfo(username, password);
-        call.enqueue(new Callback<IdResponse>() {
+        Call<RegisterResponse> call = apiInterface.postLoginInfo(username, password);
+        call.enqueue(new Callback<RegisterResponse>() {
 
             @Override
-            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.isSuccessful()) {
-                    callback.onSuccess(response.body().getId());
+                    if (response.body().isResult()) {
+                        callback.onSuccess(response.body().getMessage());
+                    }
                 } else {
                     callback.onFail(response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<IdResponse> call, Throwable t) {
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
                 callback.onFail(t.getMessage());
             }
         });

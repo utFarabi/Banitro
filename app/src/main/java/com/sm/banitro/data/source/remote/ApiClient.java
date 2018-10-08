@@ -1,6 +1,5 @@
 package com.sm.banitro.data.source.remote;
 
-
 import com.sm.banitro.util.ConstantUtil;
 
 import okhttp3.OkHttpClient;

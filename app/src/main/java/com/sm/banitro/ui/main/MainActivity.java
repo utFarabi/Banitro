@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity
         registerFragment = RegisterFragment.newInstance();
         fragmentManager.beginTransaction()
                 .add(R.id.base_layout, registerFragment, RegisterFragment.class.getName())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -350,8 +351,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void setLoginInfoToFirstPageFragment(String username, String password){
-        firstPageFragment.setLoginInfo(username,password);
+    public void setLoginInfoToFirstPageFragment(String username, String password) {
+        firstPageFragment.setLoginInfo(username, password);
     }
 
     @Override
