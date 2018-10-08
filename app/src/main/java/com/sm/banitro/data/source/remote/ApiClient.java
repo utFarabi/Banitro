@@ -7,6 +7,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit = null;
@@ -22,7 +24,7 @@ public class ApiClient {
             retrofit = new Retrofit.Builder()
                     .client(builder.build())
                     .baseUrl(ConstantUtil.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(MoshiConverterFactory.create())
                     .build();
         }
         return retrofit;
