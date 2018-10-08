@@ -39,7 +39,7 @@ public class ProductDiffUtil extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldProducts.get(oldItemPosition).getId() == newProducts.get(newItemPosition).getId();
+        return oldProducts.get(oldItemPosition).getId().equals(newProducts.get(newItemPosition).getId());
     }
 
     @Override
