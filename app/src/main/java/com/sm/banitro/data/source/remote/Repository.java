@@ -77,6 +77,7 @@ public class Repository {
     }
 
     public void loadSeller(final ApiResult<Seller> callback) {
+        Log.i("sina","id: "+pref.getSellerId());
         final Call<Seller> call = apiInterface.getSeller(pref.getSellerId());
         call.enqueue(new Callback<Seller>() {
 

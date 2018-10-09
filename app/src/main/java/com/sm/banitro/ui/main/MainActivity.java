@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         EditTextDialogFragment.Interaction, EditCategoryDialogFragment.Interaction,
         RegisterFragment.Interaction, FirstPageFragment.Interaction,
         LoginDialogFragment.Interaction {
+    private static final String TAG =MainActivity.class.getName() ;
 
     // ********************************************************************************
     // Field
@@ -175,9 +177,11 @@ public class MainActivity extends AppCompatActivity
 
     private void goToRecentFragment() {
         if (recentFragment == null) {
-            recentFragment = recentFragment.newInstance();
+            recentFragment = RecentFragment.newInstance();
             fragmentManager.beginTransaction()
-                    .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                    .replace(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                    .hide(firstPageFragment)
+                    .hide(registerFragment)
                     .commit();
         } else {
             if (profileFragment == null && incomingFragment != null) {
