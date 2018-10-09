@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class RegisterFragment extends Fragment implements RegisterContract.View {
 
     // ********************************************************************************
@@ -170,6 +172,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void registerFinished(String sellerId) {
+        Log.d(TAG, "registerFinished() called with: sellerId = [" + sellerId + "]");
         if (sellerId != null && !sellerId.isEmpty()) {
             pref.setFirstLogin(false);
             pref.setSellerId(sellerId);

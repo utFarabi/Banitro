@@ -455,8 +455,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void showSeller(Seller seller) {
-        tvName.setText(seller.getFirstName() + " " + seller.getLastName());
-        tvPhoneNumber.setText(seller.getNickname());
+        tvName.setText(seller.getNickname());
+        tvPhoneNumber.setText(seller.getPhonenumber());
         tvAddress.setText(seller.getAddress());
         tvCategory.setText(seller.getCategory());
         if (seller.getImage() != null && !seller.getImage().isEmpty()) {
