@@ -146,7 +146,7 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
 
     @OnClick(R.id.fragment_first_page_btn_login)
     public void onClickLogin() {
-        interaction.goToLoginFragment();
+        interaction.goToLoginDialogFragment();
     }
 
     @Override
@@ -177,6 +177,6 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
 
         void goToRegisterFragment();
 
-        void goToLoginFragment();
+        void goToLoginDialogFragment();
     }
 }

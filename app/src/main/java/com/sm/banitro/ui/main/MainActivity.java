@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     private ProfileFragment profileFragment;
     private RecentDetailFragment recentDetailFragment;
     private IncomingDetailFragment incomingDetailFragment;
-    private DialogFragment networkDialogFragment;
+    private DialogFragment networkDialogFragment, loginDialogFragment;
     private FirstPageFragment firstPageFragment;
     private RegisterFragment registerFragment;
     private NetworkReceiver networkReceiver;
@@ -173,14 +173,23 @@ public class MainActivity extends AppCompatActivity
     // ********************************************************************************
     // Method
 
+    private void x() {
+        BanitroApp.getBanitroApp().clearApplicationData();
+    }
+
     private void goToRecentFragment() {
         if (recentFragment == null) {
             recentFragment = RecentFragment.newInstance();
-            if (firstPageFragment != null && registerFragment != null) {
+            if (registerFragment != null) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
                         .hide(firstPageFragment)
                         .hide(registerFragment)
+                        .commit();
+            } else if (firstPageFragment != null) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                        .hide(firstPageFragment)
                         .commit();
             } else {
                 fragmentManager.beginTransaction()
@@ -284,10 +293,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void goToLoginFragment() {
-        DialogFragment dialogFragment = LoginDialogFragment.newInstance();
-        dialogFragment.show(fragmentManager.beginTransaction(), LoginDialogFragment.class.getName());
-        dialogFragment.setCancelable(false);
+    public void goToLoginDialogFragment() {
+        loginDialogFragment = LoginDialogFragment.newInstance();
+        loginDialogFragment.show(fragmentManager.beginTransaction(), LoginDialogFragment.class.getName());
+        loginDialogFragment.setCancelable(false);
     }
 
     @Override
@@ -360,6 +369,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setLoginInfoToFirstPageFragment(String username, String password) {
+        loginDialogFragment.dismiss();
         firstPageFragment.setLoginInfo(username, password);
     }
 

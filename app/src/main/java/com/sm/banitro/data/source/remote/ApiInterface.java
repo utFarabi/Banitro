@@ -56,7 +56,7 @@ interface ApiInterface {
     @POST("user/edit")
     @FormUrlEncoded
     Call<BaseResponse> postProfileName(@Field("id") String sellerId,
-                                       @Field("fullname") String name);
+                                       @Field("full_name") String name);
 
     @POST("user/edit")
     @FormUrlEncoded

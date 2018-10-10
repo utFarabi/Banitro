@@ -82,9 +82,6 @@ public class Repository {
 
             @Override
             public void onResponse(Call<Seller> call, Response<Seller> response) {
-                Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
-                        " success code = [" + response + "]" + ", message = [" + response.message() + "]");
-                Log.i("sina","name: "+response.body().getNickname());
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
                 } else {
@@ -134,11 +131,9 @@ public class Repository {
 
         switch (type) {
             case R.string.full_name:
-                Log.i("sina","name: "+text);
                 call = apiInterface.postProfileName(pref.getSellerId(), text);
                 break;
             case R.string.phone:
-                Log.i("sina","phone: "+text);
                 call = apiInterface.postProfilePhoneNumber(pref.getSellerId(), text);
                 break;
             case R.string.address:
@@ -174,7 +169,6 @@ public class Repository {
 
     public void sendRegisterInfo(String name, String phoneNamber, String address, String categories, String password,
                                  final ApiResult<String> callback) {
-        Log.i("sina", "categoriesId: " + categories);
         Call<RegisterResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories, password);
         call.enqueue(new Callback<RegisterResponse>() {
 
@@ -200,17 +194,20 @@ public class Repository {
     }
 
     public void sendLoginInfo(String username, String password, final ApiResult<String> callback) {
-
+        Log.i("sina", "username: " + username+"     password: "+password);
         Call<RegisterResponse> call = apiInterface.postLoginInfo(username, password);
         call.enqueue(new Callback<RegisterResponse>() {
 
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
+                        " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
                     if (response.body().isResult()) {
                         callback.onSuccess(response.body().getMessage());
                     }
                 } else {
+                    Log.i("sina", "onFailure");
                     callback.onFail(response.message());
                 }
             }
