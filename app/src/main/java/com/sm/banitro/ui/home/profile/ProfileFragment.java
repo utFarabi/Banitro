@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -70,6 +72,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     // Data Type
     private final int IMAGE_REQUEST_CODE = 100;
     private int MAX_CROP_HEIGHT, MAX_CROP_WIDTH;
+    private final String IMAGE_DEFAULT = "NULL";
 
     // View
     @BindView(R.id.fragment_profile_iv_image)
@@ -400,10 +403,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         iaPresenter.sendInfo(text, type);
     }
 
-    public String getCategoriesName(String text) {
+    public String getCategoriesName(ArrayList<String> categories) {
         String result = "";
-        while (!text.isEmpty()) {
-            switch (text.substring(0, 2)) {
+        for (int i = 0; i < categories.size(); i++) {
+            switch (categories.get(i)) {
                 case ConstantUtil.CATEGORY_10:
                     result += getString(R.string.category_10) + " . ";
                     break;
@@ -435,7 +438,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                     result += getString(R.string.category_28) + " . ";
                     break;
             }
-            text = text.substring(2);
         }
         return result;
     }
@@ -458,8 +460,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         tvName.setText(seller.getNickname());
         tvPhoneNumber.setText(seller.getPhonenumber());
         tvAddress.setText(seller.getAddress());
-        tvCategory.setText(seller.getCategory());
-        if (seller.getImage() != null && !seller.getImage().isEmpty()) {
+        tvCategory.setText(getCategoriesName(seller.getCategory()));
+        if (!seller.getImage().equals(IMAGE_DEFAULT)) {
             Glide.with(this).load(seller.getImage()).into(ivImage);
         }
     }
@@ -471,7 +473,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void infoSent(String text, int type) {
-        switch (type){
+        Log.i("sina","setText: "+text);
+        switch (type) {
             case R.string.full_name:
                 tvName.setText(text);
                 break;
@@ -482,7 +485,15 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 tvAddress.setText(text);
                 break;
             case R.string.categories:
-                tvCategory.setText(getCategoriesName(text));
+                ArrayList<String> categories = new ArrayList<>();
+                while (!text.isEmpty()) {
+                    categories.add(text.substring(0, 2));
+                    text = text.substring(2);
+                }
+                tvCategory.setText(getCategoriesName(categories));
+                break;
+            case R.string.choose_your_profile_image:
+                Glide.with(this).load(text).into(ivImage);
                 break;
         }
     }
@@ -505,17 +516,17 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @OnClick(R.id.fragment_profile_cl_name)
     public void onClickName() {
-        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.full_name);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG, R.string.full_name);
     }
 
     @OnClick(R.id.fragment_profile_cl_phoneNumber)
     public void onClickPhoneNumber() {
-        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.phone);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG, R.string.phone);
     }
 
     @OnClick(R.id.fragment_profile_cl_address)
     public void onClickAddress() {
-        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG,R.string.address);
+        interaction.goToEditTextDialogFragment(ConstantUtil.EDIT_DIALOG, R.string.address);
     }
 
     @OnClick(R.id.fragment_profile_cl_category)
@@ -546,7 +557,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-//                iaPresenter.uploadSellerImage(new File(result.getUri().getPath()));
+                Glide.with(this).load(result.getUri().getPath()).into(ivImage);
+                iaPresenter.sendInfo(result.getUri().getPath(),R.string.choose_your_profile_image);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -576,7 +588,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     public interface Interaction {
 
-        void goToEditTextDialogFragment(int callStatus,int type);
+        void goToEditTextDialogFragment(int callStatus, int type);
 
         void goToEditCategoryDialogFragment(int callStatus);
     }

@@ -7,7 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity
         EditTextDialogFragment.Interaction, EditCategoryDialogFragment.Interaction,
         RegisterFragment.Interaction, FirstPageFragment.Interaction,
         LoginDialogFragment.Interaction {
-    private static final String TAG =MainActivity.class.getName() ;
 
     // ********************************************************************************
     // Field
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         toast = Toast.makeText(this, R.string.toast_click_again_to_exit, Toast.LENGTH_SHORT);
 
         networkReceiver = new NetworkReceiver();
-        networkReceiver.interaction = this;
+        NetworkReceiver.interaction = this;
 
         registerNetworkReceiver();
 
@@ -178,11 +176,17 @@ public class MainActivity extends AppCompatActivity
     private void goToRecentFragment() {
         if (recentFragment == null) {
             recentFragment = RecentFragment.newInstance();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
-                    .hide(firstPageFragment)
-                    .hide(registerFragment)
-                    .commit();
+            if (firstPageFragment != null && registerFragment != null) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                        .hide(firstPageFragment)
+                        .hide(registerFragment)
+                        .commit();
+            } else {
+                fragmentManager.beginTransaction()
+                        .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                        .commit();
+            }
         } else {
             if (profileFragment == null && incomingFragment != null) {
                 fragmentManager.beginTransaction()

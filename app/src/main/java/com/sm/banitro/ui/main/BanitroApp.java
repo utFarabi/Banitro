@@ -1,4 +1,4 @@
-package com.sm.banitro;
+package com.sm.banitro.ui.main;
 
 import android.app.Application;
 

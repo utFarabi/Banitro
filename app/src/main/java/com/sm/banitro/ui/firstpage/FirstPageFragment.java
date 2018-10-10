@@ -9,13 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.source.local.AppPreferences;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -32,6 +38,11 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
     private Unbinder unbinder;
 
     // View
+    @BindViews({R.id.fragment_first_page_tv_b, R.id.fragment_first_page_tv_a,
+            R.id.fragment_first_page_tv_n, R.id.fragment_first_page_tv_i,
+            R.id.fragment_first_page_tv_t, R.id.fragment_first_page_tv_r,
+            R.id.fragment_first_page_tv_o})
+    List<TextView> tvLogo;
     @BindView(R.id.fragment_first_page_pb_progress)
     ProgressBar pbProgress;
 
@@ -74,13 +85,27 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
 
         // Init Instance
         unbinder = ButterKnife.bind(this, view);
+
+        setValueToTextViewAnim();
     }
 
     // ********************************************************************************
     // Method
 
+    private void setValueToTextViewAnim(){
+        for (int i = 0; i < tvLogo.size(); i++) {
+            int time=500;
+            Animation anim = new AlphaAnimation(1.0f, 0.1f);
+            anim.setDuration((tvLogo.size()-i)*time);
+            anim.setStartOffset(time*i);
+            anim.setRepeatMode(Animation.REVERSE);
+            anim.setRepeatCount(Animation.INFINITE);
+            tvLogo.get(i).startAnimation(anim);
+        }
+    }
+
     public void setLoginInfo(String username, String password) {
-        iaPresenter.sendLoginInfo(username,password);
+        iaPresenter.sendLoginInfo(username, password);
     }
 
     // ********************************************************************************
