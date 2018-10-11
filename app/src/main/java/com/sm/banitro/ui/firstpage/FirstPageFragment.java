@@ -92,12 +92,12 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
     // ********************************************************************************
     // Method
 
-    private void setValueToTextViewAnim(){
+    private void setValueToTextViewAnim() {
         for (int i = 0; i < tvLogo.size(); i++) {
-            int time=500;
+            int time = 500;
             Animation anim = new AlphaAnimation(1.0f, 0.1f);
-            anim.setDuration((tvLogo.size()-i)*time);
-            anim.setStartOffset(time*i);
+            anim.setDuration((tvLogo.size() - i) * time);
+            anim.setStartOffset(time * i);
             anim.setRepeatMode(Animation.REVERSE);
             anim.setRepeatCount(Animation.INFINITE);
             tvLogo.get(i).startAnimation(anim);
@@ -123,10 +123,10 @@ public class FirstPageFragment extends Fragment implements FirstPageContract.Vie
 
     @Override
     public void loginFinished(String sellerId) {
+        Toast.makeText(getContext(), getString(R.string.wellcome), Toast.LENGTH_SHORT).show();
         if (sellerId != null && !sellerId.isEmpty()) {
             pref.setFirstLogin(false);
             pref.setSellerId(sellerId);
-            Log.i("sina", "sellerId: " + pref.getSellerId());
             interaction.goToApp();
         }
     }

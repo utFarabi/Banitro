@@ -7,7 +7,11 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/dialog_fragment_width"
-        android:layout_height="@dimen/login_dialog_fragment_height">
+        android:layout_height="@dimen/login_dialog_fragment_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.Guideline
             android:id="@+id/dialog_fragment_login_gl_y05"
@@ -118,10 +122,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
-            android:lines="1"
-            android:textSize="@dimen/text_size_15"
-            android:text="@string/username_login"
             android:gravity="center|right"
+            android:lines="1"
+            android:text="@string/username_login"
+            android:textSize="@dimen/text_size_15"
             app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y35"
             app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
             app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
@@ -148,10 +152,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
-            android:lines="1"
-            android:textSize="@dimen/text_size_15"
-            android:text="@string/password"
             android:gravity="center|right"
+            android:lines="1"
+            android:text="@string/password"
+            android:textSize="@dimen/text_size_15"
             app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y65"
             app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
             app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +15,12 @@ import android.widget.Toast;
 import com.sm.banitro.R;
 import com.sm.banitro.data.source.local.AppPreferences;
 import com.sm.banitro.util.ConstantUtil;
+import com.sm.banitro.util.FunctionUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static android.support.constraint.Constraints.TAG;
 
 public class RegisterFragment extends Fragment implements RegisterContract.View {
 
@@ -76,6 +74,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         super.onCreate(savedInstanceState);
         iaPresenter = new RegisterPresenter(this, getContext());
         pref = new AppPreferences(getContext());
+        categoriesCode = "";
     }
 
     @Nullable
@@ -172,11 +171,10 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void registerFinished(String sellerId) {
-        Log.d(TAG, "registerFinished() called with: sellerId = [" + sellerId + "]");
+        Toast.makeText(getContext(), getString(R.string.wellcome), Toast.LENGTH_SHORT).show();
         if (sellerId != null && !sellerId.isEmpty()) {
             pref.setFirstLogin(false);
             pref.setSellerId(sellerId);
-            Log.i("sina", "sellerId: " + pref.getSellerId());
             interaction.goToApp();
         }
     }
@@ -224,7 +222,13 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         if (!name.isEmpty() && !phoneNumber.isEmpty() &&
                 !address.isEmpty() && !categories.isEmpty() &&
                 !password.isEmpty()) {
-            iaPresenter.sendRegisterInfo(name, phoneNumber, address, categories, password);
+            if (FunctionUtil.isConnecting(getContext())) {
+                iaPresenter.sendRegisterInfo(name, phoneNumber, address, categories, password);
+            } else {
+                Toast.makeText(getContext(), R.string.internet_error_header, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getContext(), R.string.enter_all_information, Toast.LENGTH_SHORT).show();
         }
     }
 

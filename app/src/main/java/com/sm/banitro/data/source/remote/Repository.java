@@ -168,7 +168,7 @@ public class Repository {
     }
 
     public void sendRegisterInfo(String name, String phoneNamber, String address, String categories, String password,
-                                 final ApiResult<String> callback) {
+                                 final ApiResult<RegisterResponse> callback) {
         Call<RegisterResponse> call = apiInterface.postRegisterInfo(name, phoneNamber, address, categories, password);
         call.enqueue(new Callback<RegisterResponse>() {
 
@@ -177,9 +177,7 @@ public class Repository {
                 Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
                         " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
-                    if (response.body().isResult()) {
-                        callback.onSuccess(response.body().getMessage());
-                    }
+                    callback.onSuccess(response.body());
                 } else {
                     callback.onFail(response.message());
                 }
