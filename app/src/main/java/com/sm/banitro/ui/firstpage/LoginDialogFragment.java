@@ -78,8 +78,15 @@ public class LoginDialogFragment extends DialogFragment {
     public void onClickSend() {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        if (!username.isEmpty() && username.length() == 11 && !password.isEmpty()) {
-            interaction.setLoginInfoToFirstPageFragment(username, password);
+        if (username.length() == 11 && username.substring(0, 2).equals("09")) {
+            if (!password.isEmpty()) {
+                interaction.setLoginInfoToFirstPageFragment(username, password);
+            } else {
+                etPassword.requestFocus();
+            }
+        } else {
+            etUsername.setText("");
+            etUsername.requestFocus();
         }
     }
 

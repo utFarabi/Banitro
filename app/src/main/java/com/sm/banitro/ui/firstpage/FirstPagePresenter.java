@@ -3,6 +3,7 @@ package com.sm.banitro.ui.firstpage;
 import android.content.Context;
 
 import com.sm.banitro.data.model.basic.BaseResponse;
+import com.sm.banitro.data.model.register.RegisterResponse;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
 
@@ -30,12 +31,16 @@ public class FirstPagePresenter implements FirstPageContract.Presenter {
     public void sendLoginInfo(String username, String password) {
         iaView.showProgress();
         repository.sendLoginInfo(username, password,
-                new ApiResult<String>() {
+                new ApiResult<RegisterResponse>() {
 
                     @Override
-                    public void onSuccess(String result) {
+                    public void onSuccess(RegisterResponse result) {
                         iaView.hideProgress();
-                        iaView.loginFinished(result);
+                        if (result.isResult()) {
+                            iaView.loginFinished(result.getMessage());
+                        }else {
+                            iaView.showErrorMessage("کاربر مورد نظر یافت نشد.");
+                        }
                     }
 
                     @Override

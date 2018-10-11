@@ -193,8 +193,8 @@ public class Repository {
         });
     }
 
-    public void sendLoginInfo(String username, String password, final ApiResult<String> callback) {
-        Log.i("sina", "username: " + username+"     password: "+password);
+    public void sendLoginInfo(String username, String password, final ApiResult<RegisterResponse> callback) {
+        Log.i("sina", "username: " + username + "     password: " + password);
         Call<RegisterResponse> call = apiInterface.postLoginInfo(username, password);
         call.enqueue(new Callback<RegisterResponse>() {
 
@@ -203,9 +203,7 @@ public class Repository {
                 Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
                         " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
-                    if (response.body().isResult()) {
-                        callback.onSuccess(response.body().getMessage());
-                    }
+                    callback.onSuccess(response.body());
                 } else {
                     Log.i("sina", "onFailure");
                     callback.onFail(response.message());
