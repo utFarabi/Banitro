@@ -15,6 +15,7 @@
     <dimen name="text_size_75">75sp</dimen>
     <dimen name="line">1dp</dimen>
     <dimen name="delete_dialog_fragment_height">150dp</dimen>
+    <dimen name="logout_dialog_fragment_height">150dp</dimen>
     <dimen name="network_dialog_fragment_height">250dp</dimen>
     <dimen name="edit_text_dialog_fragment_height">200dp</dimen>
     <dimen name="reply_dialog_fragment_height">230dp</dimen>

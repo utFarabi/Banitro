@@ -56,4 +56,7 @@
     <string name="username_login">نام کاربری (تلفن همراه)</string>
     <string name="enter_all_information">لطفا تمامی اطلاعات را وارد کنید.</string>
     <string name="wellcome">به بانیترو خوش آمدید.</string>
+    <string name="logout">خروج</string>
+    <string name="logout_title">خروج از حساب کاربری</string>
+    <string name="logout_description">مطمئن به خروج از حسابتان هستید؟</string>
 </resources>

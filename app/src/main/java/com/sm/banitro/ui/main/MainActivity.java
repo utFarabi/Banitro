@@ -1,5 +1,6 @@
 package com.sm.banitro.ui.main;
 
+import android.app.ActivityManager;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,9 +31,11 @@ import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.FunctionUtil;
+import com.sm.banitro.util.VersionUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         DeleteDialogFragment.Interaction, ReplyDialogFragment.Interaction,
         EditTextDialogFragment.Interaction, EditCategoryDialogFragment.Interaction,
         RegisterFragment.Interaction, FirstPageFragment.Interaction,
-        LoginDialogFragment.Interaction {
+        LoginDialogFragment.Interaction, LogoutDialogFragment.Interaction {
 
     // ********************************************************************************
     // Field
@@ -172,10 +175,6 @@ public class MainActivity extends AppCompatActivity
 
     // ********************************************************************************
     // Method
-
-    private void x() {
-        BanitroApp.getBanitroApp().clearApplicationData();
-    }
 
     private void goToRecentFragment() {
         if (recentFragment == null) {
@@ -374,6 +373,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void logoutFromApp() {
+        try {
+            if (VersionUtil.isVersionCodesKitkatSupported()) {
+                ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
+            } else {
+                String packageName = getApplicationContext().getPackageName();
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("pm clear " + packageName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void isConnecting() {
         if (networkDialogIsShowing) {
             networkDialogFragment.dismiss();
@@ -384,6 +398,13 @@ public class MainActivity extends AppCompatActivity
 
     // ********************************************************************************
     // Supplementary Override
+
+    @OnClick(R.id.activity_main_toolbar_logout)
+    public void onClicLogout() {
+        DialogFragment dialogFragment = LogoutDialogFragment.newInstance();
+        dialogFragment.show(fragmentManager.beginTransaction(), LogoutDialogFragment.class.getName());
+        dialogFragment.setCancelable(false);
+    }
 
     @Override
     public void onBackPressed() {
