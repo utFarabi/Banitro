@@ -34,6 +34,7 @@ import com.sm.banitro.util.FunctionUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import co.ronash.pushe.Pushe;
 
 public class MainActivity extends AppCompatActivity
         implements RecentFragment.Interaction, RecentDetailFragment.Interaction,
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Pushe.initialize(this, true);
         // Init Instance
         unbinder = ButterKnife.bind(this);
         fragmentManager = getSupportFragmentManager();

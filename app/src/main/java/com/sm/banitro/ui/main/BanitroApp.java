@@ -2,10 +2,6 @@ package com.sm.banitro.ui.main;
 
 import android.app.Application;
 
-import com.batch.android.Batch;
-import com.batch.android.BatchActivityLifecycleHelper;
-import com.batch.android.Config;
-
 import java.io.File;
 
 public class BanitroApp extends Application {
@@ -26,8 +22,6 @@ public class BanitroApp extends Application {
     public void onCreate() {
         super.onCreate();
         banitroApp = this;
-        Batch.setConfig(new Config(DEV_API_KEY));
-        registerActivityLifecycleCallbacks(new BatchActivityLifecycleHelper());
     }
 
     // ********************************************************************************

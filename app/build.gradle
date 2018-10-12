@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
@@ -48,14 +51,12 @@ dependencies {
     // Crop Image
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
 
-    // Batch
-    implementation 'com.batch.android:batch-sdk:1.13.0'
-//    implementation "com.google.firebase:firebase-core:16.0.4"
-//    implementation "com.google.firebase:firebase-messaging:17.3.3"
-//    implementation "com.google.android.gms:play-services-ads-lite:17.0.0"
+    implementation "com.google.firebase:firebase-core:11.0.2"
+    implementation "com.google.firebase:firebase-messaging:11.0.2"
 
-    // Test
-    //    testImplementation 'junit:junit:4.12'
-    //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'co.ronash.android:pushe-base:1.4.1'
+    implementation 'com.google.android.gms:play-services-gcm:11.0.2'
+    implementation 'com.android.support:multidex:1.0.3'
 }
+apply plugin: 'com.google.gms.google-services'
