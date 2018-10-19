@@ -21,7 +21,7 @@ public class FirstPagePresenter implements FirstPageContract.Presenter {
 
     public FirstPagePresenter(FirstPageContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = new Repository(context);
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

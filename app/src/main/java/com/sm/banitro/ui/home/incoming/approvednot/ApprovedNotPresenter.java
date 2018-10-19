@@ -23,7 +23,7 @@ public class ApprovedNotPresenter implements ApprovedNotContract.Presenter {
 
     public ApprovedNotPresenter(ApprovedNotContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = new Repository(context);
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

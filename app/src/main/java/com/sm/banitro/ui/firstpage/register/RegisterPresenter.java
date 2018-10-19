@@ -21,7 +21,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     public RegisterPresenter(RegisterContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = new Repository(context);
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

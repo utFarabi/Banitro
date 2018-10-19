@@ -22,7 +22,7 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
     public ProfilePresenter(ProfileContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = new Repository(context);
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

@@ -24,7 +24,7 @@ public class Repository {
     // Instance
     private ApiInterface apiInterface;
     private AppPreferences pref;
-
+    private synchronized static Repository INSTANCE;
     // ********************************************************************************
     // Constructor
 
@@ -32,6 +32,14 @@ public class Repository {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         pref = new AppPreferences(context);
     }
+
+    public static Repository getINSTANCE(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new Repository(context);
+        }
+        return INSTANCE;
+    }
+
 
     // ********************************************************************************
     // Method
