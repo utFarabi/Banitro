@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".ui.main.NetworkReceiver">
+        <receiver android:name=".ui.main.network.NetworkReceiver">
             <intent-filter>
                 <action
                     android:name="android.net.conn.CONNECTIVITY_CHANGE"
@@ -50,6 +50,7 @@
                 android:resource="@xml/files_path" />
         </provider>
 
+        <service android:name=".ui.main.notification.NotificationService" />
     </application>
 
 </manifest>

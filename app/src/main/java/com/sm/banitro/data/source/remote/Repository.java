@@ -13,6 +13,9 @@ import com.sm.banitro.util.ConstantUtil;
 
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,6 +88,26 @@ public class Repository {
         });
     }
 
+    public void loadProductsForNotif(final ApiResult<ArrayList<Product>> callback) {
+        Call<ArrayList<Product>> call = apiInterface.getProductsForNotif(pref.getSellerId(), ConstantUtil.TOKEN);
+        call.enqueue(new Callback<ArrayList<Product>>() {
+
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
     public void loadSeller(final ApiResult<Seller> callback) {
         final Call<Seller> call = apiInterface.getSeller(pref.getSellerId(), ConstantUtil.TOKEN);
         call.enqueue(new Callback<Seller>() {
@@ -151,13 +174,31 @@ public class Repository {
             case R.string.categories:
                 call = apiInterface.postProfileCategory(pref.getSellerId(), text, ConstantUtil.TOKEN);
                 break;
-            case R.string.choose_your_profile_image:
-                call = apiInterface.postProfileImage(pref.getSellerId(), text, ConstantUtil.TOKEN);
-                break;
             default:
                 call = null;
         }
 
+        call.enqueue(new Callback<BaseResponse>() {
+
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                callback.onFail(t.getMessage());
+            }
+        });
+    }
+
+    public void sendImage(MultipartBody.Part image, final ApiResult<BaseResponse> callback) {
+        RequestBody sellerId = RequestBody.create(MediaType.parse("text/plain"), pref.getSellerId());
+        Call<BaseResponse> call = apiInterface.postProfileImage(sellerId, image, ConstantUtil.TOKEN);
         call.enqueue(new Callback<BaseResponse>() {
 
             @Override

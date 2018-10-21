@@ -22,7 +22,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -473,7 +472,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void infoSent(String text, int type) {
-        Log.i("sina","setText: "+text);
         switch (type) {
             case R.string.full_name:
                 tvName.setText(text);
@@ -492,10 +490,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 }
                 tvCategory.setText(getCategoriesName(categories));
                 break;
-            case R.string.choose_your_profile_image:
-                Glide.with(this).load(text).into(ivImage);
-                break;
         }
+    }
+
+    @Override
+    public void imageSent(String path) {
+        Glide.with(this).load(path).into(ivImage);
     }
 
     // ********************************************************************************
@@ -557,8 +557,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                Glide.with(this).load(result.getUri().getPath()).into(ivImage);
-                iaPresenter.sendInfo(result.getUri().getPath(),R.string.choose_your_profile_image);
+                Uri resultUri = result.getUri();
+                iaPresenter.sendImage(new File(resultUri.getPath()));
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

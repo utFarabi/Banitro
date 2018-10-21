@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.main;
+package com.sm.banitro.ui.main.network;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

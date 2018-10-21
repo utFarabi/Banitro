@@ -1,6 +1,7 @@
 package com.sm.banitro.ui.main;
 
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +29,9 @@ import com.sm.banitro.ui.home.profile.ProfileFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
+import com.sm.banitro.ui.main.network.NetworkDialogFragment;
+import com.sm.banitro.ui.main.network.NetworkReceiver;
+import com.sm.banitro.ui.main.notification.NotificationService;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
 import com.sm.banitro.util.FunctionUtil;
@@ -120,6 +124,15 @@ public class MainActivity extends AppCompatActivity
         } else {
             setValueToBottomNavigation();
         }
+
+
+        startNotificationService();
+
+    }
+
+    private void startNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        startService(intent);
     }
 
     // ********************************************************************************

@@ -2,6 +2,8 @@ package com.sm.banitro.ui.home.profile;
 
 import com.sm.banitro.data.model.seller.Seller;
 
+import java.io.File;
+
 public interface ProfileContract {
 
     interface View {
@@ -15,6 +17,8 @@ public interface ProfileContract {
         void showErrorMessage(String message);
 
         void infoSent(String text, int type);
+
+        void imageSent(String path);
     }
 
     interface Presenter {
@@ -22,5 +26,7 @@ public interface ProfileContract {
         void loadData();
 
         void sendInfo(String text, int type);
+
+        void sendImage(File file);
     }
 }

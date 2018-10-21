@@ -8,6 +8,12 @@ import com.sm.banitro.data.model.seller.Seller;
 import com.sm.banitro.data.source.remote.ApiResult;
 import com.sm.banitro.data.source.remote.Repository;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 public class ProfilePresenter implements ProfileContract.Presenter {
 
     // ********************************************************************************
@@ -57,6 +63,30 @@ public class ProfilePresenter implements ProfileContract.Presenter {
                 iaView.hideProgress();
                 if (result.isResult()) {
                     iaView.infoSent(text, type);
+                }
+            }
+
+            @Override
+            public void onFail(String errorMessage) {
+                iaView.hideProgress();
+                iaView.showErrorMessage(errorMessage);
+            }
+        });
+    }
+
+    @Override
+    public void sendImage(final File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
+
+        iaView.showProgress();
+        repository.sendImage(body,new ApiResult<BaseResponse>() {
+
+            @Override
+            public void onSuccess(BaseResponse result) {
+                iaView.hideProgress();
+                if (result.isResult()) {
+                    iaView.imageSent(file.getPath());
                 }
             }
 

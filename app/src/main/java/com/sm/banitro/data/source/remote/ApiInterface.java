@@ -7,12 +7,16 @@ import com.sm.banitro.data.model.seller.Seller;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -29,6 +33,10 @@ public interface ApiInterface {
     Call<BaseResponse> getProductForDelete(@Path("reply_id") String productId,
                                            @Path("seller_id") String sellerId,
                                            @Header("Authorization") String token);
+
+    @GET("notif/{seller_id}")
+    Call<ArrayList<Product>> getProductsForNotif(@Path("seller_id") String sellerId,
+                                                 @Header("Authorization") String token);
 
     // ********************************************************************************
     // Reply
@@ -54,10 +62,10 @@ public interface ApiInterface {
     Call<Seller> getSeller(@Path("seller_id") String sellerId,
                            @Header("Authorization") String token);
 
+    @Multipart
     @POST("user/edit")
-    @FormUrlEncoded
-    Call<BaseResponse> postProfileImage(@Field("id") String sellerId,
-                                        @Field("user_pic") String image,
+    Call<BaseResponse> postProfileImage(@Part("id") RequestBody sellerId,
+                                        @Part MultipartBody.Part image,
                                         @Header("Authorization") String token);
 
     @POST("user/edit")
