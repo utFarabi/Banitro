@@ -84,18 +84,18 @@
             app:layout_constraintGuide_percent="0.1" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/dialog_fragment_login_gl_x3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
-
-        <android.support.constraint.Guideline
             android:id="@+id/dialog_fragment_login_gl_x5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/dialog_fragment_login_gl_x7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
 
         <android.support.constraint.Guideline
             android:id="@+id/dialog_fragment_login_gl_x9"
@@ -183,14 +183,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@null"
-            android:gravity="bottom|right"
+            android:gravity="bottom|left"
             android:text="@string/send"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_15"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y95"
-            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x3"
-            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x1"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x9"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x7"
             app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y85" />
 
         <Button
@@ -198,14 +198,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@null"
-            android:gravity="bottom|right"
+            android:gravity="bottom|left"
             android:text="@string/cancel"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_15"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/dialog_fragment_login_gl_y95"
-            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x5"
-            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x3"
+            app:layout_constraintLeft_toLeftOf="@id/dialog_fragment_login_gl_x7"
+            app:layout_constraintRight_toRightOf="@id/dialog_fragment_login_gl_x5"
             app:layout_constraintTop_toTopOf="@id/dialog_fragment_login_gl_y85" />
 
     </android.support.constraint.ConstraintLayout>

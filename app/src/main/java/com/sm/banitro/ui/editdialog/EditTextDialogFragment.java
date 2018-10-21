@@ -112,7 +112,8 @@ public class EditTextDialogFragment extends DialogFragment {
             case R.string.password:
                 tvTitle.setText(R.string.password);
                 tvDescription.setText(R.string.password_description);
-                etInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                etInput.setInputType(InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 etInput.setHint(R.string.password_hint);
                 break;
         }
