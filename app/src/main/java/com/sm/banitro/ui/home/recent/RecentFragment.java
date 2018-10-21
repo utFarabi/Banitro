@@ -164,6 +164,10 @@ public class RecentFragment extends Fragment
         iaPresenter.deleteProduct(product);
     }
 
+    public void changeReplyImage(Product product) {
+        recentAdapter.changeReplyImage(product);
+    }
+
     // ********************************************************************************
     // Supplementary Override
 

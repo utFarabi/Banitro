@@ -28,6 +28,9 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
     private ArrayList<Product> products;
     private DiffUtil.DiffResult diffResult;
 
+    // Data Type
+    private int productPosition;
+
     // ********************************************************************************
     // Constructor
 
@@ -78,6 +81,10 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         products.remove(product);
     }
 
+    public void changeReplyImage(Product product) {
+        notifyItemChanged(productPosition, product);
+    }
+
     // ********************************************************************************
     // Inner Class
 
@@ -95,6 +102,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    productPosition = getAdapterPosition();
                     interaction.setProductFromAdapterToRecentFragment(products.get(getAdapterPosition()));
                 }
             });

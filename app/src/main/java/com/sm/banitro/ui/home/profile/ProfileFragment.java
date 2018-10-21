@@ -460,7 +460,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         tvPhoneNumber.setText(seller.getPhonenumber());
         tvAddress.setText(seller.getAddress());
         tvCategory.setText(getCategoriesName(seller.getCategory()));
-        if (!seller.getImage().equals(IMAGE_DEFAULT)) {
+        if (seller.getImage() != null && !seller.getImage().equals(IMAGE_DEFAULT)) {
             Glide.with(this).load(seller.getImage()).into(ivImage);
         }
     }

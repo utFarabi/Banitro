@@ -136,10 +136,12 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
 
     @Override
     public void replySent(String price, String description) {
+        product.setReplied(true);
         product.setReplyPrice(price);
         product.setReplyDc(description);
         btnSendPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
                 + "   :" + getString(R.string.suggested_price));
+        interaction.setProductToFragmentForChangeReplyImage(product);
     }
 
     @Override
@@ -179,5 +181,7 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
     public interface Interaction {
 
         void goToReplyDialogFragment(Product product);
+
+        void setProductToFragmentForChangeReplyImage(Product product);
     }
 }

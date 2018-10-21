@@ -403,6 +403,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void setProductToFragmentForChangeReplyImage(Product product) {
+        recentFragment.changeReplyImage(product);
+    }
+
+    @Override
     public void setPriceToRecentDetailFragment(String price, String description) {
         recentDetailFragment.sendReply(price, description);
     }
