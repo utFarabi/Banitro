@@ -155,17 +155,23 @@ public class MainActivity extends AppCompatActivity
                             case R.id.bottom_navigation_profile:
                                 title.setText(R.string.profile);
                                 logo.setImageResource(R.drawable.baseline_person_white_24);
-                                goToProfileFragment();
+                                if (!networkDialogIsShowing) {
+                                    goToProfileFragment();
+                                }
                                 break;
                             case R.id.bottom_navigation_recent:
                                 title.setText(R.string.recent);
                                 logo.setImageResource(R.drawable.baseline_mail_white_24);
-                                goToRecentFragment();
+                                if (!networkDialogIsShowing) {
+                                    goToRecentFragment();
+                                }
                                 break;
                             case R.id.bottom_navigation_incoming:
                                 title.setText(R.string.incoming);
                                 logo.setImageResource(R.drawable.baseline_drafts_white_24);
-                                goToIncomingFragment();
+                                if (!networkDialogIsShowing) {
+                                    goToIncomingFragment();
+                                }
                                 break;
                         }
                         return true;
@@ -191,9 +197,26 @@ public class MainActivity extends AppCompatActivity
                         .hide(firstPageFragment)
                         .commit();
             } else {
-                fragmentManager.beginTransaction()
-                        .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
-                        .commit();
+                if (profileFragment == null && incomingFragment != null) {
+                    fragmentManager.beginTransaction()
+                            .hide(incomingFragment)
+                            .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                            .commit();
+                } else if (profileFragment != null && incomingFragment == null) {
+                    fragmentManager.beginTransaction()
+                            .hide(profileFragment)
+                            .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                            .commit();
+                } else if (profileFragment != null && incomingFragment != null) {
+                    fragmentManager.beginTransaction()
+                            .hide(profileFragment).hide(incomingFragment)
+                            .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                            .commit();
+                } else {
+                    fragmentManager.beginTransaction()
+                            .add(R.id.home_page_layout, recentFragment, RecentFragment.class.getName())
+                            .commit();
+                }
             }
         } else {
             if (profileFragment == null && incomingFragment != null) {
@@ -212,16 +235,24 @@ public class MainActivity extends AppCompatActivity
     private void goToIncomingFragment() {
         if (incomingFragment == null) {
             incomingFragment = IncomingFragment.newInstance();
-            if (profileFragment == null) {
+            if (recentFragment == null && profileFragment != null) {
                 fragmentManager.beginTransaction()
+                        .hide(profileFragment)
                         .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
+                        .commit();
+            } else if (recentFragment != null && profileFragment == null) {
+                fragmentManager.beginTransaction()
                         .hide(recentFragment)
+                        .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
+                        .commit();
+            } else if (recentFragment != null && profileFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(recentFragment).hide(profileFragment)
+                        .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
                         .commit();
             } else {
                 fragmentManager.beginTransaction()
                         .add(R.id.home_page_layout, incomingFragment, IncomingFragment.class.getName())
-                        .hide(recentFragment)
-                        .hide(profileFragment)
                         .commit();
             }
         } else {
@@ -241,16 +272,24 @@ public class MainActivity extends AppCompatActivity
     private void goToProfileFragment() {
         if (profileFragment == null) {
             profileFragment = ProfileFragment.newInstance();
-            if (incomingFragment == null) {
+            if (recentFragment == null && incomingFragment != null) {
                 fragmentManager.beginTransaction()
+                        .hide(incomingFragment)
                         .add(R.id.home_page_layout, profileFragment, ProfileFragment.class.getName())
+                        .commit();
+            } else if (recentFragment != null && incomingFragment == null) {
+                fragmentManager.beginTransaction()
                         .hide(recentFragment)
+                        .add(R.id.home_page_layout, profileFragment, ProfileFragment.class.getName())
+                        .commit();
+            } else if (recentFragment != null && incomingFragment != null) {
+                fragmentManager.beginTransaction()
+                        .hide(recentFragment).hide(incomingFragment)
+                        .add(R.id.home_page_layout, profileFragment, ProfileFragment.class.getName())
                         .commit();
             } else {
                 fragmentManager.beginTransaction()
                         .add(R.id.home_page_layout, profileFragment, ProfileFragment.class.getName())
-                        .hide(recentFragment)
-                        .hide(incomingFragment)
                         .commit();
             }
         } else {
@@ -270,7 +309,6 @@ public class MainActivity extends AppCompatActivity
     public void goToNetworkDialogFragment() {
         networkDialogFragment = NetworkDialogFragment.newInstance();
         networkDialogFragment.show(fragmentManager.beginTransaction(), NetworkDialogFragment.class.getName());
-        networkDialogFragment.setCancelable(false);
         networkDialogIsShowing = true;
     }
 
@@ -392,7 +430,24 @@ public class MainActivity extends AppCompatActivity
         if (networkDialogIsShowing) {
             networkDialogFragment.dismiss();
             networkDialogIsShowing = false;
-            goToRecentFragment();
+
+            switch (bottomNavigation.getSelectedItemId()) {
+                case R.id.bottom_navigation_profile:
+                    title.setText(R.string.profile);
+                    logo.setImageResource(R.drawable.baseline_person_white_24);
+                    goToProfileFragment();
+                    break;
+                case R.id.bottom_navigation_recent:
+                    title.setText(R.string.recent);
+                    logo.setImageResource(R.drawable.baseline_mail_white_24);
+                    goToRecentFragment();
+                    break;
+                case R.id.bottom_navigation_incoming:
+                    title.setText(R.string.incoming);
+                    logo.setImageResource(R.drawable.baseline_drafts_white_24);
+                    goToIncomingFragment();
+                    break;
+            }
         }
     }
 

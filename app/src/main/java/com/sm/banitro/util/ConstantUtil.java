@@ -12,6 +12,11 @@ public class ConstantUtil {
     public static final String BASE_URL = "https://banitro.com/wp-json/";
 
     // ********************************************************************************
+    // Token
+
+    public static final String TOKEN = "A126A568752A439A678C3BB4438B6C8DD79360AE3FCF555A418452E4436C986B";
+
+    // ********************************************************************************
     // Product Condition
 
     public static final String CONDITION_RECENT = "0";
@@ -21,8 +26,8 @@ public class ConstantUtil {
     // ********************************************************************************
     // Dialog Call Status
 
-    public static final int EDIT_DIALOG=1;
-    public static final int REGISTER_DIALOG=2;
+    public static final int EDIT_DIALOG = 1;
+    public static final int REGISTER_DIALOG = 2;
 
     // ********************************************************************************
     // Category

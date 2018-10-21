@@ -53,8 +53,11 @@ public class NetworkDialogFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getDialog().setCanceledOnTouchOutside(false);
+
         // Init Instance
         unbinder = ButterKnife.bind(this, view);
+
     }
 
     // ********************************************************************************
