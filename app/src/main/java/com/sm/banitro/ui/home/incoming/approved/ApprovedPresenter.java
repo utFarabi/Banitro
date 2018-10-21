@@ -23,7 +23,7 @@ public class ApprovedPresenter implements ApprovedContract.Presenter {
 
     public ApprovedPresenter(ApprovedContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = Repository.getINSTANCE(context)
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

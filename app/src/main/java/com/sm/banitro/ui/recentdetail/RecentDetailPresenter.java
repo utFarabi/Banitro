@@ -21,7 +21,7 @@ public class RecentDetailPresenter implements RecentDetailContract.Presenter {
 
     public RecentDetailPresenter(RecentDetailContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = Repository.getINSTANCE(context)
+        repository = Repository.getINSTANCE(context);
     }
 
     // ********************************************************************************

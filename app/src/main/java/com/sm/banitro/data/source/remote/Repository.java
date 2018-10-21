@@ -24,7 +24,7 @@ public class Repository {
     // Instance
     private ApiInterface apiInterface;
     private AppPreferences pref;
-    private synchronized static Repository INSTANCE;
+    private static Repository INSTANCE;
     // ********************************************************************************
     // Constructor
 

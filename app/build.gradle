@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.sm.banitro"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -41,8 +41,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     // Butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -51,17 +50,7 @@ dependencies {
     // Crop Image
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
 
-    implementation "com.google.firebase:firebase-core:11.0.2"
-    implementation "com.google.firebase:firebase-messaging:11.0.2"
-
-
-    implementation 'co.ronash.android:pushe-base:1.4.1'
-    implementation 'com.google.android.gms:play-services-gcm:11.0.2'
-    implementation 'com.android.support:multidex:1.0.3'
-
-
     def work_version = "1.0.0-alpha10"
 
     implementation "android.arch.work:work-runtime:$work_version"
 }
-apply plugin: 'com.google.gms.google-services'
