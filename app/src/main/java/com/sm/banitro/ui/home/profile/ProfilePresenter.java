@@ -76,11 +76,9 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
     @Override
     public void sendImage(final File file) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("user_pic", file.getName(), requestBody);
 
         iaView.showProgress();
-        repository.sendImage(body,new ApiResult<BaseResponse>() {
+        repository.sendImage(file,new ApiResult<BaseResponse>() {
 
             @Override
             public void onSuccess(BaseResponse result) {

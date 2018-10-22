@@ -11,6 +11,7 @@ import com.sm.banitro.data.model.seller.Seller;
 import com.sm.banitro.data.source.local.AppPreferences;
 import com.sm.banitro.util.ConstantUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -196,8 +197,12 @@ public class Repository {
         });
     }
 
-    public void sendImage(MultipartBody.Part image, final ApiResult<BaseResponse> callback) {
+    public void sendImage(File file, final ApiResult<BaseResponse> callback) {
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("user_pic", file.getName(), requestBody);
         RequestBody sellerId = RequestBody.create(MediaType.parse("text/plain"), pref.getSellerId());
+
         Call<BaseResponse> call = apiInterface.postProfileImage(sellerId, image, ConstantUtil.TOKEN);
         call.enqueue(new Callback<BaseResponse>() {
 
