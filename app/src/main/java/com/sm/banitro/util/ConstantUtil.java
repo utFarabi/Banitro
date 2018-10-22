@@ -42,4 +42,9 @@ public class ConstantUtil {
     public static final String CATEGORY_24 = "24";
     public static final String CATEGORY_26 = "26";
     public static final String CATEGORY_28 = "28";
+
+    //************************************************************************************
+    // Actions
+
+    public static final String ACTION_START_SERVICE = "ACTION_START_SERVICE";
 }

@@ -34,6 +34,7 @@ import com.sm.banitro.ui.main.network.NetworkReceiver;
 import com.sm.banitro.ui.main.notification.NotificationService;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
+import com.sm.banitro.util.ConstantUtil;
 import com.sm.banitro.util.FunctionUtil;
 import com.sm.banitro.util.VersionUtil;
 
@@ -125,13 +126,13 @@ public class MainActivity extends AppCompatActivity
             setValueToBottomNavigation();
         }
 
-
         startNotificationService();
 
     }
 
     private void startNotificationService() {
-        Intent intent = new Intent(this, NotificationService.class);
+        Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+        intent.setAction(ConstantUtil.ACTION_START_SERVICE);
         startService(intent);
     }
 
@@ -443,7 +444,7 @@ public class MainActivity extends AppCompatActivity
         if (networkDialogIsShowing) {
             networkDialogFragment.dismiss();
             networkDialogIsShowing = false;
-
+            startNotificationService();
             switch (bottomNavigation.getSelectedItemId()) {
                 case R.id.bottom_navigation_profile:
                     title.setText(R.string.profile);
