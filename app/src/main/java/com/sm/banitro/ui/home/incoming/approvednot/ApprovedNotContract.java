@@ -19,6 +19,6 @@ public interface ApprovedNotContract {
 
     interface Presenter {
 
-        void loadData();
+        void loadData(int offset);
     }
 }

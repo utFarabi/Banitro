@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.main;
+package com.sm.banitro.ui.main.logout;
 
 import android.content.Context;
 import android.os.Bundle;

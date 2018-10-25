@@ -23,16 +23,16 @@ public class ApprovedPresenter implements ApprovedContract.Presenter {
 
     public ApprovedPresenter(ApprovedContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = Repository.getINSTANCE(context);
+        repository = Repository.newInstance(context);
     }
 
     // ********************************************************************************
     // Implement
 
     @Override
-    public void loadData() {
+    public void loadData(int offset) {
         iaView.showProgress();
-        repository.loadProducts(ConstantUtil.CONDITION_APPROVED,
+        repository.loadProducts(ConstantUtil.CONDITION_APPROVED, offset,
                 new ApiResult<ArrayList<Product>>() {
 
                     @Override

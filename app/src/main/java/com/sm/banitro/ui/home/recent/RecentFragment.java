@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
-import com.sm.banitro.ui.main.PaginationScrollListener;
+import com.sm.banitro.ui.main.list.PaginationScrollListener;
 import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class RecentFragment extends Fragment
         rvRecent.setLayoutManager(layoutManager);
         rvRecent.setAdapter(recentAdapter);
 
-        iaPresenter.loadData();
+        iaPresenter.loadData(recentAdapter.getItemCount());
 
         rvRecent.addOnScrollListener(new PaginationScrollListener(layoutManager) {
 
@@ -102,7 +102,7 @@ public class RecentFragment extends Fragment
             protected void loadMoreItems() {
                 if (FunctionUtil.isConnecting(getContext())) {
                     isLoading = true;
-                    iaPresenter.loadData();
+                    iaPresenter.loadData(recentAdapter.getItemCount());
                 }
             }
 
@@ -129,7 +129,9 @@ public class RecentFragment extends Fragment
     @Override
     public void showProducts(ArrayList<Product> products) {
         if (products == null || products.size() == 0) {
-            tvNotFound.setVisibility(View.VISIBLE);
+            if (recentAdapter.getItemCount() == 0) {
+                tvNotFound.setVisibility(View.VISIBLE);
+            }
         } else {
             recentAdapter.setProducts(products);
         }

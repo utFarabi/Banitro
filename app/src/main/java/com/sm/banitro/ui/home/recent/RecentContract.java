@@ -21,7 +21,7 @@ public interface RecentContract {
 
     interface Presenter {
 
-        void loadData();
+        void loadData(int offset);
 
         void deleteProduct(Product product);
     }

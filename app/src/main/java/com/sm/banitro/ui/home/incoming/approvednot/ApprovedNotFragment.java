@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.ui.home.incoming.IncomingAdapter;
-import com.sm.banitro.ui.main.PaginationScrollListener;
+import com.sm.banitro.ui.main.list.PaginationScrollListener;
 import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
         rvApprovedNot.setLayoutManager(layoutManager);
         rvApprovedNot.setAdapter(incomingAdapter);
 
-        iaPresenter.loadData();
+        iaPresenter.loadData(incomingAdapter.getItemCount());
 
         rvApprovedNot.addOnScrollListener(new PaginationScrollListener(layoutManager) {
 
@@ -102,7 +102,7 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
             protected void loadMoreItems() {
                 if (FunctionUtil.isConnecting(getContext())) {
                     isLoading = true;
-                    iaPresenter.loadData();
+                    iaPresenter.loadData(incomingAdapter.getItemCount());
                 }
             }
 
@@ -129,7 +129,9 @@ public class ApprovedNotFragment extends Fragment implements ApprovedNotContract
     @Override
     public void showProducts(ArrayList<Product> products) {
         if (products == null || products.size() == 0) {
-            tvNotFound.setVisibility(View.VISIBLE);
+            if (incomingAdapter.getItemCount() == 0) {
+                tvNotFound.setVisibility(View.VISIBLE);
+            }
         } else {
             incomingAdapter.setProducts(products);
         }

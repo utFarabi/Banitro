@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
-import com.sm.banitro.ui.main.ProductDiffUtil;
+import com.sm.banitro.ui.main.list.ProductDiffUtil;
 import com.sm.banitro.util.FunctionUtil;
 
 import java.util.ArrayList;

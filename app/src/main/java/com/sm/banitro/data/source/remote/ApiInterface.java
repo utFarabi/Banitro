@@ -18,6 +18,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -27,6 +28,8 @@ public interface ApiInterface {
     @GET("seller/{seller_id}/{position}")
     Call<ArrayList<Product>> getProducts(@Path("seller_id") String sellerId,
                                          @Path("position") String condition,
+                                         @Query("offset") int offset,
+                                         @Query("limit") int limit,
                                          @Header("Authorization") String token);
 
     @GET("delete/{reply_id}/{seller_id}")

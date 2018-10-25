@@ -29,11 +29,13 @@ import com.sm.banitro.ui.home.profile.ProfileFragment;
 import com.sm.banitro.ui.home.recent.DeleteDialogFragment;
 import com.sm.banitro.ui.home.recent.RecentFragment;
 import com.sm.banitro.ui.incomingdetail.IncomingDetailFragment;
+import com.sm.banitro.ui.main.logout.LogoutDialogFragment;
 import com.sm.banitro.ui.main.network.NetworkDialogFragment;
 import com.sm.banitro.ui.main.network.NetworkReceiver;
 import com.sm.banitro.ui.main.notification.NotificationService;
 import com.sm.banitro.ui.recentdetail.RecentDetailFragment;
 import com.sm.banitro.ui.recentdetail.ReplyDialogFragment;
+import com.sm.banitro.util.ConstantUtil;
 import com.sm.banitro.util.FunctionUtil;
 import com.sm.banitro.util.VersionUtil;
 
@@ -125,14 +127,7 @@ public class MainActivity extends AppCompatActivity
             setValueToBottomNavigation();
         }
 
-
         startNotificationService();
-
-    }
-
-    private void startNotificationService() {
-        Intent intent = new Intent(this, NotificationService.class);
-        startService(intent);
     }
 
     // ********************************************************************************
@@ -146,6 +141,12 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void startNotificationService() {
+        Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+        intent.setAction(ConstantUtil.ACTION_START_SERVICE);
+        startService(intent);
     }
 
     private void setValueToBottomNavigation() {
@@ -353,6 +354,7 @@ public class MainActivity extends AppCompatActivity
     public void goToRecentDetailFragment(Product product) {
         recentDetailFragment = RecentDetailFragment.newInstance(product);
         fragmentManager.beginTransaction()
+
                 .add(R.id.base_layout, recentDetailFragment, RecentDetailFragment.class.getName())
                 .hide(recentFragment)
                 .addToBackStack(RecentDetailFragment.class.getName())
@@ -448,7 +450,6 @@ public class MainActivity extends AppCompatActivity
         if (networkDialogIsShowing) {
             networkDialogFragment.dismiss();
             networkDialogIsShowing = false;
-
             switch (bottomNavigation.getSelectedItemId()) {
                 case R.id.bottom_navigation_profile:
                     title.setText(R.string.profile);
@@ -520,6 +521,7 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        pref = null;
         fragmentManager = null;
         recentFragment = null;
         incomingFragment = null;
@@ -527,6 +529,9 @@ public class MainActivity extends AppCompatActivity
         recentDetailFragment = null;
         incomingDetailFragment = null;
         networkDialogFragment = null;
+        loginDialogFragment = null;
+        firstPageFragment = null;
+        registerFragment = null;
         networkReceiver = null;
         unbinder.unbind();
         super.onDestroy();

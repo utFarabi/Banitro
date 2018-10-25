@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.main;
+package com.sm.banitro.ui.main.list;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

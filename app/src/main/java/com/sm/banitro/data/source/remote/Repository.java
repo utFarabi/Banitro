@@ -29,7 +29,8 @@ public class Repository {
     // Instance
     private ApiInterface apiInterface;
     private AppPreferences pref;
-    private static Repository INSTANCE;
+    private static Repository repository;
+
     // ********************************************************************************
     // Constructor
 
@@ -38,19 +39,22 @@ public class Repository {
         pref = new AppPreferences(context);
     }
 
-    public static Repository getINSTANCE(Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = new Repository(context);
+    // ********************************************************************************
+    // New Instance
+
+    public static Repository newInstance(Context context) {
+        if (repository == null) {
+            repository = new Repository(context);
         }
-        return INSTANCE;
+        return repository;
     }
 
 
     // ********************************************************************************
     // Method
 
-    public void loadProducts(String condition, final ApiResult<ArrayList<Product>> callback) {
-        Call<ArrayList<Product>> call = apiInterface.getProducts(pref.getSellerId(), condition, ConstantUtil.TOKEN);
+    public void loadProducts(String condition, int offset, final ApiResult<ArrayList<Product>> callback) {
+        Call<ArrayList<Product>> call = apiInterface.getProducts(pref.getSellerId(), condition, offset, ConstantUtil.LIMIT, ConstantUtil.TOKEN);
         call.enqueue(new Callback<ArrayList<Product>>() {
 
             @Override

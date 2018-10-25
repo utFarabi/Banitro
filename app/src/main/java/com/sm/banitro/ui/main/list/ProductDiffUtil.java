@@ -1,4 +1,4 @@
-package com.sm.banitro.ui.main;
+package com.sm.banitro.ui.main.list;
 
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;

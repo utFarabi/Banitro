@@ -9,7 +9,7 @@ public class ConstantUtil {
     // ********************************************************************************
     // Base Url
 
-    public static final String BASE_URL = "https://banitro.com/wp-json/";
+    public static final String BASE_URL = "https://banitro.com/api/";
 
     // ********************************************************************************
     // Token
@@ -17,11 +17,21 @@ public class ConstantUtil {
     public static final String TOKEN = "A126A568752A439A678C3BB4438B6C8DD79360AE3FCF555A418452E4436C986B";
 
     // ********************************************************************************
+    // Limit
+
+    public static final int LIMIT = 10;
+
+    // ********************************************************************************
     // Product Condition
 
     public static final String CONDITION_RECENT = "0";
     public static final String CONDITION_APPROVED_NOT = "2";
     public static final String CONDITION_APPROVED = "1";
+
+    //************************************************************************************
+    // Action
+
+    public static final String ACTION_START_SERVICE = "ACTION_START_SERVICE";
 
     // ********************************************************************************
     // Dialog Call Status

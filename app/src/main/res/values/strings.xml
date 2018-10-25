@@ -59,4 +59,5 @@
     <string name="logout">خروج</string>
     <string name="logout_title">خروج از حساب کاربری</string>
     <string name="logout_description">مطمئن به خروج از حسابتان هستید؟</string>
+    <string name="new_product">محصول جدید</string>
 </resources>

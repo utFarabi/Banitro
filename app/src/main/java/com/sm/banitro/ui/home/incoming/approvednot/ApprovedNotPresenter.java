@@ -23,16 +23,16 @@ public class ApprovedNotPresenter implements ApprovedNotContract.Presenter {
 
     public ApprovedNotPresenter(ApprovedNotContract.View iaView, Context context) {
         this.iaView = iaView;
-        repository = Repository.getINSTANCE(context);
+        repository = Repository.newInstance(context);
     }
 
     // ********************************************************************************
     // Implement
 
     @Override
-    public void loadData() {
+    public void loadData(int offset) {
         iaView.showProgress();
-        repository.loadProducts(ConstantUtil.CONDITION_APPROVED_NOT,
+        repository.loadProducts(ConstantUtil.CONDITION_APPROVED_NOT, offset,
                 new ApiResult<ArrayList<Product>>() {
 
                     @Override
