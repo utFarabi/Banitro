@@ -60,4 +60,8 @@
     <string name="logout_title">خروج از حساب کاربری</string>
     <string name="logout_description">مطمئن به خروج از حسابتان هستید؟</string>
     <string name="new_product">محصول جدید</string>
+    <string name="product_model">مدل خودرو</string>
+    <string name="product_year">سال ساخت</string>
+    <string name="product_description">توضیح تکمیلی</string>
+    <string name="product_chassis">شماره شاسی خودروی وارداتی</string>
 </resources>

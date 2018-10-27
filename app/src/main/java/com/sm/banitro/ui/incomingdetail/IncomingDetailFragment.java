@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
 import com.sm.banitro.util.ConstantUtil;
@@ -30,6 +31,7 @@ public class IncomingDetailFragment extends Fragment {
 
     // Data Type
     private static final String KEY_PRODUCT = "product";
+    private final String IMAGE_DEFAULT = "NULL";
 
     // View
     @BindView(R.id.fragment_incoming_detail_iv_picture)
@@ -38,12 +40,20 @@ public class IncomingDetailFragment extends Fragment {
     TextView tvName;
     @BindView(R.id.fragment_incoming_detail_tv_category)
     TextView tvCategory;
+    @BindView(R.id.fragment_incoming_detail_tv_model)
+    TextView tvModel;
+    @BindView(R.id.fragment_incoming_detail_tv_year)
+    TextView tvYear;
     @BindView(R.id.fragment_incoming_detail_tv_number)
     TextView tvNumber;
+    @BindView(R.id.fragment_incoming_detail_tv_description)
+    TextView tvDescription;
     @BindView(R.id.fragment_incoming_detail_tv_price)
     TextView tvPrice;
     @BindView(R.id.fragment_incoming_detail_tv_condition)
     TextView tvCondition;
+    @BindView(R.id.fragment_incoming_detail_tv_chassis)
+    TextView tvChassis;
 
     // ********************************************************************************
     // New Instance
@@ -83,14 +93,33 @@ public class IncomingDetailFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
+        if (product.getProPicture() != null && !product.getProPicture().equals(IMAGE_DEFAULT)) {
+            Glide.with(this).load(product.getProPicture()).into(ivPicture);
+        }
         tvName.setText(product.getProName());
         tvCategory.setText(FunctionUtil.getCategoryName(product.getProCat()));
+        tvModel.setText(product.getCarCo() + "  " + product.getCarMo());
+        tvYear.setText(product.getCarYear());
         tvNumber.setText(String.valueOf(product.getProNumber()));
-        tvPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
+        if (product.getProductDc() != null) {
+            tvDescription.setText(product.getProductDc());
+        } else {
+            tvDescription.setText("—");
+        }
+        if (product.getReplyPrice()!=null) {
+            tvPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
+        }else {
+            tvPrice.setText("—");
+        }
         if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED)) {
             tvCondition.setText(R.string.approved);
         } else if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED_NOT)) {
             tvCondition.setText(R.string.approved_not);
+        }
+        if (product.getCarSpid()!=null){
+            tvChassis.setText(product.getCarSpid());
+        }else {
+            tvChassis.setText("—");
         }
     }
 

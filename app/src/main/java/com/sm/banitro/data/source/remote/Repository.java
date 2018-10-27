@@ -233,8 +233,6 @@ public class Repository {
 
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
-                        " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
                 } else {
@@ -244,25 +242,20 @@ public class Repository {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                Log.i("sina", "onFailure");
                 callback.onFail(t.getMessage());
             }
         });
     }
 
     public void sendLoginInfo(String username, String password, final ApiResult<RegisterResponse> callback) {
-        Log.i("sina", "username: " + username + "     password: " + password);
         Call<RegisterResponse> call = apiInterface.postLoginInfo(username, password, ConstantUtil.TOKEN);
         call.enqueue(new Callback<RegisterResponse>() {
 
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                Log.d("sina", "onSuccess: <<<<    fetchListOfCategories    >>>> with :" +
-                        " success code = [" + response + "]" + ", message = [" + response.message() + "]");
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
                 } else {
-                    Log.i("sina", "onFailure");
                     callback.onFail(response.message());
                 }
             }

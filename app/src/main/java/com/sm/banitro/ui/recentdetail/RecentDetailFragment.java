@@ -35,8 +35,9 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
     private Product product;
     private Unbinder unbinder;
 
-    // Seller Type
+    // Data Type
     private static final String KEY_PRODUCT = "product";
+    private final String IMAGE_DEFAULT = "NULL";
 
     // View
     @BindView(R.id.fragment_recent_detail_iv_picture)
@@ -45,8 +46,16 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
     TextView tvName;
     @BindView(R.id.fragment_recent_detail_tv_category)
     TextView tvCategory;
+    @BindView(R.id.fragment_recent_detail_tv_model)
+    TextView tvModel;
+    @BindView(R.id.fragment_recent_detail_tv_year)
+    TextView tvYear;
     @BindView(R.id.fragment_recent_detail_tv_number)
     TextView tvNumber;
+    @BindView(R.id.fragment_recent_detail_tv_description)
+    TextView tvDescription;
+    @BindView(R.id.fragment_recent_detail_tv_chassis)
+    TextView tvChassis;
     @BindView(R.id.fragment_recent_detail_btn_submit_price)
     Button btnSendPrice;
     @BindView(R.id.fragment_recent_detail_pb_progress)
@@ -97,16 +106,27 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
         unbinder = ButterKnife.bind(this, view);
 
         // Init View
+        if (product.getProPicture() != null && !product.getProPicture().equals(IMAGE_DEFAULT)) {
+            Glide.with(this).load(product.getProPicture()).into(ivPicture);
+        }
         tvName.setText(product.getProName());
         tvCategory.setText(FunctionUtil.getCategoryName(product.getProCat()));
+        tvModel.setText(product.getCarCo() + " " + product.getCarMo());
+        tvYear.setText(product.getCarYear());
         tvNumber.setText(String.valueOf(product.getProNumber()));
-        if (product.isReplied()) {
-            btnSendPrice.setText(
-                    FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
-                            + "   :" + getString(R.string.suggested_price));
+        if (product.getProductDc() != null) {
+            tvDescription.setText(product.getProductDc());
+        } else {
+            tvDescription.setText("—");
         }
-        if (product.getProPicture() != null && !product.getProPicture().isEmpty()) {
-            Glide.with(this).load(product.getProPicture()).into(ivPicture);
+        if (product.getCarSpid()!=null){
+            tvChassis.setText(product.getCarSpid());
+        }else {
+            tvChassis.setText("—");
+        }
+        if (product.isReplied()) {
+            btnSendPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)
+                    + "   :" + getString(R.string.suggested_price));
         }
     }
 
@@ -136,7 +156,7 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
 
     @Override
     public void replySent(String price, String description) {
-        product.setReplied(true);
+        product.setIsReplied(true);
         product.setReplyPrice(price);
         product.setReplyDc(description);
         btnSendPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false)

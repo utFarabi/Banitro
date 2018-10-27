@@ -1,5 +1,6 @@
 package com.sm.banitro.ui.main.notification;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
@@ -33,7 +35,7 @@ public class NotificationService extends Service {
 
     // Data Type
     private static final String CHANNEL_ID = "CHANNEL_ID";
-    private static final int KEY_PERIOD = 1800000; // half of hour
+    private static final int KEY_PERIOD = 300000; // 5 min
     public static boolean isServiceRunning = false;
 
     // ********************************************************************************
@@ -80,6 +82,7 @@ public class NotificationService extends Service {
 
             @Override
             public void onSuccess(ArrayList<Product> result) {
+                Log.i("sina", "onSuccess: "+result.size());
                 if (result.size() > 0) {
                     for (Product pr : result) {
                         Intent notificationIntent = new Intent(getApplicationContext(), NotificationService.class);
@@ -94,6 +97,7 @@ public class NotificationService extends Service {
                                 .setContentText("نام:  " + pr.getProName())
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setContentIntent(pendingIntent)
+                                .setDefaults(Notification.DEFAULT_SOUND)
                                 .setAutoCancel(true);
 
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationService.this);

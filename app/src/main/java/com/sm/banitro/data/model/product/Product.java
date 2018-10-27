@@ -33,6 +33,9 @@ public class Product implements Parcelable {
     @SerializedName("pro_name")
     @Expose
     private String proName;
+    @SerializedName("product_dc")
+    @Expose
+    private String productDc;
     @SerializedName("pro_cat")
     @Expose
     private String proCat;
@@ -60,6 +63,9 @@ public class Product implements Parcelable {
     @SerializedName("reply_approved")
     @Expose
     private boolean replyApproved;
+    @SerializedName("notifcheck")
+    @Expose
+    private boolean notifcheck;
     @SerializedName("position")
     @Expose
     private String position;
@@ -73,6 +79,7 @@ public class Product implements Parcelable {
         carYear = in.readString();
         phoneNumber = in.readString();
         proName = in.readString();
+        productDc = in.readString();
         proCat = in.readString();
         proNumber = in.readString();
         proPicture = in.readString();
@@ -82,7 +89,37 @@ public class Product implements Parcelable {
         replyPrice = in.readString();
         replyDc = in.readString();
         replyApproved = in.readByte() != 0;
+        notifcheck = in.readByte() != 0;
         position = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(userName);
+        dest.writeString(carCo);
+        dest.writeString(carMo);
+        dest.writeString(carSpid);
+        dest.writeString(carYear);
+        dest.writeString(phoneNumber);
+        dest.writeString(proName);
+        dest.writeString(productDc);
+        dest.writeString(proCat);
+        dest.writeString(proNumber);
+        dest.writeString(proPicture);
+        dest.writeString(clientId);
+        dest.writeString(sellerId);
+        dest.writeByte((byte) (isReplied ? 1 : 0));
+        dest.writeString(replyPrice);
+        dest.writeString(replyDc);
+        dest.writeByte((byte) (replyApproved ? 1 : 0));
+        dest.writeByte((byte) (notifcheck ? 1 : 0));
+        dest.writeString(position);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -161,6 +198,14 @@ public class Product implements Parcelable {
         this.proName = proName;
     }
 
+    public String getProductDc() {
+        return productDc;
+    }
+
+    public void setProductDc(String productDc) {
+        this.productDc = productDc;
+    }
+
     public String getProCat() {
         return proCat;
     }
@@ -205,8 +250,8 @@ public class Product implements Parcelable {
         return isReplied;
     }
 
-    public void setReplied(boolean replied) {
-        isReplied = replied;
+    public void setIsReplied(boolean isReplied) {
+        this.isReplied = isReplied;
     }
 
     public String getReplyPrice() {
@@ -233,39 +278,19 @@ public class Product implements Parcelable {
         this.replyApproved = replyApproved;
     }
 
+    public boolean isNotifcheck() {
+        return notifcheck;
+    }
+
+    public void setNotifcheck(boolean notifcheck) {
+        this.notifcheck = notifcheck;
+    }
+
     public String getPosition() {
         return position;
     }
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-        parcel.writeString(id);
-        parcel.writeString(userName);
-        parcel.writeString(carCo);
-        parcel.writeString(carMo);
-        parcel.writeString(carSpid);
-        parcel.writeString(carYear);
-        parcel.writeString(phoneNumber);
-        parcel.writeString(proName);
-        parcel.writeString(proCat);
-        parcel.writeString(proNumber);
-        parcel.writeString(proPicture);
-        parcel.writeString(clientId);
-        parcel.writeString(sellerId);
-        parcel.writeByte((byte) (isReplied ? 1 : 0));
-        parcel.writeString(replyPrice);
-        parcel.writeString(replyDc);
-        parcel.writeByte((byte) (replyApproved ? 1 : 0));
-        parcel.writeString(position);
     }
 }

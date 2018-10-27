@@ -69,6 +69,41 @@
                 app:layout_constraintGuide_begin="600dp" />
 
             <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y720"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="720dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y800"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="800dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y880"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="880dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y960"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="960dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/fragment_incoming_detail_gl_y1040"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="1040dp" />
+
+            <android.support.constraint.Guideline
                 android:id="@+id/fragment_incoming_detail_gl_x2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,7 +226,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_add_to_photos_black_36"
+                android:src="@drawable/outline_directions_car_white_36"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y440"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
@@ -203,15 +238,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
-                android:text="@string/product_number"
+                android:text="@string/product_model"
                 android:textSize="@dimen/text_size_12"
-                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_number"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_model"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
                 app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
                 app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y360" />
 
             <TextView
-                android:id="@+id/fragment_incoming_detail_tv_number"
+                android:id="@+id/fragment_incoming_detail_tv_model"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -236,7 +271,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_attach_money_white_36"
+                android:src="@drawable/outline_date_range_white_36"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y520"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
@@ -248,22 +283,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
-                android:text="@string/price_toman"
+                android:text="@string/product_year"
                 android:textSize="@dimen/text_size_12"
-                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_price"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_year"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
                 app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
                 app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y440" />
 
             <TextView
-                android:id="@+id/fragment_incoming_detail_tv_price"
+                android:id="@+id/fragment_incoming_detail_tv_year"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="right|center"
                 android:lines="1"
                 android:textColor="@android:color/black"
-                android:textDirection="ltr"
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y520"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
@@ -282,7 +316,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_done_all_white_36"
+                android:src="@drawable/outline_add_to_photos_black_36"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y600"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
@@ -294,15 +328,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
-                android:text="@string/condition_offer"
+                android:text="@string/product_number"
                 android:textSize="@dimen/text_size_12"
-                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_condition"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_number"
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
                 app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
                 app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y520" />
 
             <TextView
-                android:id="@+id/fragment_incoming_detail_tv_condition"
+                android:id="@+id/fragment_incoming_detail_tv_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -323,6 +357,191 @@
                 app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
                 app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
                 app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y600" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_assignment_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y720"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y600" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/product_description"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_description"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y600" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:maxLines="2"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y720"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help6" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y720"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y720" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_attach_money_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y800"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y720" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/price_toman"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_price"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y720" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y800"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help7" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y800"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y800" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_done_all_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y880"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y800" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/condition_offer"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_condition"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y800" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_condition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y880"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help8" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y880"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y880" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_more_vert_white_36"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y960"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y880" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_help9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="@string/product_chassis"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toTopOf="@id/fragment_incoming_detail_tv_chassis"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y880" />
+
+            <TextView
+                android:id="@+id/fragment_incoming_detail_tv_chassis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right|center"
+                android:maxLines="2"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y960"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toBottomOf="@id/fragment_incoming_detail_tv_help9" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_incoming_detail_gl_y960"
+                app:layout_constraintLeft_toLeftOf="@id/fragment_incoming_detail_gl_x95"
+                app:layout_constraintRight_toRightOf="@id/fragment_incoming_detail_gl_x25"
+                app:layout_constraintTop_toTopOf="@id/fragment_incoming_detail_gl_y960" />
 
         </android.support.constraint.ConstraintLayout>
 

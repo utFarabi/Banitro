@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
@@ -50,6 +51,7 @@
         </provider>
 
         <service android:name=".ui.main.notification.NotificationService" />
+
     </application>
 
 </manifest>
