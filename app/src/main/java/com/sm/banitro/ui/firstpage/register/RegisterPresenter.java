@@ -1,7 +1,6 @@
 package com.sm.banitro.ui.firstpage.register;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.sm.banitro.data.model.register.RegisterResponse;
 import com.sm.banitro.data.source.remote.ApiResult;
@@ -38,7 +37,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                         iaView.hideProgress();
                         if (result.isResult()) {
                             iaView.registerFinished(result.getMessage());
-                        }else {
+                        } else {
                             iaView.showErrorMessage("ثبت نام با موفقیت انجام نشد.");
                         }
                     }

@@ -7,6 +7,9 @@ import com.sm.banitro.R;
 
 public class FunctionUtil {
 
+    // ********************************************************************************
+    // Constructor
+
     private FunctionUtil() {
         // No Instance
     }

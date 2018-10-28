@@ -1,7 +1,6 @@
 package com.sm.banitro.data.source.remote;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.basic.BaseResponse;
@@ -48,7 +47,6 @@ public class Repository {
         }
         return repository;
     }
-
 
     // ********************************************************************************
     // Method

@@ -1,3 +1,4 @@
+// In the name of Allah
 package com.sm.banitro.ui.main;
 
 import android.app.ActivityManager;

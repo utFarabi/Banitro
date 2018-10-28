@@ -33,7 +33,7 @@
     <string name="address_hint">آدرس محل کار</string>
     <string name="full_name_hint">نام کامل</string>
     <string name="phone_hint">*********09</string>
-    <string name="password_hint">حداکثر 8 رقم</string>
+    <string name="password_hint">رمز عبور</string>
     <string name="choose_your_profile_image">تصویر پروفایل مورد نظر خود را انتخاب نمایید.</string>
     <string name="condition_offer">وضعیت پیشنهاد</string>
     <string name="short_description">توضیح مختصر</string>
@@ -59,7 +59,7 @@
     <string name="logout">خروج</string>
     <string name="logout_title">خروج از حساب کاربری</string>
     <string name="logout_description">مطمئن به خروج از حسابتان هستید؟</string>
-    <string name="new_product">محصول جدید</string>
+    <string name="new_product">درخواست قطعه جدید</string>
     <string name="product_model">مدل خودرو</string>
     <string name="product_year">سال ساخت</string>
     <string name="product_description">توضیح تکمیلی</string>

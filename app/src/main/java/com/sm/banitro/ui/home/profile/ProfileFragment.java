@@ -1,7 +1,6 @@
 package com.sm.banitro.ui.home.profile;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -13,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -264,14 +262,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         File storageDir =
                 getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-        return File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private String getRealPathFromURI(Context context, final Uri uri) {
 
         if (VersionUtil.isVersionCodesKitkatSupported() && DocumentsContract.isDocumentUri(context, uri)) {
@@ -303,23 +296,16 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[]{
-                        split[1]
-                };
+                final String[] selectionArgs = new String[]{split[1]};
 
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
-        }
-        // MediaStore (and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            // Return the remote address
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
 
             return getDataColumn(context, uri, null, null);
-        }
-        // File
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
         } else
             return getRealPathFromURIDB(context, uri);
@@ -340,8 +326,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         final String column = "_data";
         final String[] projection = {column};
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
-                    null);
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(index);
@@ -378,17 +363,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private File createImageTempFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        return File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                createRootDirectory()      /* directory */
-        );
+        return File.createTempFile(imageFileName, ".jpg", createRootDirectory());
     }
 
     private File createRootDirectory() {
         File mediaStorageDir = new File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                getString(R.string.app_name));
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getString(R.string.app_name));
 
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {

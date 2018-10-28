@@ -2,6 +2,9 @@ package com.sm.banitro.util;
 
 public class ConstantUtil {
 
+    // ********************************************************************************
+    // Constructor
+
     private ConstantUtil() {
         // No Instance
     }

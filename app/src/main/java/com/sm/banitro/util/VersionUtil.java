@@ -4,6 +4,9 @@ import android.os.Build;
 
 public class VersionUtil {
 
+    // ********************************************************************************
+    // Constructor
+
     private VersionUtil() {
         // No Instance
     }

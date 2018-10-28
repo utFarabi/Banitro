@@ -7,12 +7,15 @@ import android.support.v4.app.ActivityCompat;
 
 public class PermissionUtil {
 
+    // ********************************************************************************
+    // Constructor
+
     private PermissionUtil() {
         // No Instance
     }
 
     // ********************************************************************************
-    // Seller Type
+    // Data Type
 
     // Image
     public static final int IMAGE_PERMISSION_REQUEST_CODE = 102;

@@ -144,7 +144,7 @@ public class EditTextDialogFragment extends DialogFragment {
                 text = "";
             }
         } else if (type == R.string.password) {
-            if (text.length() > 8) {
+            if (text.length() > 15) {
                 etInput.setText("");
                 text = "";
             }

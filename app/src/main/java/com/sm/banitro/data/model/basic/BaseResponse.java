@@ -50,5 +50,4 @@ public class BaseResponse {
     public void setData(Data data) {
         this.data = data;
     }
-
 }

@@ -119,9 +119,9 @@ public class RecentDetailFragment extends Fragment implements RecentDetailContra
         } else {
             tvDescription.setText("—");
         }
-        if (product.getCarSpid()!=null){
+        if (product.getCarSpid() != null) {
             tvChassis.setText(product.getCarSpid());
-        }else {
+        } else {
             tvChassis.setText("—");
         }
         if (product.isReplied()) {

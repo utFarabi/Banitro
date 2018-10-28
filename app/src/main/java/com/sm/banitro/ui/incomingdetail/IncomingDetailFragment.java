@@ -106,9 +106,9 @@ public class IncomingDetailFragment extends Fragment {
         } else {
             tvDescription.setText("—");
         }
-        if (product.getReplyPrice()!=null) {
+        if (product.getReplyPrice() != null) {
             tvPrice.setText(FunctionUtil.convertIntToStrMoney(Integer.parseInt(product.getReplyPrice()), false));
-        }else {
+        } else {
             tvPrice.setText("—");
         }
         if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED)) {
@@ -116,9 +116,9 @@ public class IncomingDetailFragment extends Fragment {
         } else if (product.getPosition().equals(ConstantUtil.CONDITION_APPROVED_NOT)) {
             tvCondition.setText(R.string.approved_not);
         }
-        if (product.getCarSpid()!=null){
+        if (product.getCarSpid() != null) {
             tvChassis.setText(product.getCarSpid());
-        }else {
+        } else {
             tvChassis.setText("—");
         }
     }

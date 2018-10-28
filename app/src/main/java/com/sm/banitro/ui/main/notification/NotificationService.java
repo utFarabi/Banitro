@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
 import com.sm.banitro.R;
 import com.sm.banitro.data.model.product.Product;
@@ -82,7 +81,6 @@ public class NotificationService extends Service {
 
             @Override
             public void onSuccess(ArrayList<Product> result) {
-                Log.i("sina", "onSuccess: "+result.size());
                 if (result.size() > 0) {
                     for (Product pr : result) {
                         Intent notificationIntent = new Intent(getApplicationContext(), NotificationService.class);
@@ -91,10 +89,10 @@ public class NotificationService extends Service {
                         PendingIntent pendingIntent = PendingIntent.getActivity(NotificationService.this, 0, notificationIntent, 0);
 
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(NotificationService.this, CHANNEL_ID)
-                                .setSmallIcon(R.drawable.outline_chat_bubble_outline_black_36)
+                                .setSmallIcon(R.drawable.banitro_logo_notif)
                                 .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.ic_launcher_round))
                                 .setContentTitle(getString(R.string.new_product))
-                                .setContentText("نام:  " + pr.getProName())
+                                .setContentText(pr.getProName())
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setContentIntent(pendingIntent)
                                 .setDefaults(Notification.DEFAULT_SOUND)

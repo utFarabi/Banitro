@@ -4,10 +4,10 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.sm.banitro"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,7 +50,7 @@ dependencies {
     // Crop Image
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
 
+    // Work for Notif
     def work_version = "1.0.0-alpha10"
-
     implementation "android.arch.work:work-runtime:$work_version"
 }
