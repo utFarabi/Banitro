@@ -16,6 +16,7 @@
         app:cardElevation="@dimen/elevation">
 
         <android.support.constraint.ConstraintLayout
+            style="@style/SelectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
